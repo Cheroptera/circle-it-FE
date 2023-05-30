@@ -19,7 +19,7 @@ export const LogIn = () => {
     if (accessToken) {
       navigate('/')
     }
-  }, [accessToken, navigate])
+  }, [accessToken, navigate, dispatch])
 
   const onFormSubmit = (event) => {
     event.preventDefault()
