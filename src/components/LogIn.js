@@ -17,7 +17,7 @@ export const LogIn = () => {
   const accessToken = useSelector((store) => store.user.accessToken)
   useEffect(() => {
     if (accessToken) {
-      navigate('/')
+      navigate('/welcome')
     }
   }, [accessToken, navigate, dispatch])
 
