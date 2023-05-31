@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { user } from 'reducers/user'
 import { API_URL } from 'utils/urls'
 import styled from 'styled-components/macro'
-import { Button } from 'lib/Button'
+import { StartButton } from 'lib/StartButton'
 import headerImg from '../images/Background.svg'
 
 export const LogIn = () => {
@@ -47,6 +47,7 @@ export const LogIn = () => {
       })
   }
   return (
+  // TODO CHANGE NAME ON BUTTON WHEN SIGNUP IS CHECKED
     <Main>
       <LoginPageTop>
         <HeaderText>Circ(le) it!</HeaderText>
@@ -55,7 +56,7 @@ export const LogIn = () => {
       <LoginPageBottom>
         <StartDiv>
           <StartText>Get going right away!</StartText>
-          <Button type="submit">Start a workout</Button>
+          <StartButton type="submit" t>Start a workout</StartButton>
         </StartDiv>
         <LoginText>Want to be able to save workouts? Sign up here.</LoginText>
         <RadioDiv>
@@ -93,9 +94,9 @@ export const LogIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </FormDiv>
-          <Button white type="submit">
+          <StartButton handleClick={onFormSubmit}>
             Log in
-          </Button>
+          </StartButton>
         </SubmitForm>
       </LoginPageBottom>
     </Main>
