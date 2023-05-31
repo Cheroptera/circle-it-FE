@@ -25,6 +25,6 @@ padding: 6px 28px;
 
 export const StartButton = ({ buttonText, handleClick }) => {
   return (
-    <StyledStartButton type="button" onClick={handleClick}>{buttonText}</StyledStartButton>
+    <StyledStartButton onClick={handleClick}>{buttonText}</StyledStartButton>
   )
 }
