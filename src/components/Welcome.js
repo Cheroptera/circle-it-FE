@@ -6,7 +6,7 @@ import { welcome } from 'reducers/welcome'
 import { API_URL } from 'utils/urls'
 import { user } from 'reducers/user'
 import { Header } from 'lib/Header'
-import { Button } from 'lib/Button'
+import { SquareButton } from 'lib/SquareButton'
 
 export const Welcome = () => {
   // const welcomeItems = useSelector((store) => store.welcome.items)
@@ -53,8 +53,8 @@ export const Welcome = () => {
       <Header headerTitle="Welcome back! What do you want to do today?" />
       <PageContent>
         <StyledBtnGroup>
-          <Button buttonText="Recent" />
-          <Button buttonText="Favorites" />
+          <SquareButton buttonText="Recent" />
+          <SquareButton buttonText="Favorites" />
         </StyledBtnGroup>
         <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn>
       </PageContent>
