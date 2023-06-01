@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
+import { API_URL } from 'utils/urls'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
 
   useEffect(() => {
-    fetch('https://circle-it-be-3qae2ggbxq-no.a.run.app/exercises')
+    fetch(API_URL('exercises'))
       .then((res) => res.json())
       .then((json) => {
-        setExerciseList(json.results);
+        setExerciseList(json);
       });
   }, []);
 

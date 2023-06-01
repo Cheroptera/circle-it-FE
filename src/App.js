@@ -9,7 +9,7 @@ import { Favorites } from 'components/Favorites'
 import { Recent } from 'components/Recent'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
-import RandomWorkout from './components/RandomWorkout'
+import { RandomWorkout } from './components/RandomWorkout'
 
 export const App = () => {
   const reducer = combineReducers({
