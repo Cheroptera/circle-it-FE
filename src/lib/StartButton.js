@@ -20,11 +20,11 @@ border: 2px #A53860 solid;
 background-color: white;
 color: black;
 padding: 6px 28px;
-`
-}`
+`}`
 
-export const StartButton = ({ buttonText, handleClick }) => {
+export const StartButton = ({ buttonText, handleClick, onClick }) => {
+  const handleClickEvent = onClick || handleClick
   return (
-    <StyledStartButton onClick={handleClick}>{buttonText}</StyledStartButton>
+    <StyledStartButton onClick={handleClickEvent}>{buttonText}</StyledStartButton>
   )
 }

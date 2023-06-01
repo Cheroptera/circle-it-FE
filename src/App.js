@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { welcome } from 'reducers/welcome'
 import { Welcome } from 'components/Welcome'
+import { Favorites } from 'components/Favorites'
+import { Recent } from 'components/Recent'
 import { LogIn } from './components/LogIn'
 
 import RandomWorkout from './components/RandomWorkout'
@@ -21,8 +23,10 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LogIn />} />
-          <Route path="/randomWorkout" element={<RandomWorkout />} />
+          <Route path="/random-workout" element={<RandomWorkout />} />
           <Route path="/welcome" element={<Welcome />}> </Route>
+          <Route path="/favorites" element={<Favorites />}> </Route>
+          <Route path="/recent" element={<Recent />}> </Route>
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </BrowserRouter>

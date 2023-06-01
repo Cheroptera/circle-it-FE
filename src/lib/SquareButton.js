@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import { useNavigate } from 'react-router-dom'
 
 const StyledSquareButton = styled.button`
 background-color: #9AFFDF;
@@ -16,8 +17,17 @@ box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
 `
 
-export const SquareButton = ({ buttonText, handleClick }) => {
+export const SquareButton = ({ buttonText }) => {
+  const navigate = useNavigate()
+
+  const handleSquareButtonClick = () => {
+    if (buttonText === 'Recent') {
+      navigate('/recent')
+    } else if (buttonText === 'Favorites') {
+      navigate('/favorites')
+    }
+  }
   return (
-    <StyledSquareButton type="button" onClick={handleClick}>{buttonText}</StyledSquareButton>
+    <StyledSquareButton type="button" onClick={handleSquareButtonClick}>{buttonText}</StyledSquareButton>
   )
 }

@@ -38,6 +38,7 @@ export const LogIn = () => {
           dispatch(user.actions.setUsername(data.response.username))
           dispatch(user.actions.setUserId(data.response.id))
           dispatch(user.actions.setError(null))
+          navigate('/welcome')
         } else {
           dispatch(user.actions.setAccessToken(null))
           dispatch(user.actions.setUsername(null))
@@ -46,8 +47,13 @@ export const LogIn = () => {
         }
       })
   }
+
+  const handleRandomWorkoutClick = () => {
+    navigate('/random-workout')
+  }
+
   return (
-  // TODO CHANGE NAME ON BUTTON WHEN SIGNUP IS CHECKED
+    // TODO CHANGE NAME ON BUTTON WHEN SIGNUP IS CHECKED
     <Main>
       <LoginPageTop>
         <HeaderText>Circ(le) it!</HeaderText>
@@ -56,7 +62,7 @@ export const LogIn = () => {
       <LoginPageBottom>
         <StartDiv>
           <StartText>Get going right away!</StartText>
-          <StartButton type="submit" t>Start a workout</StartButton>
+          <StartButton buttonText="Start a workout" onClick={handleRandomWorkoutClick} />
         </StartDiv>
         <LoginText>Want to be able to save workouts? Sign up here.</LoginText>
         <RadioDiv>
@@ -94,7 +100,7 @@ export const LogIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </FormDiv>
-          <StartButton handleClick={onFormSubmit}>
+          <StartButton buttonText="Log in" handleClick={onFormSubmit}>
             Log in
           </StartButton>
         </SubmitForm>

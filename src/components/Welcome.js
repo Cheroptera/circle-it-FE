@@ -47,6 +47,7 @@ export const Welcome = () => {
     dispatch(user.actions.setUserId(null))
     dispatch(user.actions.setError(null))
     dispatch(welcome.actions.setItems([]))
+    navigate('/')
   }
   return (
     <>
