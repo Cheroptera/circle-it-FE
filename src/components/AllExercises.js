@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
-// import { Details } from './components/details'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
-  // const [selectedExercise, setSelectedExercise] = useState()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,21 +25,10 @@ export const AllExercises = () => {
       <ul>
         {exerciseList && exerciseList.map((singleExercise) => (
           <p key={singleExercise.name}>
-            {/* <Link to={`/exercises/${singleExercise.name}`} onClick={() => navigate}> */}
             {singleExercise.name}
-            {/* </Link> */}
           </p>
         ))}
       </ul>
-
-      {/* {selectedExercise && (
-        <Details
-          name={selectedExercise.name}
-          musclegroup={selectedExercise.musclegroup}
-          equipment={selectedExercise.equipment}
-          type={selectedExercise.type}
-          img={selectedExercise.img} />
-      )} */}
     </StyledList>
   )
 }
