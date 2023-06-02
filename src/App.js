@@ -7,6 +7,7 @@ import { welcome } from 'reducers/welcome'
 import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
 import { Recent } from 'components/Recent'
+import { Details } from 'components/Details'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -25,6 +26,7 @@ export const App = () => {
           <Route path="/" element={<LogIn />} />
           <Route path="/random-workout" element={<RandomWorkout />} />
           <Route path="/exercises" element={<AllExercises />} />
+          <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />}> </Route>
           <Route path="/favorites" element={<Favorites />}> </Route>
           <Route path="/recent" element={<Recent />}> </Route>
