@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
+import { Header } from '../lib/Header'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
@@ -20,16 +21,18 @@ export const AllExercises = () => {
   }, [navigate])
 
   return (
-    <StyledList>
-      <p>This is a list of all exercises</p>
-      <ul>
+    <>
+      <Header headerTitle="This is a list of all exercises" />
+      <StyledList>
         {exerciseList && exerciseList.map((singleExercise) => (
-          <p key={singleExercise.name}>
-            {singleExercise.name}
-          </p>
+          <div>
+            <StyledExerciseTitle key={singleExercise.name}>
+              {singleExercise.name}
+            </StyledExerciseTitle>
+          </div>
         ))}
-      </ul>
-    </StyledList>
+      </StyledList>
+    </>
   )
 }
 
@@ -37,5 +40,10 @@ const StyledList = styled.div`
 display: flex; 
 flex-direction:column; 
 border: 2px solid green;
-list-style-type:none;
+height: 100vh;
+`
+
+const StyledExerciseTitle = styled.h3`
+display: flex;
+justify-content: center;
 `

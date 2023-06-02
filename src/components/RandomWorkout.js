@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
+import { Header } from '../lib/Header'
 
 export const RandomWorkout = () => {
   const [randomList, setRandomList] = useState([])
@@ -15,16 +16,19 @@ export const RandomWorkout = () => {
   }, []);
 
   return (
-    <StyledList>
-      <p>This is a random list</p>
-      <ul>
-        {randomList && randomList.map((singleRandomExercise) => (
-          <li key={singleRandomExercise.name}>
-            {singleRandomExercise.name}
-          </li>
-        ))}
-      </ul>
-    </StyledList>
+    <>
+      <Header headerTitle="This is a random workout" />
+      <StyledList>
+        <p>This is a random list</p>
+        <ul>
+          {randomList && randomList.map((singleRandomExercise) => (
+            <li key={singleRandomExercise.name}>
+              {singleRandomExercise.name}
+            </li>
+          ))}
+        </ul>
+      </StyledList>
+    </>
   )
 }
 
