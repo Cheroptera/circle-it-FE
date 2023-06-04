@@ -1,12 +1,10 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState, useEffect } from 'react'
 
-const Timer = () => {
+const Timer = (rounds, restTime, setRounds) => {
   // Length of workout and rest in seconds
-  const [workTime, setWorkTime] = useState(40)
-  const [restTime, setRestTime] = useState(20)
-  const [rounds, setRounds] = useState(4) // Number of rounds
-  const [timeLeft, setTimeLeft] = useState(workTime) // Time left in current interval
-  const [isRunning, setIsRunning] = useState(false) // Timer running state
+  const [timeLeft, setTimeLeft] = useState(null) // Time left in current interval
+  const [isRunning, setIsRunning] = useState(false)
 
   useEffect(() => {
     let timer = null
@@ -42,28 +40,17 @@ const Timer = () => {
     }
 
     return () => clearInterval(timer)
-  }, [isRunning, restTime, rounds])
+  }, [isRunning, restTime, rounds, setIsRunning, setRounds])
 
   // Function to start or pause the timer
   const handleStartPause = () => {
     setIsRunning((prevState) => !prevState)
   }
 
-  // Reset the timer
-  const handleReset = () => {
-    setIsRunning(false)
-    setTimeLeft(workTime)
-    setRounds(1)
-  }
-
   return (
     <div>
-      <div>{timeLeft}</div> {/* Display time left */}
       <button type="button" onClick={handleStartPause}>
-        {isRunning ? 'Pause' : 'Start'}
-      </button>
-      <button type="button" onClick={handleReset}>
-        Reset
+        {timeLeft}
       </button>
     </div>
   )

@@ -1,7 +1,10 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 import { API_URL } from 'utils/urls'
+import { Button } from 'lib/Button'
 import { Header } from '../lib/Header'
 
 export const RandomWorkout = () => {
@@ -12,8 +15,8 @@ export const RandomWorkout = () => {
       .then((res) => res.json())
       .then((json) => {
         setRandomList(json.response)
-      });
-  }, []);
+      })
+  }, [])
 
   return (
     <>
@@ -21,19 +24,23 @@ export const RandomWorkout = () => {
       <StyledList>
         <p>This is a random list</p>
         <ul>
-          {randomList && randomList.map((singleRandomExercise) => (
-            <li key={singleRandomExercise.name}>
-              {singleRandomExercise.name}
-            </li>
-          ))}
+          {randomList &&
+            randomList.map((singleRandomExercise) => (
+              <li key={singleRandomExercise.name}>
+                {singleRandomExercise.name}
+              </li>
+            ))}
         </ul>
       </StyledList>
+      <Link to="/set-timer">
+        <Button>Set rounds</Button>
+      </Link>
     </>
   )
 }
 
 const StyledList = styled.div`
-display: flex; 
-flex-direction:column; 
-border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
 `

@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import Timer from './Timer'
+/* eslint-disable react/jsx-closing-bracket-location */
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const SetTimer = () => {
+export const SetTimer = () => {
   // Length of workout and rest in seconds
   const [workTime, setWorkTime] = useState('00:40')
   const [restTime, setRestTime] = useState('00:20')
   const [rounds, setRounds] = useState(4) // Number of rounds
-  const [isRunning, setIsRunning] = useState(false) // Timer state
-
-  const handleStart = () => {
-    setIsRunning(true)
-  }
+  const [isRunning, setIsRunning] = useState(false)
 
   const formatTime = (timeString) => {
     // Remove non-numeric characters
@@ -18,8 +15,11 @@ const SetTimer = () => {
 
     // Format the numeric string as mm:ss
     const formattedString = numericString.replace(/(\d{2})(\d{2})/, '$1:$2')
-
     return formattedString
+  }
+
+  const handleStartWorkout = () => {
+    setIsRunning(isRunning)
   }
 
   return (
@@ -60,18 +60,11 @@ const SetTimer = () => {
           }}
         />
       </label>
-      <button type="button" onClick={handleStart}>
-        Start Timer
-      </button>
-      {isRunning && (
-        <Timer
-          workoutTime={workTime}
-          restTime={restTime}
-          rounds={parseInt(rounds)}
-        />
-      )}
+      <Link to="/exercise">
+        <button type="button" onClick={handleStartWorkout}>
+          Lets go!
+        </button>
+      </Link>
     </div>
   )
 }
-
-export default SetTimer
