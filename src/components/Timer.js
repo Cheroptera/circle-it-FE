@@ -21,9 +21,9 @@ export const Timer = () => {
   const [currentRound, setCurrentRound] = useState(1)
 
   useEffect(() => {
-    setIsWorkTime(currentRound !== 1) // Start with restTime for rounds other than 1
+    setIsWorkTime(currentRound > 0) // Start with workTime all rounds
     setTimeLeft(formatTimeToSeconds(isWorkTime ? workTime : restTime))
-  }, [workTime, restTime, currentRound])
+  }, [workTime, isWorkTime, restTime, currentRound])
 
   useEffect(() => {
     let timer = null
