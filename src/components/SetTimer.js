@@ -1,25 +1,31 @@
 /* eslint-disable react/jsx-closing-bracket-location */
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {
+  setWorkTime,
+  setRestTime,
+  setRounds,
+  setIsRunning
+} from 'reducers/timer'
 
 export const SetTimer = () => {
   // Length of workout and rest in seconds
-  const [workTime, setWorkTime] = useState('00:40')
-  const [restTime, setRestTime] = useState('00:20')
-  const [rounds, setRounds] = useState(4) // Number of rounds
-  const [isRunning, setIsRunning] = useState(false)
+  const dispatch = useDispatch()
+  const workTime = useSelector((store) => store.timer.workTime)
+  const restTime = useSelector((store) => store.timer.restTime)
+  const rounds = useSelector((store) => store.timer.rounds)
 
   const formatTime = (timeString) => {
     // Remove non-numeric characters
     const numericString = timeString.replace(/\D/g, '')
-
     // Format the numeric string as mm:ss
     const formattedString = numericString.replace(/(\d{2})(\d{2})/, '$1:$2')
     return formattedString
   }
 
   const handleStartWorkout = () => {
-    setIsRunning(isRunning)
+    dispatch(setIsRunning(true))
   }
 
   return (
@@ -32,7 +38,7 @@ export const SetTimer = () => {
           value={workTime}
           onChange={(e) => {
             const inputValue = formatTime(e.target.value)
-            setWorkTime(inputValue)
+            dispatch(setWorkTime(inputValue))
           }}
         />
       </label>
@@ -44,7 +50,7 @@ export const SetTimer = () => {
           value={restTime}
           onChange={(e) => {
             const inputValue = formatTime(e.target.value)
-            setRestTime(inputValue)
+            dispatch(setRestTime(inputValue))
           }}
         />
       </label>
@@ -55,8 +61,8 @@ export const SetTimer = () => {
           type="text"
           value={rounds}
           onChange={(e) => {
-            const inputValue = e.target.value.replace(/\D/g, '') // Remove non-numeric characters
-            setRounds(inputValue)
+            const inputValue = e.target.value.replace(/\D/g, '')
+            dispatch(setRounds(inputValue))
           }}
         />
       </label>

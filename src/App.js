@@ -1,10 +1,11 @@
 import React from 'react'
 import { user } from 'reducers/user'
+import { welcome } from 'reducers/welcome'
+import { timer } from 'reducers/timer'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { welcome } from 'reducers/welcome'
-import Timer from 'components/Timer'
+import { Timer } from 'components/Timer'
 import { SetTimer } from 'components/SetTimer'
 import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
@@ -18,7 +19,8 @@ import { RandomWorkout } from './components/RandomWorkout'
 export const App = () => {
   const reducer = combineReducers({
     user: user.reducer,
-    welcome: welcome.reducer
+    welcome: welcome.reducer,
+    timer: timer.reducer
   })
   const store = configureStore({ reducer })
 

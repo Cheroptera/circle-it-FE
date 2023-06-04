@@ -1,59 +1,79 @@
-/* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-const Timer = (rounds, restTime, setRounds) => {
+export const Timer = () => {
+  const workTime = useSelector((store) => store.timer.workTime)
+  const restTime = useSelector((store) => store.timer.restTime)
+  const rounds = useSelector((store) => store.timer.rounds)
+  const isRunning = useSelector((store) => store.timer.isRunning)
+
+  // Function to convert time in "mm:ss" format to seconds
+  const formatTimeToSeconds = (time = '00:00') => {
+    const [minutes, seconds] = time.split(':')
+    const totalSeconds = parseInt(minutes, 10) * 60 + parseInt(seconds, 10)
+    return totalSeconds
+  }
+
   // Length of workout and rest in seconds
-  const [timeLeft, setTimeLeft] = useState(null) // Time left in current interval
-  const [isRunning, setIsRunning] = useState(false)
+  const [isWorkTime, setIsWorkTime] = useState(true)
+  const [timeLeft, setTimeLeft] = useState(formatTimeToSeconds(workTime))
+  const [isTimerRunning, setIsTimerRunning] = useState(isRunning)
+  const [currentRound, setCurrentRound] = useState(1)
+
+  useEffect(() => {
+    setIsWorkTime(currentRound !== 1) // Start with restTime for rounds other than 1
+    setTimeLeft(formatTimeToSeconds(isWorkTime ? workTime : restTime))
+  }, [workTime, restTime, currentRound])
 
   useEffect(() => {
     let timer = null
 
-    // Updates the timer, decrement by 1 second
     const updateTimer = () => {
       setTimeLeft((prevTimeLeft) => {
         const newTimeLeft = prevTimeLeft - 1
-
-        // Check if the current interval is completed
-        if (newTimeLeft === 0) {
-          // Check if all rounds are completed
-          if (rounds === 0) {
-            // Timer completed, stop the timer
-            setIsRunning(false)
-            return 0
+        console.log(isWorkTime)
+        if (newTimeLeft <= 0) {
+          if (currentRound < rounds) {
+            if (isWorkTime) {
+              setTimeLeft(formatTimeToSeconds(restTime))
+              setIsWorkTime(false)
+            } else {
+              setTimeLeft(formatTimeToSeconds(workTime))
+              setIsWorkTime(true)
+              setCurrentRound((prevRound) => prevRound + 1)
+            }
+          } else {
+            setIsTimerRunning(false)
+            clearInterval(timer)
           }
-
-          // Start the rest interval
-          setTimeLeft(restTime)
-          setRounds((prevRounds) => prevRounds - 1)
         }
-
         return newTimeLeft
       })
     }
-
-    // Start or stop the timer based on the running state
-    if (isRunning) {
+    if (isTimerRunning && !(currentRound === rounds && !isWorkTime)) {
       timer = setInterval(updateTimer, 1000)
     } else {
       clearInterval(timer)
     }
 
     return () => clearInterval(timer)
-  }, [isRunning, restTime, rounds, setIsRunning, setRounds])
+  }, [isTimerRunning, isWorkTime, workTime, restTime, currentRound, rounds])
 
-  // Function to start or pause the timer
   const handleStartPause = () => {
-    setIsRunning((prevState) => !prevState)
+    setIsTimerRunning((prevState) => !prevState)
   }
+
+  // Showing the user the value of the time left
+  const userText = isWorkTime ? 'Work time' : 'Rest time'
 
   return (
     <div>
+      <p>
+        Current round: {currentRound} / {rounds}
+      </p>
       <button type="button" onClick={handleStartPause}>
-        {timeLeft}
+        {userText}: {timeLeft}
       </button>
     </div>
   )
 }
-
-export default Timer

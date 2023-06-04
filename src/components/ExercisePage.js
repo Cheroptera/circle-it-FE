@@ -1,11 +1,11 @@
 import React from 'react'
-import Timer from './Timer'
+import { Timer } from './Timer'
 
-export const ExercisePage = ({ workTime, restTime, rounds }) => {
+export const ExercisePage = () => {
   return (
     <div>
       I am a workout page
-      <Timer workTime={workTime} restTime={restTime} rounds={rounds} />
+      <Timer />
     </div>
   )
 }
