@@ -1,19 +1,17 @@
-import React from 'react'
 import styled from 'styled-components'
 
-export const ExerciseCard = () => {
-  return (
-    <Card>
-      <p> This is an exercise card!</p>
-      <HeartButton type="button">❤︎</HeartButton>
-    </Card>
-  )
-}
-
-const Card = styled.div`
+export const ExerciseCard = styled.button`
 background: #9AFFDF;
-`
-const HeartButton = styled.button`
 border: none;
-background: none;
+border-radius: 16px;
+width: 250px;
+padding: 16px;
+display: flex;
+margin: 16px;
+justify-content: center;
+
+&:hover {
+  background-color: white;
+  border: solid 4px #9AFFDF;
+}
 `
