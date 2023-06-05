@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
+import { ExerciseCard } from 'lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
+// * This is a list of all exercises
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
   const navigate = useNavigate()
@@ -27,7 +29,10 @@ export const AllExercises = () => {
         {exerciseList && exerciseList.map((singleExercise) => (
           <div>
             <StyledExerciseTitle key={singleExercise.name}>
-              {singleExercise.name}
+              <ExerciseCard>
+                {singleExercise.name}
+                <FavoriteBtn type="button">❤︎</FavoriteBtn>
+              </ExerciseCard>
             </StyledExerciseTitle>
           </div>
         ))}
@@ -46,4 +51,11 @@ height: 100vh;
 const StyledExerciseTitle = styled.h3`
 display: flex;
 justify-content: center;
+`
+
+const FavoriteBtn = styled.button`
+border: none;
+background: none;
+display: flex;
+align-self: center;
 `

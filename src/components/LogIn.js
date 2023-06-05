@@ -8,6 +8,8 @@ import styled from 'styled-components/macro'
 import { StartButton } from 'lib/StartButton'
 import headerImg from '../images/Background.svg'
 
+// * This is the page where the user can choose to either start a workout without
+// * logging in, sign up or log in.
 export const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

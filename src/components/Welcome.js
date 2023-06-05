@@ -8,6 +8,8 @@ import { user } from 'reducers/user'
 import { Header } from 'lib/Header'
 import { SquareButton } from 'lib/SquareButton'
 
+//* This is where the logged in user can choose to go to recent, favorites, customize
+//* workout and random.
 export const Welcome = () => {
   // const welcomeItems = useSelector((store) => store.welcome.items)
   const dispatch = useDispatch()

@@ -7,6 +7,7 @@ import { API_URL } from 'utils/urls'
 import { Button } from 'lib/Button'
 import { Header } from '../lib/Header'
 
+//* This is where the random workout shows
 export const RandomWorkout = () => {
   const [randomList, setRandomList] = useState([])
 

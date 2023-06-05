@@ -10,6 +10,7 @@ import {
   setIsRunning
 } from 'reducers/timer'
 
+//* This is where the user sets the timer
 export const SetTimer = () => {
   // Length of workout and rest in seconds
   const dispatch = useDispatch()
