@@ -6,7 +6,9 @@ export const timer = createSlice({
   initialState: {
     workTime: '00:07',
     restTime: '00:04',
+    repetitions: 5,
     rounds: 4,
+    roundsRestTime: '1:00',
     isRunning: true
   },
   reducers: {
@@ -16,8 +18,14 @@ export const timer = createSlice({
     setRestTime: (store, action) => {
       store.restTime = action.payload
     },
+    setRepetitions: (store, action) => {
+      store.repetitions = action.payload
+    },
     setRounds: (store, action) => {
       store.rounds = action.payload
+    },
+    setRoundsRestTime: (store, action) => {
+      store.roundsRestTime = action.payload
     },
     setIsRunning: (store, action) => {
       store.isRunning = action.payload
@@ -25,7 +33,14 @@ export const timer = createSlice({
   }
 })
 
-export const { setWorkTime, setRestTime, setRounds, setIsRunning } =
+export const {
+  setWorkTime,
+  setRestTime,
+  setRepetitions,
+  setRounds,
+  setRoundsRestTime,
+  setIsRunning
+} =
   timer.actions
 
 export default timer.reducer

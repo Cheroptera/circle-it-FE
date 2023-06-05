@@ -11,7 +11,7 @@ import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
 import { Recent } from 'components/Recent'
 import { Details } from 'components/Details'
-import { ExercisePage } from 'components/ExercisePage'
+import { WorkoutPage } from 'components/WorkoutPage'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -37,7 +37,7 @@ export const App = () => {
           <Route path="/timer" element={<Timer />} />
           <Route path="/random-workout" element={<RandomWorkout />} />
           <Route path="/set-timer" element={<SetTimer />} />
-          <Route path="/exercise" element={<ExercisePage />} />
+          <Route path="/workout" element={<WorkoutPage />} />
           <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </BrowserRouter>

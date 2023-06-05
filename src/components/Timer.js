@@ -4,7 +4,9 @@ import { useSelector } from 'react-redux'
 export const Timer = () => {
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
+  const repetitions = useSelector((store) => store.timer.repetitions)
   const rounds = useSelector((store) => store.timer.rounds)
+  const roundsRestTime = useSelector((store) => store.timer.roundsRestTime)
   const isRunning = useSelector((store) => store.timer.isRunning)
 
   // Function to convert time in "mm:ss" format to seconds
@@ -18,46 +20,64 @@ export const Timer = () => {
   const [isWorkTime, setIsWorkTime] = useState(true)
   const [timeLeft, setTimeLeft] = useState(formatTimeToSeconds(workTime))
   const [isTimerRunning, setIsTimerRunning] = useState(isRunning)
+  const [currentRepetition, setCurrentRepetition] = useState(1)
   const [currentRound, setCurrentRound] = useState(1)
 
   useEffect(() => {
-    setIsWorkTime(currentRound > 0) // Start with workTime all rounds
-    setTimeLeft(formatTimeToSeconds(isWorkTime ? workTime : restTime))
-  }, [workTime, isWorkTime, restTime, currentRound])
+    setIsWorkTime(true)
+    setTimeLeft(formatTimeToSeconds(workTime))
+  }, [workTime, restTime])
 
   useEffect(() => {
     let timer = null
-
     const updateTimer = () => {
       setTimeLeft((prevTimeLeft) => {
         const newTimeLeft = prevTimeLeft - 1
-        console.log(isWorkTime)
         if (newTimeLeft <= 0) {
-          if (currentRound < rounds) {
-            if (isWorkTime) {
+          if (isWorkTime) {
+            if (currentRepetition < repetitions) {
               setTimeLeft(formatTimeToSeconds(restTime))
               setIsWorkTime(false)
+              setCurrentRepetition((prevRepetition) => prevRepetition + 1)
             } else {
+              setTimeLeft(formatTimeToSeconds(roundsRestTime))
+              setIsWorkTime(false)
+              setCurrentRepetition(1) // Reset the current repetition to 1
+            }
+          } else if (currentRepetition === 1) {
+            if (currentRound < rounds) {
+              setCurrentRound((prevRound) => prevRound + 1) // Increment the number of rounds
               setTimeLeft(formatTimeToSeconds(workTime))
               setIsWorkTime(true)
-              setCurrentRound((prevRound) => prevRound + 1)
+            } else {
+              setIsTimerRunning(false)
+              clearInterval(timer)
             }
           } else {
-            setIsTimerRunning(false)
-            clearInterval(timer)
+            setTimeLeft(formatTimeToSeconds(workTime))
+            setIsWorkTime(true)
           }
         }
         return newTimeLeft
       })
     }
-    if (isTimerRunning && !(currentRound === rounds && !isWorkTime)) {
+    // eslint-disable-next-line max-len
+    if (isTimerRunning && !(currentRepetition === repetitions && currentRound === repetitions && !isWorkTime)) {
       timer = setInterval(updateTimer, 1000)
     } else {
       clearInterval(timer)
     }
 
     return () => clearInterval(timer)
-  }, [isTimerRunning, isWorkTime, workTime, restTime, currentRound, rounds])
+  }, [isTimerRunning,
+    workTime,
+    restTime,
+    repetitions,
+    currentRepetition,
+    rounds,
+    currentRound,
+    roundsRestTime,
+    isWorkTime])
 
   const handleStartPause = () => {
     setIsTimerRunning((prevState) => !prevState)
