@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { CountdownTimer } from 'lib/CountdownTimer'
 
 //* This is a timer component
+
 export const Timer = () => {
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
@@ -92,9 +94,14 @@ export const Timer = () => {
       <p>
         Current round: {currentRound} / {rounds}
       </p>
-      <button type="button" onClick={handleStartPause}>
-        {userText}: {timeLeft}
-      </button>
+      {userText}: {timeLeft}
+      <CountdownTimer
+        onClick={handleStartPause}
+        seconds={timeLeft} // Pass the timeLeft value as seconds
+        size={200} // Customize the size as needed
+        strokeBgColor="black" // Customize the stroke background color
+        strokeColor="lightgreen" // Customize the stroke color
+        strokeWidth={12} />
     </div>
   )
 }

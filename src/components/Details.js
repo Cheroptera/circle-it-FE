@@ -1,6 +1,6 @@
 import React from 'react'
 
-// This is where the user can get more info about a specific exercise. Stretch goal?
+// * This is where the user can get more info about a specific exercise. Stretch goal?
 export const Details = () => {
   return (
     <div>
