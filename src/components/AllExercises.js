@@ -8,6 +8,7 @@ import { Favorites } from './Favorites'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
+  const [selectedExercises, setSelectedExercises] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -22,15 +23,26 @@ export const AllExercises = () => {
       })
   }, [navigate])
 
+  const handleExerciseSselect = (exerciseId) => {
+    if (selectedExercises.includes(exerciseId)) {
+      // eslint-disable-next-line max-len
+      setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((id) => id !== exerciseId))
+    } else if (selectedExercises.length < 5) {
+      setSelectedExercises((prevSelectedExercises) => [...prevSelectedExercises, exerciseId])
+    }
+  }
+
   return (
     <>
       <Header headerTitle="Choose your exercises" />
       <StyledList>
         {exerciseList && exerciseList.map((singleExercise) => (
           <CardAndLike key={singleExercise.name}>
-            <ExerciseCard>
+            <SelectableExerciseCard
+              onClick={() => handleExerciseSselect(singleExercise.id)}
+              isSelected={selectedExercises.includes(singleExercise.id)}>
               <H3>{singleExercise.name}</H3>
-            </ExerciseCard>
+            </SelectableExerciseCard>
             <FavoriteCheckbox exerciseId={singleExercise.id} />
           </CardAndLike>
         ))}
@@ -54,7 +66,18 @@ const H3 = styled.h3`
   margin: 0;
 `
 
-const FavoriteCheckbox = ({ exerciseId }) => {
+const SelectableExerciseCard = styled(ExerciseCard)`
+cursor: pointer;
+  background-color: ${({ isSelected }) => (isSelected ? '#A53860' : 'inherit')};
+  color: ${({ isSelected }) => (isSelected ? '#ffffff' : 'inherit')};
+
+  &:hover {
+    background-color: #A53860;
+    color: #ffffff;
+  }
+`
+
+const FavoriteCheckbox = () => {
   const [isChecked, setIsChecked] = useState(false)
 
   const handleCheckboxChange = () => {
