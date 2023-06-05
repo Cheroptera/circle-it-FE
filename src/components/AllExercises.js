@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
-import { ExerciseCard } from 'lib/ExerciseCard'
+import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 import { Favorites } from './Favorites'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
-  const [selectedExercises, setSelectedExercises] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
     fetch(API_URL('exercises'))
       .then((res) => res.json())
       .then((json) => {
-        setExerciseList(json);
+        const exercisesWithSelection = json.map((exercise) => ({
+          ...exercise,
+          isSelected: false
+        }))
+        setExerciseList(exercisesWithSelection);
+        console.log(exercisesWithSelection)
       })
       .catch((error) => {
         console.error(error)
@@ -23,31 +27,32 @@ export const AllExercises = () => {
       })
   }, [navigate])
 
-  const handleExerciseSselect = (exerciseId) => {
-    if (selectedExercises.includes(exerciseId)) {
-      // eslint-disable-next-line max-len
-      setSelectedExercises((prevSelectedExercises) => prevSelectedExercises.filter((id) => id !== exerciseId))
-    } else if (selectedExercises.length < 5) {
-      setSelectedExercises((prevSelectedExercises) => [...prevSelectedExercises, exerciseId])
-    }
-  }
+  const handleExerciseSelect = (exerciseId) => {
+    setExerciseList((prevExerciseList) =>
+      prevExerciseList.map((exercise) =>
+        exercise.id === exerciseId
+          ? { ...exercise, isSelected: !exercise.isSelected }
+          : exercise));
+    console.log(exerciseList)
+  };
 
   return (
     <>
       <Header headerTitle="Choose your exercises" />
       <StyledList>
-        {exerciseList && exerciseList.map((singleExercise) => (
-          <CardAndLike key={singleExercise.name}>
+        {exerciseList.map((singleExercise) => (
+          <CardAndLike key={singleExercise.id}>
             <SelectableExerciseCard
-              onClick={() => handleExerciseSselect(singleExercise.id)}
-              isSelected={selectedExercises.includes(singleExercise.id)}>
+              type="button"
+              onClick={() => handleExerciseSelect(singleExercise.id)}
+              isSelected={singleExercise.isSelected}>
               <H3>{singleExercise.name}</H3>
             </SelectableExerciseCard>
             <FavoriteCheckbox exerciseId={singleExercise.id} />
           </CardAndLike>
         ))}
       </StyledList>
-      <Favorites exerciseList={exerciseList} />
+      <Favorites />
     </>
   )
 }
@@ -68,12 +73,11 @@ const H3 = styled.h3`
 
 const SelectableExerciseCard = styled(ExerciseCard)`
 cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? '#A53860' : 'inherit')};
-  color: ${({ isSelected }) => (isSelected ? '#ffffff' : 'inherit')};
+  background-color: ${({ isSelected }) => (isSelected ? '#61C9A8' : '#9AFFDF')};
 
   &:hover {
-    background-color: #A53860;
-    color: #ffffff;
+    background-color: #61C9A8;
+    border: #61C9A8;
   }
 `
 
