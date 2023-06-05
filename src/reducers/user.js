@@ -9,6 +9,9 @@ export const user = createSlice({
     error: null
   },
   reducers: {
+    setName: (store, action) => {
+      store.name = action.payload
+    },
     setUsername: (store, action) => {
       store.username = action.payload
     },
