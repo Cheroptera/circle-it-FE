@@ -11,6 +11,7 @@ import headerImg from '../images/Background.svg'
 export const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [mode, setMode] = useState('login')
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -64,7 +65,7 @@ export const LogIn = () => {
           <StartText>Get going right away!</StartText>
           <StartButton buttonText="Start a workout" onClick={handleRandomWorkoutClick} />
         </StartDiv>
-        <LoginText>Want to be able to save workouts? Sign up here.</LoginText>
+        <LoginText>Want to be able to save workouts? Sign up first.</LoginText>
         <RadioDiv>
           <RadioDivSmall>
             <label htmlFor="signup">Sign up</label>
@@ -84,6 +85,17 @@ export const LogIn = () => {
           </RadioDivSmall>
         </RadioDiv>
         <SubmitForm onSubmit={onFormSubmit}>
+          {mode === 'signup' && (
+            <FormDiv>
+              <label htmlFor="name" />
+              <input
+                type="text"
+                id="name"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)} />
+            </FormDiv>
+          )}
           <FormDiv>
             <label htmlFor="username" />
             <input
@@ -100,9 +112,7 @@ export const LogIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </FormDiv>
-          <StartButton buttonText="Log in" handleClick={onFormSubmit}>
-            Log in
-          </StartButton>
+          <StartButton buttonText="Submit" handleClick={onFormSubmit} />
         </SubmitForm>
       </LoginPageBottom>
     </Main>
