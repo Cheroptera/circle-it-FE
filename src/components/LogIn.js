@@ -52,7 +52,7 @@ export const LogIn = () => {
   }
 
   const handleRandomWorkoutClick = () => {
-    navigate('/random-workout')
+    navigate('/random')
   }
 
   return (
