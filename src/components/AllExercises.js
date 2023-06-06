@@ -10,8 +10,16 @@ import { toggleFavorite } from '../reducers/favorites'
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
   const navigate = useNavigate()
+  const accessToken = useSelector((store) => store.user.accessToken)
 
-  useEffect(() => {
+    useEffect(() => {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: accessToken
+        }
+      }
     fetch(API_URL('exercises'))
       .then((res) => res.json())
       .then((json) => {
@@ -26,7 +34,7 @@ export const AllExercises = () => {
         console.error(error)
         navigate('/404')
       })
-  }, [navigate])
+  }, [navigate, accessToken])
 
   const handleExerciseSelect = (exerciseId) => {
     /* eslint-disable-next-line max-len */
