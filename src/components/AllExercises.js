@@ -50,7 +50,7 @@ export const AllExercises = () => {
               isSelected={singleExercise.isSelected}>
               <H3>{singleExercise.name}</H3>
             </SelectableExerciseCard>
-            <FavoriteCheckbox exerciseId={singleExercise._id} />
+            <FavoriteCheckbox exerciseId={singleExercise.id} />
           </CardAndLike>
         ))}
       </StyledList>
