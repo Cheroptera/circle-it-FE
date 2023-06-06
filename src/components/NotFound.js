@@ -12,9 +12,6 @@ export const NotFound = () => {
       <p>
         <Link to="/login">GO TO LOGIN</Link>
       </p>
-      <p>
-        <Link to="/">GO TO MAIN</Link>
-      </p>
       <p>Sorry, nothing here...</p>
     </StyledNF>
   )
