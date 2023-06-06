@@ -19,14 +19,6 @@ export const SetTimer = () => {
   const rounds = useSelector((store) => store.timer.rounds)
   const roundsRestTime = useSelector((store) => store.timer.roundsRestTime)
 
-  const formatTime = (timeString) => {
-    // Remove non-numeric characters
-    const numericString = timeString.replace(/\D/g, '')
-    // Format the numeric string as mm:ss
-    const formattedString = numericString.replace(/(\d{2})(\d{2})/, '$1:$2')
-    return formattedString
-  }
-
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
   }
@@ -40,7 +32,7 @@ export const SetTimer = () => {
           type="text"
           value={workTime}
           onChange={(e) => {
-            const inputValue = formatTime(e.target.value)
+            const inputValue = e.target.value
             dispatch(setWorkTime(inputValue))
           }}
         />
@@ -52,7 +44,7 @@ export const SetTimer = () => {
           type="text"
           value={restTime}
           onChange={(e) => {
-            const inputValue = formatTime(e.target.value)
+            const inputValue = e.target.value
             dispatch(setRestTime(inputValue))
           }}
         />
@@ -64,7 +56,7 @@ export const SetTimer = () => {
           type="text"
           value={rounds}
           onChange={(e) => {
-            const inputValue = e.target.value.replace(/\D/g, '')
+            const inputValue = e.target.value
             dispatch(setRounds(inputValue))
           }}
         />
@@ -76,7 +68,7 @@ export const SetTimer = () => {
           type="text"
           value={roundsRestTime}
           onChange={(e) => {
-            const inputValue = formatTime(e.target.value)
+            const inputValue = e.target.value
             dispatch(setRoundsRestTime(inputValue))
           }}
         />
