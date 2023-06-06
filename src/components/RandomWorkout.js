@@ -1,22 +1,22 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components/macro'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { setList } from 'reducers/exercises';
+import styled from 'styled-components/macro'
+import { setList } from 'reducers/exercises'
 import { API_URL } from 'utils/urls'
-// import { Button } from 'lib/Button'
-import { Header } from 'lib/Header';
-import { ExerciseCard } from 'lib/ExerciseCard';
+import { Header } from 'lib/Header'
+import { ExerciseCard } from 'lib/ExerciseCard'
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
   const [randomList, setRandomList] = useState([])
   const dispatch = useDispatch()
+
   const handleSetList = () => {
-    dispatch(setList(randomList));
-  };
+    dispatch(setList(randomList))
+  }
 
   useEffect(() => {
     fetch(API_URL('exercises/random'))
@@ -35,14 +35,17 @@ export const RandomWorkout = () => {
           {randomList &&
             randomList.map((singleRandomExercise) => (
               <Li key={singleRandomExercise.name}>
-                <ExerciseCard>
-                  {singleRandomExercise.name}
-                </ExerciseCard>
+                <ExerciseCard>{singleRandomExercise.name}</ExerciseCard>
               </Li>
             ))}
         </Ul>
       </StyledList>
-      <Link to="/set-timer" onClick={handleSetList}>Set timer</Link>
+      <Link to="/set-timer">
+        {/* FOR NOW DO NOT import button components here, all of them cause memory errors //Vio */}
+        <button type="button" onClick={handleSetList}>
+          Set timer
+        </button>
+      </Link>
     </>
   )
 }
@@ -55,10 +58,10 @@ const StyledList = styled.div`
 `
 
 const Ul = styled.ul`
-list-style-type: none;
+  list-style-type: none;
 `
 
 const Li = styled.li`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 `
