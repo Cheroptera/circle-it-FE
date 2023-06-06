@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
-import { Favorites } from './Favorites'
+import { toggleFavorite } from '../reducers/favorites'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
@@ -28,12 +29,13 @@ export const AllExercises = () => {
   }, [navigate])
 
   const handleExerciseSelect = (exerciseId) => {
-    setExerciseList((prevExerciseList) =>
-      prevExerciseList.map((exercise) =>
-        exercise.id === exerciseId
-          ? { ...exercise, isSelected: !exercise.isSelected }
-          : exercise));
-    console.log(exerciseList)
+    /* eslint-disable-next-line max-len */
+    setExerciseList((prevExerciseList) => prevExerciseList.map((exercise) => {
+      return exercise.id === exerciseId
+        ? { ...exercise, isSelected: !exercise.isSelected }
+        : exercise;
+    }));
+    console.log(exerciseList);
   };
 
   return (
@@ -41,18 +43,17 @@ export const AllExercises = () => {
       <Header headerTitle="Choose your exercises" />
       <StyledList>
         {exerciseList.map((singleExercise) => (
-          <CardAndLike key={singleExercise.id}>
+          <CardAndLike key={singleExercise.exerciseId}>
             <SelectableExerciseCard
               type="button"
-              onClick={() => handleExerciseSelect(singleExercise.id)}
+              onClick={() => handleExerciseSelect(singleExercise.exerciseId)}
               isSelected={singleExercise.isSelected}>
               <H3>{singleExercise.name}</H3>
             </SelectableExerciseCard>
-            <FavoriteCheckbox exerciseId={singleExercise.id} />
+            <FavoriteCheckbox exerciseId={singleExercise._id} />
           </CardAndLike>
         ))}
       </StyledList>
-      <Favorites />
     </>
   )
 }
@@ -81,11 +82,14 @@ cursor: pointer;
   }
 `
 
-const FavoriteCheckbox = () => {
-  const [isChecked, setIsChecked] = useState(false)
+const FavoriteCheckbox = ({ exerciseId }) => {
+  const dispatch = useDispatch()
+  const favorites = useSelector((store) => store.favorites || [])
+  // This code checks if the exerciseId is in the user's favorites:
+  const isChecked = favorites.includes(exerciseId)
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked)
+    dispatch(toggleFavorite(exerciseId))
   }
 
   return (

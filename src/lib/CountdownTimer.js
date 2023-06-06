@@ -65,7 +65,7 @@ export const CountdownTimer = ({
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [countdown, milliseconds]);
 
   return (
     <div>

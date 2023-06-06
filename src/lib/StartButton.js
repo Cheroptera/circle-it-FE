@@ -13,6 +13,7 @@ margin: 10px;
 box-sizing: border-box;
 align-self: center;
 box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
+cursor: pointer;
 
 
 ${(props) => props.white && css`

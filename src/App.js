@@ -2,10 +2,10 @@ import React from 'react'
 import { user } from 'reducers/user'
 import { welcome } from 'reducers/welcome'
 import { timer } from 'reducers/timer'
+import { exercises } from 'reducers/exercises'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { Timer } from 'components/Timer'
 import { SetTimer } from 'components/SetTimer'
 import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
@@ -21,7 +21,8 @@ export const App = () => {
   const reducer = combineReducers({
     user: user.reducer,
     welcome: welcome.reducer,
-    timer: timer.reducer
+    timer: timer.reducer,
+    exercises: exercises.reducer
   })
   const store = configureStore({ reducer })
 
@@ -35,8 +36,7 @@ export const App = () => {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/recent" element={<Recent />} />
-          <Route path="/timer" element={<Timer />} />
-          <Route path="/random-workout" element={<RandomWorkout />} />
+          <Route path="/random" element={<RandomWorkout />} />
           <Route path="/set-timer" element={<SetTimer />} />
           <Route path="/workout" element={<WorkoutPage />} />
           <Route path="*" element={<NotFound />} />
