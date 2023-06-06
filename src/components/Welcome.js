@@ -58,6 +58,8 @@ export const Welcome = () => {
         <StyledBtnGroup>
           <SquareButton buttonText="Recent" />
           <SquareButton buttonText="Favorites" />
+          <SquareButton buttonText="Surprise Me" />
+          <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
         <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn>
       </PageContent>

@@ -25,6 +25,10 @@ export const SquareButton = ({ buttonText }) => {
       navigate('/recent')
     } else if (buttonText === 'Favorites') {
       navigate('/favorites')
+    } else if (buttonText === 'Surprise Me') {
+      navigate('/random')
+    } else if (buttonText === 'Custom Workout') {
+      navigate('/exercises')
     }
   }
   return (
