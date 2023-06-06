@@ -20,7 +20,7 @@ export const AllExercises = () => {
           Authorization: accessToken
         }
       }
-    fetch(API_URL('exercises'))
+    fetch(API_URL('exercises', options))
       .then((res) => res.json())
       .then((json) => {
         const exercisesWithSelection = json.map((exercise) => ({
