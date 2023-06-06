@@ -71,9 +71,7 @@ export const Header = ({
       {headerSubheading && (
         <StyledSubHeading>{headerSubheading}</StyledSubHeading>
       )}
-      {headerNextUp && (
-        <StyledSubHeading>Next up: {headerNextUp}</StyledSubHeading>
-      )}
+      {headerNextUp && <StyledSubHeading>{headerNextUp}</StyledSubHeading>}
     </StyledHeader>
   )
 }

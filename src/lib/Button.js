@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable implicit-arrow-linebreak */
 import styled, { css } from 'styled-components'
 import React from 'react'
 
@@ -15,8 +17,9 @@ export const StyledButton = styled.button`
   align-self: center;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
 
-  ${(props) => props.white
-    && css`
+  ${(props) =>
+    props.white &&
+    css`
       border: 2px #a53860 solid;
       background-color: white;
       color: black;
