@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { css } from 'styled-components';
+import { GoBackBtn } from './GoBackBtn';
 
 const StyledHeader = styled.div`
   display: flex;
@@ -70,22 +71,25 @@ export const Header = ({
   headerNextUp
 }) => {
   return (
-    <StyledHeader className={className}>
-      {headerBackText && (
-        <StyledheaderBackText>{headerBackText}</StyledheaderBackText>
-      )}
-      {currentRoundText && (
-        <StyledCurrentRoundText>{currentRoundText}</StyledCurrentRoundText>
-      )}
-      {currentRepText && (
-        <StyledCurrentRoundText>{currentRepText}</StyledCurrentRoundText>
-      )}
-      {headerTitle && <StyledHeaderTitle>{headerTitle}</StyledHeaderTitle>}
-      {headerSubheading && (
-        <StyledSubHeading>{headerSubheading}</StyledSubHeading>
-      )}
-      {headerNextUp && (
-        <StyledHeaderNextUp>{headerNextUp}</StyledHeaderNextUp>)}
-    </StyledHeader>
+    <>
+      <GoBackBtn />
+      <StyledHeader className={className}>
+        {headerBackText && (
+          <StyledheaderBackText>{headerBackText}</StyledheaderBackText>
+        )}
+        {currentRoundText && (
+          <StyledCurrentRoundText>{currentRoundText}</StyledCurrentRoundText>
+        )}
+        {currentRepText && (
+          <StyledCurrentRoundText>{currentRepText}</StyledCurrentRoundText>
+        )}
+        {headerTitle && <StyledHeaderTitle>{headerTitle}</StyledHeaderTitle>}
+        {headerSubheading && (
+          <StyledSubHeading>{headerSubheading}</StyledSubHeading>
+        )}
+        {headerNextUp && (
+          <StyledHeaderNextUp>{headerNextUp}</StyledHeaderNextUp>)}
+      </StyledHeader>
+    </>
   )
 }
