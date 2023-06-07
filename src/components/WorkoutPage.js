@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -20,42 +21,46 @@ export const WorkoutPage = () => {
   const [isRoundRest, setIsRoundRest] = useState(false)
 
   const getCurrentExercise = () => {
-    if (randomList.length > 0) {
-      return randomList[currentRepetition - 1]
+    if (currentRepetition >= 1 && currentRepetition <= repetitions) {
+      return randomList[currentRepetition - 1];
+    } else if (currentRepetition > repetitions && currentRound < rounds) {
+      return randomList[0];
     }
-    return null
-  }
+    return null;
+  };
 
   const getNextExercise = () => {
-    if (randomList.length > currentRepetition) {
-      return randomList[currentRepetition]
+    if (currentRepetition >= 1 && currentRepetition <= repetitions) {
+      return randomList[currentRepetition];
+    } else if (currentRepetition > repetitions && currentRound < rounds) {
+      return randomList[0];
     }
-    return null
-  }
+    return null;
+  };
 
   const handleTimerComplete = () => {
-    if (isWorkTime) {
-      setIsWorkTime(false)
-      setIsRestTime(true)
+    if (isRoundRest) {
+      setIsRoundRest(false);
+      setCurrentRepetition((prevRepetition) => prevRepetition + 1);
+      setCurrentRound((prevRound) => prevRound + 1);
+      setIsWorkTime(true);
+    } else if (isWorkTime) {
+      setIsWorkTime(false);
+      setIsRestTime(true);
     } else if (isRestTime) {
-      setIsWorkTime(true)
-      setIsRestTime(false)
-      setCurrentRepetition((prevRepetition) => prevRepetition + 1)
-    } else if (isRoundRest) {
-      setIsRoundRest(false)
-      setIsWorkTime(true)
-      setCurrentRepetition(1)
-      setCurrentRound((prevRound) => prevRound + 1)
+      setIsWorkTime(true);
+      setIsRestTime(false);
+      setCurrentRepetition((prevRepetition) => prevRepetition + 1);
+      if (currentRepetition === repetitions) {
+        setCurrentRound((prevRound) => prevRound + 1);
+        setIsRoundRest(true);
+      }
     }
-    if (currentRepetition === randomList.length) {
-      setIsRestTime(false)
-      setIsWorkTime(false)
-      setIsRoundRest(true)
-    }
-  }
+  };
+
   return (
     <>
-      {isWorkTime && (
+      {isWorkTime && getCurrentExercise() && currentRepetition >= 1 && currentRepetition <= repetitions && (
         <Header
           headerTitle={getCurrentExercise().name}
           headerBackText="< Todays workout"
@@ -63,7 +68,7 @@ export const WorkoutPage = () => {
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />
       )}
-      {isRestTime && (
+      {isRestTime && getNextExercise() && currentRepetition >= 1 && currentRepetition <= repetitions && (
         <Header
           headerTitle="Rest"
           headerBackText="< Todays workout"
@@ -72,18 +77,17 @@ export const WorkoutPage = () => {
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />
       )}
-      {isRoundRest && (
+      {isRoundRest && currentRepetition >= 1 && currentRepetition <= repetitions && (
         <Header
           headerTitle="Rest"
           headerBackText="< Todays workout"
-          headerNextUp={`Next up: ${getNextExercise().name}`}
           currentRoundText={`Round: ${currentRound} / ${rounds}`}
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />
       )}
       <Main>
         <WorkoutWrapper>
-          {isWorkTime && (
+          {isWorkTime && getCurrentExercise() && getCurrentExercise().img && (
             <>
               <Img src={getCurrentExercise().img} alt="Exercise" />
               <CountdownCircleTimer
@@ -97,7 +101,7 @@ export const WorkoutPage = () => {
             </>
           )}
 
-          {isRestTime && (
+          {isRestTime && getNextExercise() && getNextExercise().img && (
             <>
               <Img src={getNextExercise().img} alt="Exercise" />
               <CountdownCircleTimer

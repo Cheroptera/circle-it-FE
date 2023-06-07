@@ -1,12 +1,14 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { welcome } from 'reducers/welcome'
 import { API_URL } from 'utils/urls'
-import { user } from 'reducers/user'
+// import { user } from 'reducers/user'
 import { Header } from 'lib/Header'
 import { SquareButton } from 'lib/SquareButton'
+import { LogOutButton } from 'lib/LogOutButton'
 
 //* This is where the logged in user can choose to go to recent, favorites, customize
 //* workout and random.
@@ -45,14 +47,14 @@ export const Welcome = () => {
       })
   })
 
-  const onLogoutButtonClick = () => {
-    dispatch(user.actions.setAccessToken(null))
-    dispatch(user.actions.setUsername(null))
-    dispatch(user.actions.setUserId(null))
-    dispatch(user.actions.setError(null))
-    dispatch(welcome.actions.setItems([]))
-    navigate('/')
-  }
+  // const onLogoutButtonClick = () => {
+  //   dispatch(user.actions.setAccessToken(null))
+  //   dispatch(user.actions.setUsername(null))
+  //   dispatch(user.actions.setUserId(null))
+  //   dispatch(user.actions.setError(null))
+  //   dispatch(welcome.actions.setItems([]))
+  //   navigate('/')
+  // }
   return (
     <>
       <Header headerTitle="Welcome back! What do you want to do today?" />
@@ -63,28 +65,30 @@ export const Welcome = () => {
           <SquareButton buttonText="Surprise Me" />
           <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
-        <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn>
+        {/* <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn> */}
+        <LogOutButton />
       </PageContent>
     </>
   )
 }
 
-const StyledLogoutBtn = styled.button`
-border: 2px solid #A53860;
-background:white;
-justify-content:center;
-align-self: center;
-width: 30%; 
-border-radius: 10px; 
-padding: 20px;
-margin-top: 200px; 
-`
+// const StyledLogoutBtn = styled.button`
+// border: 2px solid #A53860;
+// background:white;
+// justify-content:center;
+// align-self: center;
+// width: 30%;
+// border-radius: 10px;
+// padding: 20px;
+// margin-top: 200px;
+// `
 
 const StyledBtnGroup = styled.div`
 display: flex; 
-gap: 30px; 
+flex-flow: wrap;
+gap: 20px; 
 justify-content: center; 
-margin-top: 5rem; 
+margin-top: 1rem; 
 `
 const PageContent = styled.div`
 display: flex; 

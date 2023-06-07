@@ -24,9 +24,6 @@ export const timer = createSlice({
     setRounds: (store, action) => {
       store.rounds = action.payload
     },
-    setRoundsRestTime: (store, action) => {
-      store.roundsRestTime = action.payload
-    },
     setIsRunning: (store, action) => {
       store.isRunning = action.payload
     }

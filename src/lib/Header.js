@@ -10,11 +10,12 @@ const StyledHeader = styled.div`
   height: 250px;
   border-radius: 0px 0px 17rem 17rem;
   background-color: #61c9a8;
+  width: 100vw;
 `
 
 const StyledHeaderTitle = styled.h2`
   font-family: 'Poppins', 'Sans-Serif';
-  font-size: 40px;
+  font-size: 28px;
   align-self: center;
   color: white;
   text-align: center;

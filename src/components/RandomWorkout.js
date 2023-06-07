@@ -58,7 +58,6 @@ export const RandomWorkout = () => {
 const StyledList = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid green;
   border: green solid 2px;
 `
 
