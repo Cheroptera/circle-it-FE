@@ -66,8 +66,8 @@ export const WorkoutPage = () => {
       {isRestTime && (
         <Header
           headerTitle="Rest"
-          headerNextUp={getNextExercise().name}
           headerBackText="< Todays workout"
+          headerNextUp={`Next up: ${getNextExercise().name}`}
           currentRoundText={`Round: ${currentRound} / ${rounds}`}
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />
@@ -76,6 +76,7 @@ export const WorkoutPage = () => {
         <Header
           headerTitle="Rest"
           headerBackText="< Todays workout"
+          headerNextUp={`Next up: ${getNextExercise().name}`}
           currentRoundText={`Round: ${currentRound} / ${rounds}`}
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />

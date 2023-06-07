@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   setWorkTime,
   setRestTime,
@@ -16,17 +16,19 @@ import styled from 'styled-components/macro'
 export const SetTimer = () => {
   // Length of workout and rest in seconds
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const rounds = useSelector((store) => store.timer.rounds)
 
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
+    navigate('/workout')
   }
 
   return (
     <Main>
-      <Header headerTitle="What do you want to do today?" />
+      <Header headerTitle="Customize timer" />
       <FormWrapper>
         <h3>Set your curcuit</h3>
         <label htmlFor="rounds">
@@ -65,13 +67,10 @@ export const SetTimer = () => {
           />{' '}
           Rest seconds
         </label>
-        <Link to="/workout">
-          <StartButton
-            type="button"
-            buttonText="Lets go!"
-            handleClickEvent={handleStartWorkout}
-          />
-        </Link>
+        <StartButton
+          buttonText="Lets go!"
+          handleClick={handleStartWorkout}
+        />
       </FormWrapper>
     </Main>
   )
