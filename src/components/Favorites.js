@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from 'utils/urls'
+import { Header } from 'lib/Header';
 import setFavorites from '../reducers/favorites'
 
 // * This is a list of all the favorites of a logged in user
@@ -21,13 +22,16 @@ export const Favorites = async () => {
   }
 
   return (
-    <div>
-      <h2>My Favorites</h2>
-      <ul>
-        {favorites.map((favorite) => (
-          <li key={favorite.id}>{favorite.name}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Header />
+      <div>
+        <h2>My Favorites</h2>
+        <ul>
+          {favorites.map((favorite) => (
+            <li key={favorite.id}>{favorite.name}</li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
