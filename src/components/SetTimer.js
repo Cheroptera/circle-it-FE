@@ -6,7 +6,6 @@ import {
   setWorkTime,
   setRestTime,
   setRounds,
-  setRoundsRestTime,
   setIsRunning
 } from 'reducers/timer'
 import { Header } from 'lib/Header'
@@ -20,7 +19,6 @@ export const SetTimer = () => {
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const rounds = useSelector((store) => store.timer.rounds)
-  const roundsRestTime = useSelector((store) => store.timer.roundsRestTime)
 
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
@@ -67,19 +65,6 @@ export const SetTimer = () => {
           />{' '}
           Rest seconds
         </label>
-
-        <label htmlFor="round-rest-time">
-          <Input
-            id="rounds-rest-time"
-            type="text"
-            value={roundsRestTime}
-            onChange={(e) => {
-              const inputValue = e.target.value
-              dispatch(setRoundsRestTime(inputValue))
-            }}
-          />{' '}
-          Rest between rounds
-        </label>
         <Link to="/workout">
           <StartButton
             type="button"
@@ -109,8 +94,8 @@ const FormWrapper = styled.div`
 `
 
 const Input = styled.input`
-width: 55px;
-height: 40px;
+width: 40px;
+height: 35px;
 background-color: #F0F0F0;
 margin: 6px;
 border-radius: 8px;
