@@ -17,11 +17,11 @@ export const AllExercises = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-         'Authorization': accessToken,
-         'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
-        }
+        Authorization: accessToken,
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+      }
     }
-    fetch(API_URL('exercises', options))
+    fetch(API_URL('exercises'), options)
       .then((res) => res.json())
       .then((json) => {
         const exercisesWithSelection = json.map((exercise) => ({
@@ -52,7 +52,7 @@ export const AllExercises = () => {
       <Header headerTitle="Choose your exercises" />
       <StyledList>
         {exerciseList.map((singleExercise) => (
-          <CardAndLike key={singleExercise.exerciseId}>
+          <CardAndLike key={singleExercise.name}>
             <SelectableExerciseCard
               type="button"
               onClick={() => handleExerciseSelect(singleExercise.exerciseId)}
