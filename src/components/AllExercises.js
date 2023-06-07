@@ -12,14 +12,14 @@ export const AllExercises = () => {
   const navigate = useNavigate()
   const accessToken = useSelector((store) => store.user.accessToken)
 
-    useEffect(() => {
-      const options = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: accessToken
-        }
+  useEffect(() => {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken
       }
+    }
     fetch(API_URL('exercises', options))
       .then((res) => res.json())
       .then((json) => {

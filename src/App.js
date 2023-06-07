@@ -6,6 +6,7 @@ import { exercises } from 'reducers/exercises'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import GlobalStyle from 'GlobalStyle'
 import { SetTimer } from 'components/SetTimer'
 import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
@@ -28,6 +29,7 @@ export const App = () => {
 
   return (
     <Provider store={store}>
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LogIn />} />

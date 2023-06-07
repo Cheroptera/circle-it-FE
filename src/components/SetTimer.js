@@ -101,7 +101,7 @@ const FormWrapper = styled.div`
   width: 242px;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 8px;
 
   @media (min-width: 1024px) {
     justify-content: center;
@@ -112,7 +112,7 @@ const Input = styled.input`
 width: 55px;
 height: 40px;
 background-color: #F0F0F0;
-margin: 10px;
+margin: 6px;
 border-radius: 8px;
 text-align: center;
 
