@@ -1,21 +1,29 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable operator-linebreak */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { setList } from 'reducers/exercises'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from 'lib/ExerciseCard'
+import { StartButton } from 'lib/StartButton'
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
   const [randomList, setRandomList] = useState([])
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleClickEvent = () => {
+    window.location.reload(true)
+  }
 
   const handleSetList = () => {
     dispatch(setList(randomList))
+    navigate('/set-timer')
   }
 
   useEffect(() => {
@@ -28,9 +36,8 @@ export const RandomWorkout = () => {
 
   return (
     <>
-      <Header headerTitle="This is a random workout" />
+      <Header headerTitle="Todays workout" />
       <StyledList>
-        <p>This is a random list</p>
         <Ul>
           {randomList &&
             randomList.map((singleRandomExercise) => (
@@ -40,12 +47,10 @@ export const RandomWorkout = () => {
             ))}
         </Ul>
       </StyledList>
-      <Link to="/set-timer">
-        {/* FOR NOW DO NOT import button components here, all of them cause memory errors //Vio */}
-        <button type="button" onClick={handleSetList}>
-          Set timer
-        </button>
-      </Link>
+      <ButtonWrapper>
+        <StartButton buttonText="Set timer" handleClick={handleSetList} />
+        <StartButton white buttonText="Regenerate" handleClick={handleClickEvent} />
+      </ButtonWrapper>
     </>
   )
 }
@@ -59,9 +64,15 @@ const StyledList = styled.div`
 
 const Ul = styled.ul`
   list-style-type: none;
+  padding-left: 0;
 `
 
 const Li = styled.li`
   display: flex;
   justify-content: center;
+`
+
+const ButtonWrapper = styled.div`
+display: flex;
+justify-content: center;
 `
