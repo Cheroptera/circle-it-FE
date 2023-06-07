@@ -10,7 +10,7 @@ export const NotFound = () => {
   return (
     <StyledNF>
       <p>
-        <Link to="/login">GO TO LOGIN</Link>
+        <Link to="/">Go to startpage</Link>
       </p>
       <p>Sorry, nothing here...</p>
     </StyledNF>
