@@ -18,7 +18,7 @@ export const Welcome = () => {
   const navigate = useNavigate()
   useEffect(() => {
     if (!accessToken) {
-      navigate('/login')
+      navigate('/')
     }
   }, [accessToken, navigate])
 
@@ -27,7 +27,9 @@ export const Welcome = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: accessToken
+        // Authorization: accessToken,
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+
       }
     }
     fetch(API_URL('welcome'), options)
@@ -57,7 +59,7 @@ export const Welcome = () => {
       <PageContent>
         <StyledBtnGroup>
           <SquareButton buttonText="Recent" />
-          <SquareButton buttonText="Favorites" />
+          <SquareButton buttonText="Favorite Workouts" />
           <SquareButton buttonText="Surprise Me" />
           <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
