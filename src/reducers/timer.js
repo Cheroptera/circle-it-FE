@@ -35,9 +35,8 @@ export const {
   setRestTime,
   setRepetitions,
   setRounds,
-  setRoundsRestTime,
+  roundsRestTime,
   setIsRunning
-} =
-  timer.actions
+} = timer.actions
 
 export default timer.reducer
