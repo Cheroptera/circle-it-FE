@@ -17,8 +17,9 @@ export const AllExercises = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: accessToken
-      }
+         'Authorization': accessToken,
+         'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        }
     }
     fetch(API_URL('exercises', options))
       .then((res) => res.json())
