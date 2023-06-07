@@ -16,6 +16,7 @@ import { WorkoutPage } from 'components/WorkoutPage'
 import { NotFound } from 'components/NotFound'
 import { SetEquipment } from 'components/SetEquipment'
 import { WellDone } from 'components/WellDone'
+import { CustomWorkout } from 'components/CustomWorkout'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -44,6 +45,7 @@ export const App = () => {
           <Route path="/set-timer" element={<SetTimer />} />
           <Route path="/workout" element={<WorkoutPage />} />
           <Route path="/customize" element={<SetEquipment />} />
+          <Route path="/my-workout" element={<CustomWorkout />} />
           <Route path="/well-done" element={<WellDone />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
