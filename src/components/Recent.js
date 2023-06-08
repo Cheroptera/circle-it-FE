@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components/macro';
 import { API_URL } from 'utils/urls';
+import { Header } from 'lib/Header';
+import { GoToStartButton } from 'lib/GoToStartButton';
 
 export const Recent = () => {
   const [recentWorkouts, setRecentWorkouts] = useState([]);
@@ -32,8 +35,8 @@ export const Recent = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Your Recent Workouts</h2>
+    <RecentPage>
+      <Header headerTitle="Your Recent Workouts" />
       {recentWorkouts.length > 0 ? (
         <ul>
           {recentWorkouts.map((workout) => (
@@ -43,6 +46,13 @@ export const Recent = () => {
       ) : (
         <p>No recent workouts</p>
       )}
-    </div>
+      <GoToStartButton />
+    </RecentPage>
   );
 };
+
+const RecentPage = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+`
