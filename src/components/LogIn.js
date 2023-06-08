@@ -15,14 +15,30 @@ export const LogIn = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const [mode, setMode] = useState('login')
+  const error = useSelector((store) => store.user.error)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const accessToken = useSelector((store) => store.user.accessToken)
+  const [alertMessage, setAlertMessage] = useState('')
+
+  const handleRandomWorkoutClick = () => {
+    navigate('/random')
+  }
   useEffect(() => {
     if (accessToken) {
       navigate('/welcome')
     }
   }, [accessToken, navigate, dispatch])
+
+  useEffect(() => {
+    if (error) {
+      if (error === 'User already exists') {
+        setAlertMessage('User already exists. Please choose a different username.');
+      } else if (error === 'Username and password do not match') {
+        setAlertMessage('Username and password do not match. Please try again.');
+      }
+    }
+  }, [error]);
 
   const onFormSubmit = (event) => {
     event.preventDefault()
@@ -48,12 +64,8 @@ export const LogIn = () => {
           dispatch(user.actions.setUserId(null))
           dispatch(user.actions.setError(data.response))
         }
-      })
-  }
-
-  const handleRandomWorkoutClick = () => {
-    navigate('/random')
-  }
+      });
+  };
 
   return (
     // TODO CHANGE NAME ON BUTTON WHEN SIGNUP IS CHECKED
@@ -115,6 +127,7 @@ export const LogIn = () => {
               onChange={(e) => setPassword(e.target.value)} />
           </FormDiv>
           <StartButton buttonText="Submit" handleClick={onFormSubmit} />
+          {alertMessage && <AlertMessage message={alertMessage} />}
         </SubmitForm>
       </LoginPageBottom>
     </Main>
@@ -220,3 +233,10 @@ const SubmitForm = styled.form`
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
   }
 `
+const AlertMessage = ({ message }) => {
+  return (
+    <div>
+      <p>{message}</p>
+    </div>
+  );
+};
