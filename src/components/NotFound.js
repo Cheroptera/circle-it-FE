@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Lottie from 'lottie-react'
+import { GoToStartButton } from 'lib/GoToStartButton'
 import { Header } from 'lib/Header'
 import notFound from '../lotties/notFound'
 
@@ -16,18 +16,7 @@ export const NotFound = () => {
     <StyledNF>
       <Header headerTitle="Ooops, something went wrong..." />
       <Lottie style={{ width: '200px', margin: 'auto' }} animationData={notFound} loop />
-      <GoToStart>
-        <Link style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} to="/">Go to startpage</Link>
-      </GoToStart>
+      <GoToStartButton />
     </StyledNF>
   )
 }
-
-const GoToStart = styled.div`
-width: fit-content;
-background-color: #A53860;
-color: white;
-cursor: pointer;
-padding: 10px 18px;
-border-radius: 16px;
-`
