@@ -57,7 +57,7 @@ export const Welcome = () => {
   // }
   return (
     <>
-      <Header headerTitle="Welcome back! What do you want to do today?" />
+      <Header headerTitle="Welcome back!" />
       <PageContent>
         <StyledBtnGroup>
           <SquareButton buttonText="Recent" />
