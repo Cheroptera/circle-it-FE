@@ -21,6 +21,14 @@ export const LogIn = () => {
   const accessToken = useSelector((store) => store.user.accessToken)
   const [alertMessage, setAlertMessage] = useState('')
 
+  let buttonText
+
+  if (mode === 'signup') {
+    buttonText = 'Sign up';
+  } else if (mode === 'login') {
+    buttonText = 'Log in';
+  }
+
   const handleRandomWorkoutClick = () => {
     navigate('/random')
   }
@@ -126,7 +134,7 @@ export const LogIn = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)} />
           </FormDiv>
-          <StartButton buttonText="Submit" handleClick={onFormSubmit} />
+          <StartButton buttonText={buttonText} handleClick={onFormSubmit} />
           {alertMessage && <AlertMessage message={alertMessage} />}
         </SubmitForm>
       </LoginPageBottom>
