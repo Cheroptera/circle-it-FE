@@ -16,6 +16,7 @@ import { WorkoutPage } from 'components/WorkoutPage'
 import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
 import { CustomWorkout } from 'components/CustomWorkout'
+import favorites from 'reducers/favorites'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -25,7 +26,8 @@ export const App = () => {
     user: user.reducer,
     welcome: welcome.reducer,
     timer: timer.reducer,
-    exercises: exercises.reducer
+    exercises: exercises.reducer,
+    favorites: favorites.reducer
   })
   const store = configureStore({ reducer })
 
