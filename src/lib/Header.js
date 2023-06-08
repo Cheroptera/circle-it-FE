@@ -62,6 +62,30 @@ const StyledCurrentRoundText = styled.h3`
   margin-top: 0;
 `
 
+const Blob1 = styled.div`
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background-color: #9AFFDF;
+position: absolute;
+top: calc(7%);
+left: calc(8%)
+`
+const Blob2 = styled.div`
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background-color: #9AFFDF;
+position: absolute;
+top: calc(22%);
+right: calc(23%);
+
+@media (min-width: 1024px) {
+  top: calc(20%);
+  right: calc(20%);
+  }
+`
+
 export const Header = ({
   headerTitle,
   className,
@@ -74,6 +98,8 @@ export const Header = ({
   return (
     <>
       <GoBackBtn />
+      <Blob1 />
+      <Blob2 />
       <StyledHeader className={className}>
         {headerBackText && (
           <StyledheaderBackText>{headerBackText}</StyledheaderBackText>
