@@ -4,11 +4,13 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import { Header } from '../lib/Header'
 
 export const WorkoutPage = () => {
+  const navigate = useNavigate()
   const randomList = useSelector((store) => store.exercises.list)
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
@@ -41,6 +43,8 @@ export const WorkoutPage = () => {
       setIsWorkTime(false)
       if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
+      } else if (currentRepetition === repetitions && currentRound === rounds) {
+        navigate('/well-done')
       } else {
         setIsRestTime(true)
       }
