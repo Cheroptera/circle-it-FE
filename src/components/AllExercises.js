@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
-import { toggleFavorite } from '../reducers/favorites'
+// import { toggleFavorite } from '../reducers/favorites'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
@@ -59,7 +59,7 @@ export const AllExercises = () => {
               isSelected={singleExercise.isSelected}>
               <H3>{singleExercise.name}</H3>
             </SelectableExerciseCard>
-            <FavoriteCheckbox exerciseId={singleExercise.id} />
+            {/* <FavoriteCheckbox exerciseId={singleExercise.id} /> */}
           </CardAndLike>
         ))}
       </StyledList>
@@ -91,65 +91,66 @@ cursor: pointer;
   }
 `
 
-const FavoriteCheckbox = ({ exerciseId }) => {
-  const dispatch = useDispatch()
-  const favorites = useSelector((store) => store.favorites || [])
-  // This code checks if the exerciseId is in the user's favorites:
-  const isChecked = favorites.includes(exerciseId)
+// const FavoriteCheckbox = ({ exerciseId }) => {
+//   const dispatch = useDispatch()
+//   const favorites = useSelector((store) => store.favorites || [])
+//  This code checks if the exerciseId is in the user's favorites:
+//   const isChecked = favorites.includes(exerciseId)
 
-  const handleCheckboxChange = () => {
-    dispatch(toggleFavorite(exerciseId))
-  }
+//   const handleCheckboxChange = () => {
+//     dispatch(toggleFavorite(exerciseId))
+//   }
 
-  return (
-    <FavoriteLabel isChecked={isChecked}>
-      <input
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleCheckboxChange} />
-      ❤︎
-    </FavoriteLabel>
-  )
-}
-const FavoriteLabel = styled.label`
-  font-size: 30px;
-  display: flex;
-  align-self: center;
-  justify-content: center;
-  cursor: pointer;
-  color: ${({ isChecked }) => (isChecked ? '#A53860' : 'inherit')};
-  position: relative;
-  padding-left: 30px;
+//   return (
+//     <FavoriteLabel isChecked={isChecked}>
+//       <input
+//         type="checkbox"
+//         checked={isChecked}
+//         onChange={handleCheckboxChange} />
+//       ❤︎
+//     </FavoriteLabel>
+//   )
+// // }
 
-  &:hover {
-    color: #A53860;
-  }
+// const FavoriteLabel = styled.label`
+//   font-size: 30px;
+//   display: flex;
+//   align-self: center;
+//   justify-content: center;
+//   cursor: pointer;
+//   color: ${({ isChecked }) => (isChecked ? '#A53860' : 'inherit')};
+//   position: relative;
+//   padding-left: 30px;
 
-  input[type='checkbox'] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
+//   &:hover {
+//     color: #A53860;
+//   }
 
-  span {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+//   input[type='checkbox'] {
+//     position: absolute;
+//     opacity: 0;
+//     width: 0;
+//     height: 0;
+//   }
 
-  span:before {
-    content: '❤︎';
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
+//   span {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//   }
 
-  input[type='checkbox']:checked + span:before {
-    color: #ffffff;
-    background-color: #A53860;
-  }
-`;
+//   span:before {
+//     content: '❤︎';
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     height: 100%;
+//   }
+
+//   input[type='checkbox']:checked + span:before {
+//     color: #ffffff;
+//     background-color: #A53860;
+//   }
+// `;
 
