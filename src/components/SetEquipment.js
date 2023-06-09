@@ -1,26 +1,18 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import { setList } from 'reducers/exercises'
 import { API_URL } from 'utils/urls'
+import { setFilteredEquipmentList } from 'reducers/filteredWorkout';
 
 export const SetEquipment = () => {
 // State variables to store selected muscle groups and equipment
-  const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([]);
   const [selectedEquipment, setSelectedEquipment] = useState([]);
+  const [filteredWorkout, setFilteredWorkout] = useState([])
   const accessToken = useSelector((store) => store.user.accessToken)
-
-  // Assuming you retrieve the data from an API endpoint
-  // Fetch muscle groups from the API endpoint
-  // const fetchMuscleGroups = () => {
-  //   fetch(API_URL('/exercises/musclegroups'), options)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setSelectedMuscleGroups(data.response);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching muscle groups:', error);
-  //     });
-  // };
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const options = {
@@ -42,63 +34,45 @@ export const SetEquipment = () => {
         });
     };
 
-    // fetchMuscleGroups();
     fetchEquipmentOptions();
   }, [accessToken]);
-
-  // Event handler for muscle group checkboxes
-  // const handleMuscleGroupChange = (event) => {
-  //   const muscleGroup = event.target.value;
-  //   if (event.target.checked) {
-  //     setSelectedMuscleGroups((prevSelected) => [...prevSelected, muscleGroup]);
-  //   } else {
-  //     setSelectedMuscleGroups((prevSelected) => prevSelected.filter((group) => group !== muscleGroup));
-  //   }
-  // };
 
   // Event handler for equipment checkboxes
   const handleEquipmentChange = (event) => {
     const equipment = event.target.value;
     if (event.target.checked) {
-      setSelectedEquipment((prevSelected) => [...prevSelected, equipment]);
+      dispatch(setFilteredEquipmentList([...selectedEquipment, equipment]));
     } else {
-      setSelectedEquipment((prevSelected) => prevSelected.filter((item) => item !== equipment));
+      dispatch(setFilteredEquipmentList(selectedEquipment.filter((item) => item !== equipment)));
     }
   };
 
   // Function to handle the random workout request
-  const handleRandomWorkout = () => {
-    const muscleGroupsQuery = selectedMuscleGroups.join(',');
-    const equipmentQuery = selectedEquipment.join(',');
+  const HandleRandomWorkout = () => {
+    const equipmentQuery = useSelector((store) => store.filteredWorkout.list)
+    const inclusion = selectedEquipment.includes(equipmentQuery) ? 'in' : 'nin';
+    const QUERY_API_URL = `/exercises/random?equipment=${equipmentQuery}&inclusion=${inclusion}`;
+    fetch(QUERY_API_URL)
+      .then((res) => res.json())
+      .then((data) => {
+        setFilteredWorkout(data.response);
+      })
+    dispatch(setList(filteredWorkout))
+    navigate('/set-timer')
+  }
+  // const muscleGroupsQuery = selectedMuscleGroups.join(',');
 
-    // Make the API request with the constructed query parameters
-    // Use the 'inclusion' parameter to determine whether to use 'in' or 'nin'
-    const inclusion = inclusionCheckbox.checked ? 'in' : 'nin';
-    const queryAPI_URL = `/exercises/random?muscleGroups=${muscleGroupsQuery}&equipment=${equipmentQuery}&inclusion=${inclusion}`;
+  // Make the API request with the constructed query parameters
+  // Use the 'inclusion' parameter to determine whether to use 'in' or 'nin'
   // Make the API request using the constructed apiUrl
-  };
 
   return (
     <>
       <p>Välj utrustning dårå!</p>
-
-      {/* Render muscle group checkboxes */}
-      {muscleGroups.map((muscleGroup) => (
-        <div key={muscleGroup}>
-          <label>
-            <input
-              type="checkbox"
-              value={muscleGroup}
-              onChange={handleMuscleGroupChange} />
-            {muscleGroup}
-          </label>
-        </div>
-      ))}
-
       {/* Render equipment checkboxes */}
-      {equipmentOptions.map((equipment) => (
+      {selectedEquipment.map((equipment) => (
         <div key={equipment}>
-          <label>
+          <label htmlFor={equipment}>
             <input
               type="checkbox"
               value={equipment}
@@ -109,7 +83,7 @@ export const SetEquipment = () => {
       ))}
 
       {/* Add a button to trigger the random workout request */}
-      <button type="button" onClick={handleRandomWorkout}>Generate Random Workout</button>
+      <button type="button" onClick={HandleRandomWorkout}>Generate Random Workout</button>
     </>
   );
 }
