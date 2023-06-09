@@ -13,7 +13,8 @@ export const WellDone = () => {
         <H2>You&apos;re frickin&apos; awesome! </H2>
       </StyledWellDoneContainer>
       <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop />
-
+      <p>Did you enjoy this workout?</p>
+      <button type="button">Save workout</button>
     </>
   )
 }
