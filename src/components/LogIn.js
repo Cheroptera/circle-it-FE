@@ -76,7 +76,6 @@ export const LogIn = () => {
   };
 
   return (
-    // TODO CHANGE NAME ON BUTTON WHEN SIGNUP IS CHECKED
     <Main>
       <LoginPageTop>
         <HeaderText>Circ(le) it!</HeaderText>
