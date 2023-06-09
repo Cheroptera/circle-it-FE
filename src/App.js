@@ -17,6 +17,8 @@ import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
 import { CustomWorkout } from 'components/CustomWorkout'
 import favorites from 'reducers/favorites'
+import { SetEquipment } from 'components/SetEquipment'
+import { SetMuscleGroup } from 'components/SetMusclegroup'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -38,6 +40,8 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/exercises" element={<AllExercises />} />
+          <Route path="/set-equipment" element={<SetEquipment />} />
+          <Route path="/set-musclegroup" element={<SetMuscleGroup />} />
           <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />

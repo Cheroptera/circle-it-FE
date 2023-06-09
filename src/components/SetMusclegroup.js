@@ -7,7 +7,7 @@ import styled from 'styled-components/macro'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
 
-export const customizeWorkout = ({ workout, generateWorkout }) => {
+export const SetMuscleGroup = ({ workout, generateWorkout }) => {
   const [filteredList, setFilteredList] = useState([])
   const [includeMuscleGroup, setIncludeMuscleGroup] = useState('')
   const [includeEquipment, setIncludeEquipment] = useState('')
