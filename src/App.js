@@ -2,8 +2,8 @@ import React from 'react'
 import { user } from 'reducers/user'
 import { welcome } from 'reducers/welcome'
 import { timer } from 'reducers/timer'
-import { exercises } from 'reducers/exercises'
-import { filteredWorkout } from 'reducers/filteredWorkout'
+import { exercises, workouts } from 'reducers/exercises'
+import { custom } from 'reducers/customWorkout'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -18,8 +18,7 @@ import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
 import { CustomWorkout } from 'components/CustomWorkout'
 import favorites from 'reducers/favorites'
-import { SetEquipment } from 'components/SetEquipment'
-import { SetMuscleGroup } from 'components/SetMusclegroup'
+import { FilterData } from 'components/FilterData'
 import { AllExercises } from './components/AllExercises'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
@@ -31,7 +30,8 @@ export const App = () => {
     timer: timer.reducer,
     exercises: exercises.reducer,
     favorites: favorites.reducer,
-    filtered: filteredWorkout.reducer
+    workouts: workouts.reducer,
+    custom: custom.reducer
   })
   const store = configureStore({ reducer })
 
@@ -42,8 +42,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/exercises" element={<AllExercises />} />
-          <Route path="/set-equipment" element={<SetEquipment />} />
-          <Route path="/set-musclegroup" element={<SetMuscleGroup />} />
+          <Route path="/exercises/filter" element={<FilterData />} />
           <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />
