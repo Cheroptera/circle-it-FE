@@ -21,8 +21,10 @@ export const FilterData = () => {
 
   const options = {
     method: 'GET',
+    mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       Authorization: accessToken,
       'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
     }
