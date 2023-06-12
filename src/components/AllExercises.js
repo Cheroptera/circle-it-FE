@@ -19,7 +19,8 @@ export const AllExercises = () => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken,
-        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'Access-Control-Allow-Origin': '*'
       }
     };
     fetch(API_URL('exercises'), options)
@@ -68,16 +69,15 @@ export const AllExercises = () => {
     })
       .then((res) => res.json())
       .then((json) => {
+        console.log('hallå', json)
         if (json.success) {
           navigate(`/set-timer?workoutId=${json.workoutId}`);
         } else {
-          navigate('*');
           console.error('Failed to save workout');
         }
       })
       .catch((error) => {
         console.error('Failed to save workout:', error);
-        navigate('*');
       });
 
     navigate('/set-timer');
