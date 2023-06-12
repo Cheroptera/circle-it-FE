@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { addWorkout } from 'reducers/exercises'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 // import { toggleFavorite } from '../reducers/favorites'
 
 export const AllExercises = () => {
   const [exerciseList, setExerciseList] = useState([])
+  const [selectedCount, setSelectedCount] = useState(0)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const accessToken = useSelector((store) => store.user.accessToken)
 
   useEffect(() => {
@@ -39,12 +42,41 @@ export const AllExercises = () => {
 
   const handleExerciseSelect = (exerciseId) => {
     /* eslint-disable-next-line max-len */
-    setExerciseList((prevExerciseList) => prevExerciseList.map((exercise) => {
-      return exercise.id === exerciseId
-        ? { ...exercise, isSelected: !exercise.isSelected }
-        : exercise;
-    }));
-    console.log(exerciseList);
+    setExerciseList((prevExerciseList) => prevExerciseList.map((exercise) => exercise.exerciseId === exerciseId
+      ? { ...exercise, isSelected: !exercise.isSelected }
+      : exercise));
+  };
+
+  useEffect(() => {
+    const count = exerciseList.reduce((total, exercise) => {
+      if (exercise.isSelected) {
+        return total + 1;
+      }
+      return total;
+    }, 0);
+    setSelectedCount(count);
+  }, [exerciseList]);
+
+  const handleCreateWorkout = () => {
+    const selectedExercises = exerciseList.filter((exercise) => exercise.isSelected)
+    dispatch(addWorkout(selectedExercises))
+
+    fetch(API_URL('workouts')) // Save the workout
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success) {
+          navigate('/recent')
+        } else {
+          navigate('*')
+          console.error('Failed to save workout')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to save workout:', error)
+        navigate('*')
+      });
+
+    navigate('/set-timer')
   };
 
   return (
@@ -63,6 +95,11 @@ export const AllExercises = () => {
           </CardAndLike>
         ))}
       </StyledList>
+      <CreateWorkoutButton
+        onClick={handleCreateWorkout}
+        disabled={selectedCount !== 5}>
+          Create Workout
+      </CreateWorkoutButton>
     </>
   )
 }
@@ -89,6 +126,9 @@ cursor: pointer;
     background-color: #61C9A8;
     border: #61C9A8;
   }
+`
+
+const CreateWorkoutButton = styled.button`
 `
 
 // const FavoriteCheckbox = ({ exerciseId }) => {
