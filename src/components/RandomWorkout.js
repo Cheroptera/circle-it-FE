@@ -18,7 +18,7 @@ export const RandomWorkout = () => {
   const navigate = useNavigate()
 
   const handleClickEvent = () => {
-    window.location.reload(true)
+    navigate('/random')
   }
 
   const handleSetList = () => {
