@@ -11,7 +11,7 @@ import { Header } from '../lib/Header'
 
 export const WorkoutPage = () => {
   const navigate = useNavigate()
-  const randomList = useSelector((store) => store.exercises.list)
+  const randomList = useSelector((store) => store.workouts.list)
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const repetitions = useSelector((store) => store.timer.repetitions)
