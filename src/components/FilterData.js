@@ -1,14 +1,15 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setCustomList } from 'reducers/customWorkout';
+import { setList } from 'reducers/workouts';
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 
 export const FilterData = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const accessToken = useSelector((store) => store.user.accessToken)
 
   const [filteredData, setFilteredData] = useState([])
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
@@ -18,6 +19,15 @@ export const FilterData = () => {
   const musclegroups = ['legs', 'chest', 'arms', 'back', 'shoulders', 'abs']
   const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band']
 
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: accessToken,
+      'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+    }
+  };
+
   const fetchFilteredData = async () => {
     try {
       const query = new URLSearchParams({
@@ -25,7 +35,7 @@ export const FilterData = () => {
         equipment: selectedEquipment.join(','),
         impact: lowImpactOnly ? 'low' : ''
       });
-      const response = await fetch(API_URL(`exercises/filter?${query}`));
+      const response = await fetch(API_URL(`exercises/filter?${query}`), options)
       const data = await response.json();
       setFilteredData(data.response);
     } catch (error) {
@@ -57,7 +67,8 @@ export const FilterData = () => {
 
   const handleSetList = () => {
     fetchFilteredData();
-    dispatch(setCustomList(filteredData))
+    dispatch(setList(filteredData))
+    navigate('set-timer')
     console.log(filteredData)
   }
 
