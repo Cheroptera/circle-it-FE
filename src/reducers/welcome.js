@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+//! Behövs denna reducern ens???
 export const welcome = createSlice({
   name: 'welcome',
   initialState: {
