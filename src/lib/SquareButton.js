@@ -15,6 +15,11 @@ font-size: 18px;
 margin-top: 1rem;
 box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 
+&:hover,
+&:focus {
+color:blue;
+
+}
 `
 
 export const SquareButton = ({ buttonText }) => {
@@ -23,8 +28,8 @@ export const SquareButton = ({ buttonText }) => {
   const handleSquareButtonClick = () => {
     if (buttonText === 'Recent') {
       navigate('/recent')
-    } else if (buttonText === 'Favorites') {
-      navigate('/favorites')
+    } else if (buttonText === 'Favorite Workouts') {
+      navigate('/filter')
     } else if (buttonText === 'Surprise Me') {
       navigate('/random')
     } else if (buttonText === 'Custom Workout') {

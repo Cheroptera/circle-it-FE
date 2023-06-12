@@ -2,7 +2,7 @@ import React from 'react'
 import { user } from 'reducers/user'
 import { welcome } from 'reducers/welcome'
 import { timer } from 'reducers/timer'
-import { exercises, workouts } from 'reducers/exercises'
+import { workouts } from 'reducers/workouts'
 import { custom } from 'reducers/customWorkout'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
@@ -28,9 +28,8 @@ export const App = () => {
     user: user.reducer,
     welcome: welcome.reducer,
     timer: timer.reducer,
-    exercises: exercises.reducer,
-    favorites: favorites.reducer,
     workouts: workouts.reducer,
+    favorites: favorites.reducer,
     custom: custom.reducer
   })
   const store = configureStore({ reducer })
@@ -42,7 +41,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<LogIn />} />
           <Route path="/exercises" element={<AllExercises />} />
-          <Route path="/exercises/filter" element={<FilterData />} />
+          <Route path="/filter" element={<FilterData />} />
           <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />
