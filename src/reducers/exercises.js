@@ -17,3 +17,19 @@ export const exercises = createSlice({
 })
 
 export const { setList } = exercises.actions
+
+export const workouts = createSlice({
+  name: 'workout list',
+  initialState: [],
+  reducers: {
+    addWorkout: (state, action) => {
+      const newWorkout = {
+        id: Date.now(), // Generates a unique ID
+        exercises: action.payload
+      }
+      state.push(newWorkout)
+    }
+  }
+})
+
+export const { addWorkout } = workouts.actions
