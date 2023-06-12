@@ -16,7 +16,6 @@ import { Details } from 'components/Details'
 import { WorkoutPage } from 'components/WorkoutPage'
 import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
-import { CustomWorkout } from 'components/CustomWorkout'
 import favorites from 'reducers/favorites'
 import { FilterData } from 'components/FilterData'
 import { AllExercises } from './components/AllExercises'
@@ -49,7 +48,6 @@ export const App = () => {
           <Route path="/random" element={<RandomWorkout />} />
           <Route path="/set-timer" element={<SetTimer />} />
           <Route path="/workout" element={<WorkoutPage />} />
-          <Route path="/my-workout" element={<CustomWorkout />} />
           <Route path="/well-done" element={<WellDone />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
