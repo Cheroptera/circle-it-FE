@@ -1,9 +1,16 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Header } from 'lib/Header'
 import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
 import confetti from '../lotties/confetti.json'
 
+const HandleSaveWorkout = () => {
+  const dispatch = useDispatch()
+  const customList = useSelector((store) => store.custom.customList)
+  dispatch(customList)
+  alert('Your workout was saved!')
+}
 export const WellDone = () => {
   return (
     <>
@@ -14,7 +21,7 @@ export const WellDone = () => {
       </StyledWellDoneContainer>
       <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop />
       <p>Did you enjoy this workout?</p>
-      <button type="button">Save workout</button>
+      <button type="button" onClick={HandleSaveWorkout}>Save workout</button>
     </>
   )
 }
