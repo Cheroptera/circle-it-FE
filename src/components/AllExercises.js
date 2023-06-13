@@ -46,26 +46,51 @@ export const AllExercises = () => {
   }, [navigate, accessToken])
 
   const handleExerciseSelection = (exerciseName) => {
-    setExerciseList((prevList) => prevList.map((exercise) => {
-      if (exercise.name === exerciseName) {
-        return {
-          ...exercise,
-          isSelected: !exercise.isSelected // Toggle isSelected value
+    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length
+    const exerciseToUpdate = exerciseList.find((exercise) => exercise.name === exerciseName)
+
+    if (exerciseToUpdate.isSelected) {
+      // If the exercise is already selected, unselect it and update the numbers
+      const deselectedNumber = exerciseToUpdate.number
+      exerciseToUpdate.isSelected = false
+      exerciseToUpdate.number = null
+
+      // Update the numbers of the remaining selected exercises
+      const updatedExerciseList = exerciseList.map((exercise) => {
+        if (exercise.isSelected && exercise.number > deselectedNumber) {
+          exercise.number -= 1
         }
-      }
-      return exercise
-    }))
-  };
+        return exercise
+      });
+
+      setExerciseList(updatedExerciseList)
+    } else if (selectedCount < 5) {
+      // If the exercise is not selected and the maximum selection limit is not reached, select it and assign a number
+      const isSelected = true;
+      const number = selectedCount + 1
+
+      exerciseToUpdate.isSelected = isSelected
+      exerciseToUpdate.number = number
+
+      setExerciseList([...exerciseList])
+    }
+  }
 
   const handleCreateWorkout = () => {
-    const selectedExercises = exerciseList.filter((exercise) => exercise.isSelected);
-    dispatch(setList(selectedExercises)) // Dispatch the setList action
-    dispatch(setTimestamp()) // Dispatch the setTimestamp action
+    const selectedExercises = exerciseList
+      .filter((exercise) => exercise.isSelected)
+      .map((exercise) => ({
+        ...exercise,
+        isSelected: false,
+        number: null
+      }))
+    dispatch(setList(selectedExercises))
+    dispatch(setTimestamp())
     navigate('/set-timer')
   }
 
-  const selectedExeciseCount = exerciseList.filter((exercise) => exercise.isSelected).length
-  const isCreateWorkoutButtonDisabled = selectedExeciseCount !== 5
+  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length
+  const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5
 
   return (
     <>
@@ -82,6 +107,9 @@ export const AllExercises = () => {
                     onClick={() => handleExerciseSelection(singleExercise.name)}
                     isSelected={singleExercise.isSelected}>
                     <H3>{singleExercise.name}</H3>
+                    <NumberWrapper>
+                      <H3>{singleExercise.number}</H3>
+                    </NumberWrapper>
                   </ExerciseCard>
                 </ExerciseCardWrapper>
               ))}
@@ -122,6 +150,16 @@ const ExerciseCardWrapper = styled.div`
 
 const H3 = styled.h3`
   margin: 0;
+`
+
+const NumberWrapper = styled.div`
+color: #A53860;
+font-size: 16px;
+display: flex;
+align-self: flex-end;
+position:absolute;
+right: calc(4%);
+top: calc(-7px);
 `
 
 const CreateWorkoutButton = styled.button`
