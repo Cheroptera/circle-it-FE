@@ -5,7 +5,7 @@ import styled from 'styled-components'
 export const GoToStartButton = () => {
   return (
     <GoToStart>
-      <Link style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} to="/">Go to startpage</Link>
+      <Link style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} to="/welcome">Go to startpage</Link>
     </GoToStart>
   )
 }
