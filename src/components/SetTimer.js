@@ -10,6 +10,7 @@ import {
 } from 'reducers/timer'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
+import { LogOutButton } from 'lib/LogOutButton'
 import styled from 'styled-components/macro'
 
 //* This is where the user sets the timer
@@ -72,6 +73,7 @@ export const SetTimer = () => {
           handleClick={handleStartWorkout}
         />
       </FormWrapper>
+      <LogOutButton />
     </Main>
   )
 }
