@@ -1,37 +1,68 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { API_URL } from 'utils/urls'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { Header } from 'lib/Header'
+import { LogOutButton } from 'lib/LogOutButton'
 import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
 import confetti from '../lotties/confetti.json'
 
-const HandleSaveWorkout = () => {
-  const dispatch = useDispatch()
-  const customList = useSelector((store) => store.custom.customList)
-  dispatch(customList)
-  alert('Your workout was saved!')
-}
 export const WellDone = () => {
+  const navigate = useNavigate()
+  const finishedWorkout = useSelector((store) => store.workouts.list)
+  const timestamp = useSelector((store) => store.workouts.createdAt)
+  const accessToken = useSelector((store) => store.user.accessToken)
+
+  // Save the workout
+  const handleSaveWorkout = () => {
+    fetch(API_URL('workouts'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+      },
+      body: JSON.stringify({
+        createdAt: timestamp,
+        exercises: finishedWorkout
+      })
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log('hallå', json)
+        if (json.success) {
+          navigate('/favorites')
+        } else {
+          console.error('Failed to save workout')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to save workout:', error)
+      })
+  }
   return (
     <>
       <Header
         headerTitle="Well done!" />
       <StyledWellDoneContainer>
         <H2>You&apos;re frickin&apos; awesome! </H2>
+        <p>Did you enjoy this workout?</p>
+        <button type="button" onClick={handleSaveWorkout}>Save workout</button>
       </StyledWellDoneContainer>
       <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop />
-      <p>Did you enjoy this workout?</p>
-      <button type="button" onClick={HandleSaveWorkout}>Save workout</button>
+      <LogOutButton />
     </>
   )
 }
 
 const StyledWellDoneContainer = styled.div`
 display: flex; 
+flex-direction: column;
 justify-content: center; 
 font-size: 32px; 
-text-align: center;
 margin: 5%;
+align-items: center;
 `
 
 const H2 = styled.h2`
