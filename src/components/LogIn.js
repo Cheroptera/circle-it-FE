@@ -24,9 +24,9 @@ export const LogIn = () => {
   let buttonText
 
   if (mode === 'signup') {
-    buttonText = 'Sign up';
+    buttonText = 'Sign up'
   } else if (mode === 'login') {
-    buttonText = 'Log in';
+    buttonText = 'Log in'
   }
 
   const handleRandomWorkoutClick = () => {
@@ -41,12 +41,12 @@ export const LogIn = () => {
   useEffect(() => {
     if (error) {
       if (error === 'User already exists') {
-        setAlertMessage('User already exists. Please choose a different username.');
+        setAlertMessage('User already exists. Please choose a different username.')
       } else if (error === 'Username and password do not match') {
-        setAlertMessage('Username and password do not match. Please try again.');
+        setAlertMessage('Username and password do not match. Please try again.')
       }
     }
-  }, [error]);
+  }, [error])
 
   const onFormSubmit = (event) => {
     event.preventDefault()
@@ -245,5 +245,5 @@ const AlertMessage = ({ message }) => {
     <div>
       <p>{message}</p>
     </div>
-  );
-};
+  )
+}
