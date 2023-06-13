@@ -29,8 +29,8 @@ export const Welcome = () => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // Authorization: accessToken,
-        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+        Authorization: accessToken
+        // 'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
 
       }
     }
