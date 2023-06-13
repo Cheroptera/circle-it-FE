@@ -1,12 +1,13 @@
+/* eslint-disable max-len */
 import React from 'react'
 import { API_URL } from 'utils/urls'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Header } from 'lib/Header'
 import { LogOutButton } from 'lib/LogOutButton'
-import Lottie from 'lottie-react'
+// import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
-import confetti from '../lotties/confetti.json'
+// import confetti from '../lotties/confetti.json'
 
 export const WellDone = () => {
   const navigate = useNavigate()
@@ -14,10 +15,16 @@ export const WellDone = () => {
   const timestamp = useSelector((store) => store.workouts.createdAt)
   const accessToken = useSelector((store) => store.user.accessToken)
 
+  const handleSomething = () => {
+    console.log('handle this 🌮')
+  }
+
   // Save the workout
   const handleSaveWorkout = () => {
+    console.log('CLICKAR DU')
     fetch(API_URL('workouts'), {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken,
@@ -38,7 +45,7 @@ export const WellDone = () => {
         }
       })
       .catch((error) => {
-        console.error('Failed to save workout:', error)
+        console.error('Failed to save workout', error)
       })
   }
   return (
@@ -49,8 +56,9 @@ export const WellDone = () => {
         <H2>You&apos;re frickin&apos; awesome! </H2>
         <p>Did you enjoy this workout?</p>
         <button type="button" onClick={handleSaveWorkout}>Save workout</button>
+        <button type="button" onClick={handleSomething}>Another</button>
       </StyledWellDoneContainer>
-      <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop />
+      {/* <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop /> */}
       <LogOutButton />
     </>
   )
