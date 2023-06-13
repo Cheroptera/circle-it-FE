@@ -44,6 +44,8 @@ export const LogIn = () => {
         setAlertMessage('User already exists. Please choose a different username.')
       } else if (error === 'Username and password do not match') {
         setAlertMessage('Username and password do not match. Please try again.')
+      } else {
+        setAlertMessage('An error occurred. Please try again later.')
       }
     }
   }, [error])
@@ -67,14 +69,19 @@ export const LogIn = () => {
           dispatch(user.actions.setError(null))
           navigate('/welcome')
         } else {
-          dispatch(user.actions.setAccessToken(null))
-          dispatch(user.actions.setUsername(null))
-          dispatch(user.actions.setUserId(null))
-          dispatch(user.actions.setError(data.response))
+          dispatch(user.actions.setAccessToken(null));
+          dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setUserId(null));
+          if (mode === 'login' && data.response === 'Credentials do not match') {
+            setAlertMessage('Username and password do not match. Please try again.');
+          } else if (mode === 'signup' && data.response === 'User already exists') {
+            setAlertMessage('User already exists. Please choose a different username.');
+          } else {
+            setAlertMessage('An error occurred. Please try again.');
+          }
         }
-      });
-  };
-
+      })
+  }
   return (
     <Main>
       <LoginPageTop>

@@ -6,7 +6,7 @@
     "@babel/eslint-parser": "^7.18.9",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.13.3",
+    "@mui/material": "^5.13.5",
     "@reduxjs/toolkit": "^1.9.5",
     "dotenv": "^16.1.4",
     "eslint": "^8.21.0",
