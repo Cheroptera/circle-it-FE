@@ -29,14 +29,6 @@ const StyledHeaderTitle = styled.h2`
   margin: 80px 30px 80px 30px;
   `}`
 
-const StyledheaderBackText = styled.p`
-  font-family: 'Poppins', 'Sans-Serif';
-  color: white;
-  font-size: 10px;
-  margin-right: 0;
-  margin-top: 0;
-`
-
 const StyledSubHeading = styled.h3`
   font-weight: 700;
   align-self: center;
@@ -89,7 +81,6 @@ right: calc(23%);
 export const Header = ({
   headerTitle,
   className,
-  headerBackText,
   currentRoundText,
   currentRepText,
   headerSubheading,
@@ -101,9 +92,6 @@ export const Header = ({
       <Blob1 />
       <Blob2 />
       <StyledHeader className={className}>
-        {headerBackText && (
-          <StyledheaderBackText>{headerBackText}</StyledheaderBackText>
-        )}
         {currentRoundText && (
           <StyledCurrentRoundText>{currentRoundText}</StyledCurrentRoundText>
         )}
