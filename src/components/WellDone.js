@@ -21,17 +21,19 @@ export const WellDone = () => {
 
   // Save the workout
   const handleSaveWorkout = () => {
-    console.log('CLICKAR DU')
+    console.log('timestamp', timestamp)
+    console.log('finishedWorkout', finishedWorkout)
     fetch(API_URL('workouts'), {
       method: 'POST',
       mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken,
-        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({
-        createdAt: timestamp,
+        timestamp,
         exercises: finishedWorkout
       })
     })

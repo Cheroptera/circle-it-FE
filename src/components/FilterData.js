@@ -11,7 +11,6 @@ export const FilterData = () => {
   const navigate = useNavigate()
   const accessToken = useSelector((store) => store.user.accessToken)
 
-  const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([])
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
   const [selectedEquipment, setSelectedEquipment] = useState([])
@@ -41,7 +40,6 @@ export const FilterData = () => {
       const response = await fetch(API_URL(`exercises/filter?${query}`), options)
       const data = await response.json()
       setFilteredData(data.response)
-      setLoading(false)
     } catch (error) {
       console.error('Error fetching filtered exercises:', error)
     }
@@ -79,52 +77,46 @@ export const FilterData = () => {
   return (
     <>
       <Header headerTitle="Customize workout" />
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {/* Render muscle group checkboxes */}
-          {musclegroups.map((singleMuscleGroup) => (
-            <div key={singleMuscleGroup}>
-              <label htmlFor={singleMuscleGroup}>
-                <input
-                  type="checkbox"
-                  id={singleMuscleGroup}
-                  value={singleMuscleGroup}
-                  checked={selectedMuscleGroups.includes(singleMuscleGroup)}
-                  onChange={handleMuscleGroupChange} />
-                {singleMuscleGroup}
-              </label>
-            </div>
-          ))}
-
-          {/* Render equipment checkboxes */}
-          {equipment.map((singleEquipment) => (
-            <div key={singleEquipment}>
-              <label htmlFor={singleEquipment}>
-                <input
-                  type="checkbox"
-                  id={singleEquipment}
-                  value={singleEquipment}
-                  checked={selectedEquipment.includes(singleEquipment)}
-                  onChange={handleEquipmentChange} />
-                {singleEquipment}
-              </label>
-            </div>
-          ))}
-
-          {/* Render the low impact switch */}
-          <label htmlFor="lowImpact">
+      {/* Render muscle group checkboxes */}
+      {musclegroups.map((singleMuscleGroup) => (
+        <div key={singleMuscleGroup}>
+          <label htmlFor={singleMuscleGroup}>
             <input
               type="checkbox"
-              id="lowImpact"
-              checked={lowImpactOnly}
-              onChange={handleLowImpactToggle} />
-            Low Impact Only
+              id={singleMuscleGroup}
+              value={singleMuscleGroup}
+              checked={selectedMuscleGroups.includes(singleMuscleGroup)}
+              onChange={handleMuscleGroupChange} />
+            {singleMuscleGroup}
           </label>
-          <button type="button" onClick={handleSetList}>Randomize</button>
-        </>
-      )}
+        </div>
+      ))}
+
+      {/* Render equipment checkboxes */}
+      {equipment.map((singleEquipment) => (
+        <div key={singleEquipment}>
+          <label htmlFor={singleEquipment}>
+            <input
+              type="checkbox"
+              id={singleEquipment}
+              value={singleEquipment}
+              checked={selectedEquipment.includes(singleEquipment)}
+              onChange={handleEquipmentChange} />
+            {singleEquipment}
+          </label>
+        </div>
+      ))}
+
+      {/* Render the low impact switch */}
+      <label htmlFor="lowImpact">
+        <input
+          type="checkbox"
+          id="lowImpact"
+          checked={lowImpactOnly}
+          onChange={handleLowImpactToggle} />
+        Low Impact Only
+      </label>
+      <button type="button" onClick={handleSetList}>Randomize</button>
     </>
   )
 }

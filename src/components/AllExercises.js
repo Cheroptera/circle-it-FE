@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
@@ -5,9 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setList, setTimestamp } from 'reducers/workouts'
 import { LogOutButton } from 'lib/LogOutButton'
+import { Loading } from 'lib/Loading'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
-import { Loading } from 'lib/Loading'
 
 export const AllExercises = () => {
   const [loading, setLoading] = useState(true);
@@ -103,7 +104,7 @@ const StyledList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 70vh;
+  height: 50vh;
   overflow-y: scroll;
   margin: 20px;
   `

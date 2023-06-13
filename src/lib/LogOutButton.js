@@ -25,12 +25,14 @@ const StyledLogoutBtn = styled.button`
 border: none;
 background: none;
 align-self: center;
-width: 30%;
-margin-top: 200px; 
 cursor: pointer;
 color: #A53860;
-font-size: 18px;
+font-size: 14px;
 position: absolute;
-right: 5px;
-bottom: 5px;
+right: 10px;
+top: 10px;
+
+@media (min-width: 1024px) {
+  font-size: 20px;
+  }
 `

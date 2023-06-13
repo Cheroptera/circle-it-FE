@@ -14,10 +14,11 @@ font-family: 'Poppins', 'Sans-Serif';
 font-size: 18px;
 margin-top: 1rem;
 box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+cursor: pointer;
 
 &:hover,
 &:focus {
-color:blue;
+color:white;
 
 }
 `

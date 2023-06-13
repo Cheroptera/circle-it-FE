@@ -25,6 +25,7 @@ export const WorkoutPage = () => {
   const [isRoundRest, setIsRoundRest] = useState(false)
 
   const getCurrentExercise = () => {
+    console.log(rounds)
     if (randomList.length > 0) {
       return randomList[currentRepetition - 1]
     }

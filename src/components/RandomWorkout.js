@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { setList } from 'reducers/workouts'
+import { setList, setTimestamp } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from 'lib/ExerciseCard'
@@ -25,6 +25,7 @@ export const RandomWorkout = () => {
 
   const handleSetList = () => {
     dispatch(setList(randomList))
+    dispatch(setTimestamp()) // Dispatch the setTimestamp action
     navigate('/set-timer')
   }
 
