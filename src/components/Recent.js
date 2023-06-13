@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components/macro';
-import { API_URL } from 'utils/urls';
-import { Header } from 'lib/Header';
-import { GoToStartButton } from 'lib/GoToStartButton';
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components/macro'
+import { API_URL } from 'utils/urls'
+import { Header } from 'lib/Header'
+import { GoToStartButton } from 'lib/GoToStartButton'
 
 export const Recent = () => {
-  const [recentWorkouts, setRecentWorkouts] = useState([]);
+  const [recentWorkouts, setRecentWorkouts] = useState([])
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken'); // Get the access token from storage
+    const accessToken = localStorage.getItem('accessToken') // Get the access token from storage
 
     const fetchRecentWorkouts = async () => {
       try {
@@ -16,23 +16,23 @@ export const Recent = () => {
           headers: {
             Authorization: accessToken
           }
-        });
+        })
 
         if (response.ok) {
-          const data = await response.json();
-          setRecentWorkouts(data.response);
+          const data = await response.json()
+          setRecentWorkouts(data.response)
         } else {
-          console.error('Failed to fetch recent workouts');
+          console.error('Failed to fetch recent workouts')
         }
       } catch (error) {
-        console.error('Error fetching recent workouts:', error);
+        console.error('Error fetching recent workouts:', error)
       }
-    };
+    }
 
     if (accessToken) {
-      fetchRecentWorkouts();
+      fetchRecentWorkouts()
     }
-  }, []);
+  }, [])
 
   return (
     <RecentPage>
@@ -48,8 +48,8 @@ export const Recent = () => {
       )}
       <GoToStartButton />
     </RecentPage>
-  );
-};
+  )
+}
 
 const RecentPage = styled.div`
 display: flex;

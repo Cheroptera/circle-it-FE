@@ -1,24 +1,22 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { API_URL } from 'utils/urls'
-import { Header } from 'lib/Header';
-import setFavorites from '../reducers/favorites'
+import { Header } from 'lib/Header'
 
 // * This is a list of all the favorites of a logged in user
 
 export const Favorites = async () => {
-  const favorites = useSelector((store) => store.favorites.exercises)
-  const dispatch = useDispatch()
+  const favorites = useSelector((store) => store.user.favorites)
+
   try {
-    const response = await fetch(API_URL('exercises/favorites'));
+    const response = await fetch(API_URL('exercises/favorites'))
     if (response.ok) {
-      const favoritesData = await response.json();
-      dispatch(setFavorites(favoritesData)); // Update the Redux store with the fetched favorites
+      await response.json()
     } else {
-      throw new Error('Error fetching favorites');
+      throw new Error('Error fetching favorites')
     }
   } catch (error) {
-    console.log('Error fetching favorites:', error);
+    console.log('Error fetching favorites:', error)
   }
 
   return (
@@ -33,5 +31,5 @@ export const Favorites = async () => {
         </ul>
       </div>
     </>
-  );
-};
+  )
+}
