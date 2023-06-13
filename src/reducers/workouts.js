@@ -4,7 +4,7 @@ export const workouts = createSlice({
   name: 'workout list',
   initialState: {
     list: [],
-    timestamp: null, // Add timestamp to the initial state
+    createdAt: null, // Add timestamp(createdAt) to the initial state
     error: null
   },
   reducers: {
@@ -15,9 +15,12 @@ export const workouts = createSlice({
       store.list = action.payload
     },
     setTimestamp: (store) => {
-      store.timestamp = Date.now() // Update the timestamp when setting the workout
+      store.createdAt = Date.now() // Updates the timestamp(createdAt) when setting the workout
+    },
+    saveFavorite: (store, action) => {
+      store.favorite = action.payload
     }
   }
 })
 
-export const { serError, setList, setTimestamp } = workouts.actions
+export const { setError, setList, setTimestamp, saveFavorite } = workouts.actions
