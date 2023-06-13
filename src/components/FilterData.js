@@ -1,15 +1,15 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setList } from 'reducers/workouts'
+import { setFilteredList } from 'reducers/filtered'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 
 export const FilterData = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const accessToken = useSelector((store) => store.user.accessToken)
+  // const accessToken = useSelector((store) => store.user.accessToken)
 
   const [filteredData, setFilteredData] = useState([])
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
@@ -21,11 +21,11 @@ export const FilterData = () => {
 
   const options = {
     method: 'GET',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
       // 'Access-Control-Allow-Origin': '*',
-      Authorization: accessToken,
+      // Authorization: accessToken,
       'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
     }
   };
@@ -45,6 +45,10 @@ export const FilterData = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(setFilteredList(filteredData));
+  }, [dispatch, filteredData]);
+
   const handleMuscleGroupChange = (event) => {
     const checkedMuscleGroup = event.target.value
     if (event.target.checked) {
@@ -56,6 +60,7 @@ export const FilterData = () => {
 
   const handleEquipmentChange = (event) => {
     const checkedEquipment = event.target.value
+    console.log('tadaaa!')
     if (event.target.checked) {
       setSelectedEquipment((prevSelected) => [...prevSelected, checkedEquipment])
     } else {
@@ -67,11 +72,14 @@ export const FilterData = () => {
     setLowImpactOnly(event.target.checked)
   };
 
-  const handleSetList = () => {
-    fetchFilteredData();
-    dispatch(setList(filteredData))
-    navigate('set-timer')
-    console.log(filteredData)
+  const handleSetList = async () => {
+    try {
+      await fetchFilteredData()
+      dispatch(setFilteredList(filteredData))
+      navigate('/exercises')
+    } catch (error) {
+      console.error('Error setting filtered list:', error)
+    }
   }
 
   return (

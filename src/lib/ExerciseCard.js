@@ -10,14 +10,16 @@ export const ExerciseCard = styled.button`
   display: flex;
   margin: 16px;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
+  position: relative;
 
   &:hover{
     background: #61C9A8;
   }
 
   ${({ isSelected }) => isSelected
-  && css`
+    && css`
       background: #61C9A8;
     `}
 `;
