@@ -3,6 +3,7 @@ import { user } from 'reducers/user'
 import { welcome } from 'reducers/welcome'
 import { timer } from 'reducers/timer'
 import { workouts } from 'reducers/workouts'
+import { filtered } from 'reducers/filtered'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -25,7 +26,8 @@ export const App = () => {
     user: user.reducer,
     welcome: welcome.reducer,
     timer: timer.reducer,
-    workouts: workouts.reducer
+    workouts: workouts.reducer,
+    filtered: filtered.reducer
   })
   const store = configureStore({ reducer })
 
