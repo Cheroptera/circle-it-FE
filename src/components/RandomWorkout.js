@@ -10,9 +10,11 @@ import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from 'lib/ExerciseCard'
 import { StartButton } from 'lib/StartButton'
+import { Loading } from 'lib/Loading'
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
+  const [loading, setLoading] = useState(true);
   const [randomList, setRandomList] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,26 +33,33 @@ export const RandomWorkout = () => {
       .then((res) => res.json())
       .then((json) => {
         setRandomList(json.response)
+        setLoading(false)
       })
   }, [])
 
   return (
     <>
       <Header headerTitle="Todays workout" />
-      <StyledList>
-        <Ul>
-          {randomList &&
-            randomList.map((singleRandomExercise) => (
-              <Li key={singleRandomExercise.name}>
-                <ExerciseCard>{singleRandomExercise.name}</ExerciseCard>
-              </Li>
-            ))}
-        </Ul>
-      </StyledList>
-      <ButtonWrapper>
-        <StartButton buttonText="Set timer" handleClick={handleSetList} />
-        <StartButton white buttonText="Regenerate" handleClick={handleClickEvent} />
-      </ButtonWrapper>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <StyledList>
+            <Ul>
+              {randomList &&
+                randomList.map((singleRandomExercise) => (
+                  <Li key={singleRandomExercise.name}>
+                    <ExerciseCard>{singleRandomExercise.name}</ExerciseCard>
+                  </Li>
+                ))}
+            </Ul>
+          </StyledList>
+          <ButtonWrapper>
+            <StartButton buttonText="Set timer" handleClick={handleSetList} />
+            <StartButton white buttonText="Regenerate" handleClick={handleClickEvent} />
+          </ButtonWrapper>
+        </>
+      )}
     </>
   )
 }
