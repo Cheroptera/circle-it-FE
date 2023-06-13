@@ -42,10 +42,10 @@ export const WorkoutPage = () => {
   const handleTimerComplete = () => {
     if (isWorkTime) {
       setIsWorkTime(false)
-      if (currentRepetition === repetitions && currentRound !== rounds) {
-        setIsRoundRest(true)
-      } else if (currentRepetition === repetitions && currentRound === rounds) {
+      if (currentRepetition === repetitions && currentRound === rounds) {
         navigate('/well-done')
+      } else if (currentRepetition === repetitions && currentRound !== rounds) {
+        setIsRoundRest(true)
       } else {
         setIsRestTime(true)
       }
@@ -87,9 +87,7 @@ export const WorkoutPage = () => {
           currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
         />
       )}
-      {isRoundRest && (
-        <Header headerTitle="Rest" />
-      )}
+      {isRoundRest && <Header headerTitle="Rest" />}
       <Main>
         <WorkoutWrapper>
           {isWorkTime && (
