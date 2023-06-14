@@ -2,16 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Modal } from 'react-modal'
+// import { Modal } from 'react-modal'
 import { user } from 'reducers/user'
 import { API_URL } from 'utils/urls'
 import styled from 'styled-components/macro'
 import { StartButton } from 'lib/StartButton'
 import headerImg from '../images/Background.svg'
 
-
-// * This is the page where the user can choose to either start a workout without
-// * logging in, sign up or log in.
+// This is the page where the user can choose to either start a workout without
+// logging in, sign up or log in.
 export const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -22,7 +21,7 @@ export const LogIn = () => {
   const navigate = useNavigate()
   const accessToken = useSelector((store) => store.user.accessToken)
   const [alertMessage, setAlertMessage] = useState('')
-  const [showModal, setShowModal] = useState(false)
+  // const [showModal, setShowModal] = useState(false)
 
   let buttonText
 
