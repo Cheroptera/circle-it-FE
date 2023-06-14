@@ -9,7 +9,6 @@ import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
 import { LogOutButton } from 'lib/LogOutButton'
 
-
 //* This is where the random workout shows
 export const TodaysWorkout = () => {
   const workoutList = useSelector((store) => store.workouts.list)
