@@ -8,9 +8,10 @@ import styled from 'styled-components/macro'
 import { setList, setTimestamp } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
-import { ExerciseCard } from 'lib/ExerciseCard'
+// import { ExerciseCard } from 'lib/ExerciseCard'
 import { StartButton } from 'lib/StartButton'
 import { Loading } from 'lib/Loading'
+import { StyledList, Ul, Li, TodaysCard, ExerciseImg, DescriptionDiv } from './TodaysWorkout'
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
@@ -21,6 +22,10 @@ export const RandomWorkout = () => {
 
   const handleClickEvent = () => {
     navigate('/random')
+  }
+
+  const handleLogInClick = () => {
+    navigate('/')
   }
 
   const handleSetList = () => {
@@ -50,7 +55,13 @@ export const RandomWorkout = () => {
               {randomList &&
                 randomList.map((singleRandomExercise) => (
                   <Li key={singleRandomExercise.name}>
-                    <ExerciseCard>{singleRandomExercise.name}</ExerciseCard>
+                    <TodaysCard>
+                      <ExerciseImg src={singleRandomExercise.img} alt="exerciseImg" />
+                      <DescriptionDiv>
+                        <h3>{singleRandomExercise.name}</h3>
+                        <p>{singleRandomExercise.description}</p>
+                      </DescriptionDiv>
+                    </TodaysCard>
                   </Li>
                 ))}
             </Ul>
@@ -59,28 +70,39 @@ export const RandomWorkout = () => {
             <StartButton buttonText="Set timer" handleClick={handleSetList} />
             <StartButton white buttonText="Regenerate" handleClick={handleClickEvent} />
           </ButtonWrapper>
+          <LogInBtn type="button" onClick={handleLogInClick}>Log In</LogInBtn>
         </>
       )}
     </>
   )
 }
 
-const StyledList = styled.div`
-  display: flex;
-  flex-direction: column;
-`
+// const StyledList = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `
 
-const Ul = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
-`
+// const Ul = styled.ul`
+//   list-style-type: none;
+//   padding-left: 0;
+// `
 
-const Li = styled.li`
-  display: flex;
-  justify-content: center;
-`
+// const Li = styled.li`
+//   display: flex;
+//   justify-content: center;
+// `
 
 const ButtonWrapper = styled.div`
 display: flex;
 justify-content: center;
+`
+
+const LogInBtn = styled.button`
+color: white;
+font-size: 20px;
+border: none;
+background-color: unset;
+position: absolute;
+top: 2px;
+right: 5px;
 `
