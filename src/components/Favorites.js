@@ -22,7 +22,7 @@ export const Favorites = () => {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    fetch(API_URL('workouts/favorites'), options)
+    fetch(API_URL(''), options)
       .then((res) => res.json())
       .then((json) => {
         console.log(json)
@@ -36,6 +36,12 @@ export const Favorites = () => {
       <Header />
       <div>
         <h2>My Favorites</h2>
+        <ul>
+          <li>
+            Render in favorites here,
+            onclick: setList to workouts.reducer and navigate to todaysworkout
+          </li>
+        </ul>
       </div>
       <LogOutButton />
     </>
@@ -54,7 +60,7 @@ export const Favorites = () => {
 //   useEffect(() => {
 //     const fetchFavoriteWorkouts = async () => {
 //       try {
-//         const response = await fetch(API_URL('workouts/favorites'), {
+//         const response = await fetch(API_URL('/favorites'), {
 //           headers: {
 //             Authorization: accessToken,
 //           }
