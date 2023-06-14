@@ -17,7 +17,8 @@ import { WorkoutPage } from 'components/WorkoutPage'
 import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
 import { FilterData } from 'components/FilterData'
-import { AllExercises } from './components/AllExercises'
+import { TodaysWorkout } from 'components/TodaysWorkout'
+import { CustomWorkout } from './components/CustomWorkout'
 import { LogIn } from './components/LogIn'
 import { RandomWorkout } from './components/RandomWorkout'
 
@@ -37,11 +38,12 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LogIn />} />
-          <Route path="/exercises" element={<AllExercises />} />
+          <Route path="/exercises" element={<CustomWorkout />} />
           <Route path="/filter" element={<FilterData />} />
           <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/todays" element={<TodaysWorkout />} />
           <Route path="/recent" element={<Recent />} />
           <Route path="/random" element={<RandomWorkout />} />
           <Route path="/set-timer" element={<SetTimer />} />
