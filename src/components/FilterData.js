@@ -3,8 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setFilteredList } from 'reducers/filtered'
+import Toggle from 'react-toggle'
+import 'react-toggle/style.css'
+import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
+import { StartButton } from 'lib/StartButton'
 
 export const FilterData = () => {
   const dispatch = useDispatch()
@@ -16,8 +20,8 @@ export const FilterData = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([])
   const [lowImpactOnly, setLowImpactOnly] = useState(false)
 
-  const musclegroups = ['legs', 'chest', 'arms', 'back', 'shoulders', 'abs']
-  const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band']
+  const musclegroups = ['Legs', 'Chest', 'Arms', 'Back', 'Shoulders', 'Abs', 'Glutes']
+  const equipment = ['None', 'Dumbbells', 'Kettlebell', 'Jump rope', 'Fitness band', 'Pilates ball', 'Weight plate']
 
   const options = {
     method: 'GET',
@@ -85,46 +89,131 @@ export const FilterData = () => {
   return (
     <>
       <Header headerTitle="Customize workout" />
-      {/* Render muscle group checkboxes */}
-      {musclegroups.map((singleMuscleGroup) => (
-        <div key={singleMuscleGroup}>
-          <label htmlFor={singleMuscleGroup}>
-            <input
-              type="checkbox"
-              id={singleMuscleGroup}
-              value={singleMuscleGroup}
-              checked={selectedMuscleGroups.includes(singleMuscleGroup)}
-              onChange={handleMuscleGroupChange} />
-            {singleMuscleGroup}
-          </label>
-        </div>
-      ))}
+      <SelectionDiv>
+        <EquipAndMuscle>
+          {/* Render muscle group toggle switches */}
+          <MuscleGroupDiv>
+            <h3>Target</h3>
+            {musclegroups.map((singleMuscleGroup) => (
+              <ToggleContainer key={singleMuscleGroup}>
+                <StyledToggle
+                  id={singleMuscleGroup}
+                  defaultChecked={selectedMuscleGroups.includes(singleMuscleGroup)}
+                  onChange={handleMuscleGroupChange} />
+                <ToggleLabel htmlFor={singleMuscleGroup}>
+                  {singleMuscleGroup}
+                </ToggleLabel>
+              </ToggleContainer>
+            ))}
+          </MuscleGroupDiv>
 
-      {/* Render equipment checkboxes */}
-      {equipment.map((singleEquipment) => (
-        <div key={singleEquipment}>
-          <label htmlFor={singleEquipment}>
-            <input
-              type="checkbox"
-              id={singleEquipment}
-              value={singleEquipment}
-              checked={selectedEquipment.includes(singleEquipment)}
-              onChange={handleEquipmentChange} />
-            {singleEquipment}
-          </label>
-        </div>
-      ))}
+          {/* Render equipment toggle switches */}
+          <EquipmentDiv>
+            <h3>Equipment</h3>
+            {equipment.map((singleEquipment) => (
+              <ToggleContainer key={singleEquipment}>
+                <StyledToggle
+                  id={singleEquipment}
+                  defaultChecked={selectedEquipment.includes(singleEquipment)}
+                  onChange={handleEquipmentChange} />
+                <ToggleLabel htmlFor={singleEquipment}>
+                  {singleEquipment}
+                </ToggleLabel>
+              </ToggleContainer>
+            ))}
+          </EquipmentDiv>
+        </EquipAndMuscle>
 
-      {/* Render the low impact switch */}
-      <label htmlFor="lowImpact">
-        <input
-          type="checkbox"
-          id="lowImpact"
-          checked={lowImpactOnly}
-          onChange={handleLowImpactToggle} />
-        Low Impact Only
-      </label>
-      <button type="button" onClick={handleSetList}>Randomize</button>
+        {/* Render the low impact switch */}
+        <ToggleContainer>
+          <StyledToggle
+            id="lowImpact"
+            defaultChecked={lowImpactOnly}
+            onChange={handleLowImpactToggle} />
+          <ToggleLabel htmlFor="lowImpact">Low Impact Only</ToggleLabel>
+        </ToggleContainer>
+        <StartButton buttonText="Next" onClick={handleSetList} />
+      </SelectionDiv>
     </>
   )
 }
+
+const SelectionDiv = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-top: 30px;
+gap: 20px;
+`
+
+const EquipAndMuscle = styled.div`
+display: flex;
+gap: 30px;
+`
+const MuscleGroupDiv = styled.div`
+width: fit-content;
+
+h3{
+  margin: 10px;
+}
+`
+
+const EquipmentDiv = styled.div`
+width: fit-content;
+
+h3{
+  margin: 10px;
+}
+`
+
+const ToggleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const ToggleLabel = styled.label`
+  margin-left: 0.5rem;
+`;
+
+const StyledToggle = styled(Toggle)`
+  && {
+    --toggle-hover-color-unchecked: #A53860;
+    --toggle-hover-color-checked: #61304B;
+
+    .react-toggle-track {
+      background-color: #61304B;
+    }
+
+    &:hover:not(.react-toggle--checked) .react-toggle-track {
+      background-color: var(--toggle-hover-color-unchecked);
+    }
+
+    &:hover.react-toggle--checked .react-toggle-track {
+      background-color: var(--toggle-hover-color-checked);
+    }
+
+    .react-toggle-thumb {
+      background-color: #fff;
+      border: 1px solid #A53860;
+    }
+
+    &.react-toggle--checked .react-toggle-thumb,
+    &.react-toggle--checked:hover .react-toggle-thumb {
+      background-color: #fff;
+    }
+
+    &.react-toggle--checked .react-toggle-track {
+      background-color: #A53860;
+    }
+
+    .react-toggle-track-check,
+    .react-toggle-track-x {
+      display: none;
+    }
+
+    .react-toggle-screenreader-only {
+      display: none;
+    }
+  }
+`;
