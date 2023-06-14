@@ -1,54 +1,32 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-import { API_URL } from 'utils/urls'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setList, setTimestamp } from 'reducers/workouts'
 import { LogOutButton } from 'lib/LogOutButton'
-import { Loading } from 'lib/Loading'
 import { StartButton } from 'lib/StartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
 export const AllExercises = () => {
-  const [loading, setLoading] = useState(true);
   const [exerciseList, setExerciseList] = useState([])
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const accessToken = useSelector((store) => store.user.accessToken)
+  const filteredList = useSelector((store) => store.filtered.filteredList)
 
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: accessToken,
-        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
-        'Access-Control-Allow-Origin': '*'
-      }
-    }
-    fetch(API_URL('exercises'), options)
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json)
-        // Add isSelected property to each exercise object
-        const exercisesWithSelection = json.map((exercise) => ({
-          ...exercise,
-          isSelected: false
-        }))
-        setExerciseList(exercisesWithSelection)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error(error)
-        navigate('/404')
-      })
-  }, [navigate, accessToken])
+    // Populate the exercise list when filteredList changes
+    setExerciseList(filteredList.map((exercise) => ({ ...exercise, isSelected: false, number: null })))
+  }, [filteredList])
+  /*   const exercisesWithSelection = filteredList.map((exercise) => ({
+      ...exercise,
+      isSelected: false
+    })) */
 
   const handleExerciseSelection = (exerciseName) => {
-    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length
-    const exerciseToUpdate = exerciseList.find((exercise) => exercise.name === exerciseName)
+    const selectedCount = filteredList.filter((exercise) => exercise.isSelected).length
+    const exerciseToUpdate = filteredList.find((exercise) => exercise.name === exerciseName)
 
     if (exerciseToUpdate.isSelected) {
       // If the exercise is already selected, unselect it and update the numbers
@@ -57,17 +35,17 @@ export const AllExercises = () => {
       exerciseToUpdate.number = null
 
       // Update the numbers of the remaining selected exercises
-      const updatedExerciseList = exerciseList.map((exercise) => {
-        if (exercise.isSelected && exercise.number > deselectedNumber) {
+      const updatedExerciseList = filteredList.map((exercise) => {
+        if (exercise.isSelected && filteredList.number > deselectedNumber) {
           exercise.number -= 1
         }
         return exercise
-      });
+      })
 
       setExerciseList(updatedExerciseList)
     } else if (selectedCount < 5) {
       // If the exercise is not selected and the maximum selection limit is not reached, select it and assign a number
-      const isSelected = true;
+      const isSelected = true
       const number = selectedCount + 1
 
       exerciseToUpdate.isSelected = isSelected
@@ -96,30 +74,26 @@ export const AllExercises = () => {
   return (
     <>
       <Header headerTitle="Choose five exercises" />
-      {loading ? (
-        <Loading />
-      ) : (
-        <Main>
-          <ExerciseDiv>
-            <StyledList>
-              {exerciseList.map((singleExercise) => (
-                <ExerciseCardWrapper key={singleExercise.name}>
-                  <ExerciseCard
-                    onClick={() => handleExerciseSelection(singleExercise.name)}
-                    isSelected={singleExercise.isSelected}>
-                    <H3>{singleExercise.name}</H3>
-                    <NumberWrapper>
-                      <H3>{singleExercise.number}</H3>
-                    </NumberWrapper>
-                  </ExerciseCard>
-                </ExerciseCardWrapper>
-              ))}
-            </StyledList>
-            <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
-          </ExerciseDiv>
-          <LogOutButton />
-        </Main>
-      )}
+      <Main>
+        <ExerciseDiv>
+          <StyledList>
+            {exerciseList.map((singleExercise) => (
+              <ExerciseCardWrapper key={singleExercise.name}>
+                <ExerciseCard
+                  onClick={() => handleExerciseSelection(singleExercise.name)}
+                  isSelected={singleExercise.isSelected}>
+                  <H3>{singleExercise.name}</H3>
+                  <NumberWrapper>
+                    <H3>{singleExercise.number}</H3>
+                  </NumberWrapper>
+                </ExerciseCard>
+              </ExerciseCardWrapper>
+            ))}
+          </StyledList>
+          <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
+        </ExerciseDiv>
+        <LogOutButton />
+      </Main>
     </>
   )
 }
