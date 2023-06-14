@@ -11,6 +11,7 @@ const StyledHeader = styled.div`
   border-radius: 0px 0px 17rem 17rem;
   background-color: #61c9a8;
   width: 100vw;
+  z-index: -1;
 `
 
 const StyledHeaderTitle = styled.h2`
@@ -19,6 +20,8 @@ const StyledHeaderTitle = styled.h2`
   align-self: center;
   color: white;
   text-align: center;
+  display: flex;
+  z-index: 1;
 
   @media (min-width: 1024px) {
     font-size: 48px;
@@ -61,7 +64,8 @@ border-radius: 50%;
 background-color: #9AFFDF;
 position: absolute;
 top: calc(12%);
-left: calc(7%);
+left: calc(10%);
+z-index: 0;
 
 @media (min-width: 1024px) {
   width: 70px;
