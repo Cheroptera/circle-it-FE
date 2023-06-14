@@ -50,9 +50,9 @@ export const SquareButton = ({ buttonText }) => {
 
   const handleSquareButtonClick = () => {
     if (buttonText === 'Recent') {
-      navigate('/recent')
-    } else if (buttonText === 'Favorite Workouts') {
       navigate('/filter')
+    } else if (buttonText === 'Favorite Workouts') {
+      navigate('/favorites')
     } else if (buttonText === 'Surprise Me') {
       navigate('/random')
     } else if (buttonText === 'Custom Workout') {
