@@ -55,26 +55,32 @@ const StyledCurrentRoundText = styled.h3`
 `
 
 const Blob1 = styled.div`
-width: 30px;
-height: 30px;
+width: 40px;
+height: 40px;
 border-radius: 50%;
 background-color: #9AFFDF;
 position: absolute;
-top: calc(7%);
-left: calc(8%)
-`
-const Blob2 = styled.div`
-width: 30px;
-height: 30px;
-border-radius: 50%;
-background-color: #9AFFDF;
-position: absolute;
-top: calc(22%);
-right: calc(23%);
+top: calc(12%);
+left: calc(7%);
 
 @media (min-width: 1024px) {
-  top: calc(20%);
-  right: calc(20%);
+  width: 70px;
+  height: 70px;
+  }
+`
+
+const Blob2 = styled.div`
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background-color: #9AFFDF;
+position: absolute;
+top: calc(2%);
+right: calc(20%);
+
+@media (min-width: 1024px) {
+  width: 70px;
+  height: 70px;
   }
 `
 

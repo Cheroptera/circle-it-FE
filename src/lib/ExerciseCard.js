@@ -13,6 +13,8 @@ export const ExerciseCard = styled.button`
   align-items: center;
   cursor: pointer;
   position: relative;
+  font-size: 16px;
+  font-weight: bold;
 
   &:hover{
     background: #61C9A8;
