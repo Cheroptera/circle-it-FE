@@ -15,18 +15,17 @@ export const WellDone = () => {
   const finishedWorkout = useSelector((store) => store.workouts.list)
   const timestamp = useSelector((store) => store.workouts.createdAt)
   const accessToken = useSelector((store) => store.user.accessToken)
+  const loggedInUserId = useSelector((store) => store.user.userId)
 
-  const handleSomething = () => {
-    console.log('handle this 🌮')
-  }
+  console.log('accessToken', accessToken)
+  console.log('loggedInUserId', loggedInUserId)
 
   // Save the workout
   const handleSaveWorkout = () => {
     console.log('timestamp', timestamp)
     console.log('finishedWorkout', finishedWorkout)
     fetch(API_URL('workouts'), {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken,
@@ -35,7 +34,8 @@ export const WellDone = () => {
       },
       body: JSON.stringify({
         timestamp,
-        exercises: finishedWorkout
+        exercises: finishedWorkout,
+        loggedInUserId
       })
     })
       .then((res) => res.json())
@@ -59,7 +59,6 @@ export const WellDone = () => {
         <H2>You&apos;re frickin&apos; awesome! </H2>
         <p>Did you enjoy this workout?</p>
         <StartButton buttonText="Save Workout" onClick={handleSaveWorkout} />
-        <button type="button" onClick={handleSomething}>Another</button>
       </StyledWellDoneContainer>
       <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px', zIndex: '-1' }} animationData={confetti} loop />
       <LogOutButton style={{ zIndex: '1' }} />
