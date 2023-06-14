@@ -9,6 +9,7 @@ import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
+import { LogOutButton } from 'lib/LogOutButton'
 
 export const FilterData = () => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ export const FilterData = () => {
   const [lowImpactOnly, setLowImpactOnly] = useState(false)
 
   const musclegroups = ['legs', 'chest', 'arms', 'back', 'shoulders', 'abs', 'glutes']
-  const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band', 'pilates ball', 'weight plate']
+  const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band', 'box', 'weight plate']
 
   useEffect(() => {
     const options = {
@@ -76,7 +77,7 @@ export const FilterData = () => {
       const muscleGroupsMatch = selectedMuscleGroups.length === 0 || exercise.musclegroup.some((group) => selectedMuscleGroups.includes(group))
       const equipmentMatch = selectedEquipment.length === 0 || exercise.equipment.some((eq) => selectedEquipment.includes(eq))
       const lowImpactMatch = !lowImpactOnly || !exercise.highImpact
-      return muscleGroupsMatch && equipmentMatch && lowImpactMatch
+      return (muscleGroupsMatch || equipmentMatch) && lowImpactMatch // Modify this line
     })
     console.log(filteredData)
     dispatch(setFilteredList(filteredData))
@@ -133,6 +134,7 @@ export const FilterData = () => {
         </ToggleContainer>
         <StartButton buttonText="Next" onClick={handleFilteredData} />
       </SelectionDiv>
+      <LogOutButton />
     </>
   )
 }
