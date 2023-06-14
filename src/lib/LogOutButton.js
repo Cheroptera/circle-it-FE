@@ -4,6 +4,7 @@ import { welcome } from 'reducers/welcome'
 import { user } from 'reducers/user'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import LogOutIconImg from '../images/logOut.png'
 
 export const LogOutButton = () => {
   const dispatch = useDispatch()
@@ -17,22 +18,27 @@ export const LogOutButton = () => {
     navigate('/')
   }
   return (
-    <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log out</StyledLogoutBtn>
+    <StyledLogoutBtn
+      type="button"
+      onClick={onLogoutButtonClick}>
+      <LogOutIcon src={LogOutIconImg} />
+    </StyledLogoutBtn>
   )
 }
 
 const StyledLogoutBtn = styled.button`
 border: none;
 background: none;
-align-self: center;
-cursor: pointer;
-color: #A53860;
-font-size: 14px;
 position: absolute;
-right: 10px;
-top: 10px;
+right: 0px;
+top: 5px;
+cursor: pointer;
 
 @media (min-width: 1024px) {
   font-size: 20px;
   }
+`
+
+const LogOutIcon = styled.img`
+height: 30px;
 `
