@@ -66,6 +66,8 @@ left: calc(7%);
 @media (min-width: 1024px) {
   width: 70px;
   height: 70px;
+  top: calc(7%);
+  left: calc(7%);
   }
 `
 

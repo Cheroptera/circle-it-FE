@@ -15,6 +15,10 @@ align-self: center;
 box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
 cursor: pointer;
 
+${(props) => props.disabled && css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `}
 
 ${(props) => props.white && css`
 border: 2px #A53860 solid;
@@ -23,9 +27,13 @@ color: black;
 padding: 6px 28px;
 `}`
 
-export const StartButton = ({ buttonText, handleClick, onClick }) => {
+export const StartButton = ({ buttonText, handleClick, onClick, disabled }) => {
   const handleClickEvent = onClick || handleClick
   return (
-    <StyledStartButton onClick={handleClickEvent}>{buttonText}</StyledStartButton>
+    <StyledStartButton
+      onClick={handleClickEvent}
+      disabled={disabled}>
+      {buttonText}
+    </StyledStartButton>
   )
 }
