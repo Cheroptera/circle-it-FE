@@ -23,7 +23,7 @@ const StyledHeaderTitle = styled.h2`
   display: flex;
   z-index: 1;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 700px) {
     font-size: 48px;
     margin: 0 20%;
   }
