@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Header } from 'lib/Header'
 import { LogOutButton } from 'lib/LogOutButton'
-// import Lottie from 'lottie-react'
+import { StartButton } from 'lib/StartButton'
+import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
-// import confetti from '../lotties/confetti.json'
+import confetti from '../lotties/confetti.json'
 
 export const WellDone = () => {
   const navigate = useNavigate()
@@ -57,11 +58,11 @@ export const WellDone = () => {
       <StyledWellDoneContainer>
         <H2>You&apos;re frickin&apos; awesome! </H2>
         <p>Did you enjoy this workout?</p>
-        <button type="button" onClick={handleSaveWorkout}>Save workout</button>
+        <StartButton buttonText="Save Workout" onClick={handleSaveWorkout} />
         <button type="button" onClick={handleSomething}>Another</button>
       </StyledWellDoneContainer>
-      {/* <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px' }} animationData={confetti} loop /> */}
-      <LogOutButton />
+      <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px', zIndex: '-1' }} animationData={confetti} loop />
+      <LogOutButton style={{ zIndex: '1' }} />
     </>
   )
 }
