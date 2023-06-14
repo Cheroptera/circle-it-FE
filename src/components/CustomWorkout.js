@@ -61,7 +61,7 @@ export const CustomWorkout = () => {
       }));
     dispatch(setList(selectedExercises));
     dispatch(setTimestamp());
-    navigate('/set-timer');
+    navigate('/todays');
   };
 
   const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length;
