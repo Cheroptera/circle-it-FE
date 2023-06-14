@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setList, setTimestamp } from 'reducers/workouts'
 import { LogOutButton } from 'lib/LogOutButton'
 import { Loading } from 'lib/Loading'
+import { StartButton } from 'lib/StartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
@@ -114,9 +115,7 @@ export const AllExercises = () => {
                 </ExerciseCardWrapper>
               ))}
             </StyledList>
-            <CreateWorkoutButton onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled}>
-              Create Workout
-            </CreateWorkoutButton>
+            <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
           </ExerciseDiv>
           <LogOutButton />
         </Main>
@@ -160,13 +159,4 @@ align-self: flex-end;
 position:absolute;
 right: calc(4%);
 top: calc(-7px);
-`
-
-const CreateWorkoutButton = styled.button`
-width: fit-content;
-background-color: #A53860;
-color: white;
-cursor: pointer;
-padding: 10px 18px;
-border-radius: 10px;
 `
