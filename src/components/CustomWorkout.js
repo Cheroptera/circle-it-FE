@@ -17,59 +17,55 @@ export const CustomWorkout = () => {
 
   useEffect(() => {
     // Populate the exercise list when filteredList changes
-    setExerciseList(filteredList.map((exercise) => ({ ...exercise, isSelected: false, number: null })))
-  }, [filteredList])
-  /*   const exercisesWithSelection = filteredList.map((exercise) => ({
+    const updatedList = filteredList.map((exercise, index) => ({
       ...exercise,
-      isSelected: false
-    })) */
+      isSelected: false,
+      number: null,
+      index
+    }));
+    setExerciseList(updatedList);
+  }, [filteredList]);
 
-  const handleExerciseSelection = (exerciseName) => {
-    const selectedCount = filteredList.filter((exercise) => exercise.isSelected).length
-    const exerciseToUpdate = filteredList.find((exercise) => exercise.name === exerciseName)
+  const handleExerciseSelection = (index) => {
+    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length;
+    const exerciseToUpdate = exerciseList.find((exercise) => exercise.index === index);
 
     if (exerciseToUpdate.isSelected) {
       // If the exercise is already selected, unselect it and update the numbers
-      const deselectedNumber = exerciseToUpdate.number
-      exerciseToUpdate.isSelected = false
-      exerciseToUpdate.number = null
+      const deselectedNumber = exerciseToUpdate.number;
+      exerciseToUpdate.isSelected = false;
+      exerciseToUpdate.number = null;
 
       // Update the numbers of the remaining selected exercises
-      const updatedExerciseList = filteredList.map((exercise) => {
-        if (exercise.isSelected && filteredList.number > deselectedNumber) {
-          exercise.number -= 1
+      exerciseList.forEach((exercise) => {
+        if (exercise.isSelected && exercise.number > deselectedNumber) {
+          exercise.number -= 1;
         }
-        return exercise
-      })
-
-      setExerciseList(updatedExerciseList)
+      });
     } else if (selectedCount < 5) {
       // If the exercise is not selected and the maximum selection limit is not reached, select it and assign a number
-      const isSelected = true
-      const number = selectedCount + 1
-
-      exerciseToUpdate.isSelected = isSelected
-      exerciseToUpdate.number = number
-
-      setExerciseList([...exerciseList])
+      exerciseToUpdate.isSelected = true;
+      exerciseToUpdate.number = selectedCount + 1;
     }
-  }
+
+    setExerciseList([...exerciseList]);
+  };
 
   const handleCreateWorkout = () => {
     const selectedExercises = exerciseList
       .filter((exercise) => exercise.isSelected)
-      .map((exercise) => ({
-        ...exercise,
+      .map(({ isSelected, number, index, ...rest }) => ({
+        ...rest,
         isSelected: false,
         number: null
-      }))
-    dispatch(setList(selectedExercises))
-    dispatch(setTimestamp())
-    navigate('/set-timer')
-  }
+      }));
+    dispatch(setList(selectedExercises));
+    dispatch(setTimestamp());
+    navigate('/set-timer');
+  };
 
-  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length
-  const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5
+  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length;
+  const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5;
 
   return (
     <>
@@ -77,15 +73,11 @@ export const CustomWorkout = () => {
       <Main>
         <ExerciseDiv>
           <StyledList>
-            {exerciseList.map((singleExercise) => (
-              <ExerciseCardWrapper key={singleExercise.name}>
-                <ExerciseCard
-                  onClick={() => handleExerciseSelection(singleExercise.name)}
-                  isSelected={singleExercise.isSelected}>
-                  <H3>{singleExercise.name}</H3>
-                  <NumberWrapper>
-                    <H3>{singleExercise.number}</H3>
-                  </NumberWrapper>
+            {exerciseList.map(({ name, isSelected, number, index }) => (
+              <ExerciseCardWrapper key={index}>
+                <ExerciseCard onClick={() => handleExerciseSelection(index)} isSelected={isSelected}>
+                  <H3>{name}</H3>
+                  {isSelected && <NumberWrapper>{number}</NumberWrapper>}
                 </ExerciseCard>
               </ExerciseCardWrapper>
             ))}
@@ -95,11 +87,10 @@ export const CustomWorkout = () => {
         <LogOutButton />
       </Main>
     </>
-  )
-}
+  );
+};
 
-const Main = styled.div`
-`
+const Main = styled.div``;
 
 const StyledList = styled.div`
   display: flex;
