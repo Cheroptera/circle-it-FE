@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setFilteredList } from 'reducers/filtered'
 import Toggle from 'react-toggle'
@@ -13,45 +13,37 @@ import { StartButton } from 'lib/StartButton'
 export const FilterData = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const accessToken = useSelector((store) => store.user.accessToken)
+  const accessToken = useSelector((store) => store.user.accessToken)
 
-  const [filteredData, setFilteredData] = useState([])
+  const [exerciseList, setExerciseList] = useState([])
   const [selectedMuscleGroups, setSelectedMuscleGroups] = useState([])
   const [selectedEquipment, setSelectedEquipment] = useState([])
   const [lowImpactOnly, setLowImpactOnly] = useState(false)
 
-  const musclegroups = ['Legs', 'Chest', 'Arms', 'Back', 'Shoulders', 'Abs', 'Glutes']
-  const equipment = ['None', 'Dumbbells', 'Kettlebell', 'Jump rope', 'Fitness band', 'Pilates ball', 'Weight plate']
-
-  const options = {
-    method: 'GET',
-    // mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*',
-      // Authorization: accessToken,
-      'X-RapidAPI-Key': process.env.REACT_APP_API_KEY
-    }
-  };
-
-  const fetchFilteredData = async () => {
-    try {
-      const query = new URLSearchParams({
-        musclegroup: selectedMuscleGroups.join(','),
-        equipment: selectedEquipment.join(','),
-        impact: lowImpactOnly ? 'low' : ''
-      });
-      const response = await fetch(API_URL(`exercises/filter?${query}`), options)
-      const data = await response.json()
-      setFilteredData(data.response)
-    } catch (error) {
-      console.error('Error fetching filtered exercises:', error)
-    }
-  };
+  const musclegroups = ['legs', 'chest', 'arms', 'back', 'shoulders', 'abs', 'glutes']
+  const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band', 'pilates ball', 'weight plate']
 
   useEffect(() => {
-    dispatch(setFilteredList(filteredData));
-  }, [dispatch, filteredData]);
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    fetch(API_URL('exercises'), options)
+      .then((res) => res.json())
+      .then((json) => {
+        setExerciseList(json)
+        console.log(json)
+      })
+      .catch((error) => {
+        console.error(error)
+        navigate('/404')
+      })
+  }, [accessToken, navigate])
 
   const handleMuscleGroupChange = (event) => {
     const checkedMuscleGroup = event.target.value
@@ -64,7 +56,6 @@ export const FilterData = () => {
 
   const handleEquipmentChange = (event) => {
     const checkedEquipment = event.target.value
-    console.log('tadaaa!')
     if (event.target.checked) {
       setSelectedEquipment((prevSelected) => [...prevSelected, checkedEquipment])
     } else {
@@ -76,14 +67,20 @@ export const FilterData = () => {
     setLowImpactOnly(event.target.checked)
   };
 
-  const handleSetList = async () => {
-    try {
-      await fetchFilteredData()
-      dispatch(setFilteredList(filteredData))
-      navigate('/exercises')
-    } catch (error) {
-      console.error('Error setting filtered list:', error)
-    }
+  const handleFilteredData = () => {
+    console.log('selectedMuscleGroups:', selectedMuscleGroups)
+    console.log('selectedEquipment:', selectedEquipment)
+    console.log('lowImpactOnly:', lowImpactOnly)
+    console.log('exerciseList:', exerciseList)
+    const filteredData = exerciseList.filter((exercise) => {
+      const muscleGroupsMatch = selectedMuscleGroups.length === 0 || exercise.musclegroup.some((group) => selectedMuscleGroups.includes(group))
+      const equipmentMatch = selectedEquipment.length === 0 || exercise.equipment.some((eq) => selectedEquipment.includes(eq))
+      const lowImpactMatch = !lowImpactOnly || !exercise.highImpact
+      return muscleGroupsMatch && equipmentMatch && lowImpactMatch
+    })
+    console.log(filteredData)
+    dispatch(setFilteredList(filteredData))
+    navigate('/exercises')
   }
 
   return (
@@ -98,6 +95,7 @@ export const FilterData = () => {
               <ToggleContainer key={singleMuscleGroup}>
                 <StyledToggle
                   id={singleMuscleGroup}
+                  value={singleMuscleGroup}
                   defaultChecked={selectedMuscleGroups.includes(singleMuscleGroup)}
                   onChange={handleMuscleGroupChange} />
                 <ToggleLabel htmlFor={singleMuscleGroup}>
@@ -114,6 +112,7 @@ export const FilterData = () => {
               <ToggleContainer key={singleEquipment}>
                 <StyledToggle
                   id={singleEquipment}
+                  value={singleEquipment}
                   defaultChecked={selectedEquipment.includes(singleEquipment)}
                   onChange={handleEquipmentChange} />
                 <ToggleLabel htmlFor={singleEquipment}>
@@ -132,7 +131,7 @@ export const FilterData = () => {
             onChange={handleLowImpactToggle} />
           <ToggleLabel htmlFor="lowImpact">Low Impact Only</ToggleLabel>
         </ToggleContainer>
-        <StartButton buttonText="Next" onClick={handleSetList} />
+        <StartButton buttonText="Next" onClick={handleFilteredData} />
       </SelectionDiv>
     </>
   )
