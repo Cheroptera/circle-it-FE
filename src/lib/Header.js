@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable implicit-arrow-linebreak */
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -130,6 +132,10 @@ const Blob1 = styled.div`
     height: 70px;
     top: calc(7%);
     left: calc(30%);
+  }
+
+  @media (min-width: 1480px) {
+    left: calc(35%);
   }
 `
 

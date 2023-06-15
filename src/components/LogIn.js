@@ -105,7 +105,7 @@ export const LogIn = () => {
       <MainWrapper>
         <LoginPageTop>
           <HeaderText>Circ(le) it!</HeaderText>
-          <HeaderImg src={headerImg} alt="headerImg" />
+          {/* <HeaderImg src={headerImg} alt="headerImg" /> */}
         </LoginPageTop>
         <LoginPageBottom>
           <StartDiv>
@@ -199,31 +199,35 @@ const MainWrapper = styled.div`
 `
 
 const LoginPageTop = styled.div`
+  height: 40vh;
+  background-image: url(${headerImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
   @media (min-width: 1024px) {
     flex-basis: 20%;
   }
 `
-const HeaderImg = styled.img`
-  display: flex;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
+// const HeaderImg = styled.img`
+//   display: flex;
+//   width: 100%;
+//   object-fit: cover;
+//   object-position: center;
 
-  @media (min-width: 668px) {
-    height: 30vh;
-  }
-`
+//   @media (min-width: 668px) {
+//     height: 30vh;
+//   }
+// `
 
 const HeaderText = styled.h1`
   color: white;
   font-size: 45px;
-  position: absolute;
-  top: calc(10%);
-  left: calc(10%);
-
+  padding-left: 2rem;
+  padding-top: 9rem;
+  margin: 0;
   @media (min-width: 668px) {
-    font-size: 82px;
-    top: calc(10%);
+    font-size: 48px;
   }
 `
 const LoginPageBottom = styled.div`
