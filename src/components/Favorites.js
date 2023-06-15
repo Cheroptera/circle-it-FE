@@ -33,9 +33,8 @@ export const Favorites = () => {
   })
   return (
     <>
-      <Header />
+      <Header headerTitle="My Favorites" />
       <div>
-        <h2>My Favorites</h2>
         <ul>
           <li>
             Render in favorites here,

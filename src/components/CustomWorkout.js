@@ -69,7 +69,7 @@ export const CustomWorkout = () => {
 
   return (
     <>
-      <Header headerTitle="Choose five exercises" />
+      <Header headerTitle="Choose Five Exercises" />
       <Main>
         <ExerciseDiv>
           <StyledList>

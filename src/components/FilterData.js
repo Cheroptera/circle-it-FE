@@ -86,7 +86,7 @@ export const FilterData = () => {
 
   return (
     <>
-      <Header headerTitle="Customize workout" />
+      <Header headerTitle="Customize Workout" />
       <SelectionDiv>
         <EquipAndMuscle>
           {/* Render muscle group toggle switches */}

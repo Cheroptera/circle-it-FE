@@ -45,7 +45,7 @@ export const RandomWorkout = () => {
 
   return (
     <>
-      <Header headerTitle="Todays workout" />
+      <Header headerTitle="Today&apos;s Workout" />
       {loading ? (
         <Loading />
       ) : (

@@ -20,7 +20,7 @@ export const TodaysWorkout = () => {
 
   return (
     <>
-      <Header headerTitle="Todays workout" />
+      <Header headerTitle="Today&apos;s Workout" />
       <StyledList>
         <Ul>
           {workoutList &&
