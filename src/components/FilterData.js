@@ -85,59 +85,75 @@ export const FilterData = () => {
   }
 
   return (
-    <>
-      <Header headerTitle="Customize Workout" />
-      <SelectionDiv>
-        <EquipAndMuscle>
-          {/* Render muscle group toggle switches */}
-          <MuscleGroupDiv>
-            <h3>Target</h3>
-            {musclegroups.map((singleMuscleGroup) => (
-              <ToggleContainer key={singleMuscleGroup}>
-                <StyledToggle
-                  id={singleMuscleGroup}
-                  value={singleMuscleGroup}
-                  defaultChecked={selectedMuscleGroups.includes(singleMuscleGroup)}
-                  onChange={handleMuscleGroupChange} />
-                <ToggleLabel htmlFor={singleMuscleGroup}>
-                  {singleMuscleGroup}
-                </ToggleLabel>
-              </ToggleContainer>
-            ))}
-          </MuscleGroupDiv>
+    <Main>
+      <MainWrapper>
+        <Header headerTitle="Customize Workout" />
+        <SelectionDiv>
+          <EquipAndMuscle>
+            {/* Render muscle group toggle switches */}
+            <MuscleGroupDiv>
+              <h3>Target</h3>
+              {musclegroups.map((singleMuscleGroup) => (
+                <ToggleContainer key={singleMuscleGroup}>
+                  <StyledToggle
+                    id={singleMuscleGroup}
+                    value={singleMuscleGroup}
+                    defaultChecked={selectedMuscleGroups.includes(singleMuscleGroup)}
+                    onChange={handleMuscleGroupChange} />
+                  <ToggleLabel htmlFor={singleMuscleGroup}>
+                    {singleMuscleGroup}
+                  </ToggleLabel>
+                </ToggleContainer>
+              ))}
+            </MuscleGroupDiv>
 
-          {/* Render equipment toggle switches */}
-          <EquipmentDiv>
-            <h3>Equipment</h3>
-            {equipment.map((singleEquipment) => (
-              <ToggleContainer key={singleEquipment}>
-                <StyledToggle
-                  id={singleEquipment}
-                  value={singleEquipment}
-                  defaultChecked={selectedEquipment.includes(singleEquipment)}
-                  onChange={handleEquipmentChange} />
-                <ToggleLabel htmlFor={singleEquipment}>
-                  {singleEquipment}
-                </ToggleLabel>
-              </ToggleContainer>
-            ))}
-          </EquipmentDiv>
-        </EquipAndMuscle>
+            {/* Render equipment toggle switches */}
+            <EquipmentDiv>
+              <h3>Equipment</h3>
+              {equipment.map((singleEquipment) => (
+                <ToggleContainer key={singleEquipment}>
+                  <StyledToggle
+                    id={singleEquipment}
+                    value={singleEquipment}
+                    defaultChecked={selectedEquipment.includes(singleEquipment)}
+                    onChange={handleEquipmentChange} />
+                  <ToggleLabel htmlFor={singleEquipment}>
+                    {singleEquipment}
+                  </ToggleLabel>
+                </ToggleContainer>
+              ))}
+            </EquipmentDiv>
+          </EquipAndMuscle>
 
-        {/* Render the low impact switch */}
-        <ToggleContainer>
-          <StyledToggle
-            id="lowImpact"
-            defaultChecked={lowImpactOnly}
-            onChange={handleLowImpactToggle} />
-          <ToggleLabel htmlFor="lowImpact">Low Impact Only</ToggleLabel>
-        </ToggleContainer>
-        <StartButton buttonText="Next" onClick={handleFilteredData} />
-      </SelectionDiv>
-      <LogOutButton />
-    </>
+          {/* Render the low impact switch */}
+          <ToggleContainer>
+            <StyledToggle
+              id="lowImpact"
+              defaultChecked={lowImpactOnly}
+              onChange={handleLowImpactToggle} />
+            <ToggleLabel htmlFor="lowImpact">Low Impact Only</ToggleLabel>
+          </ToggleContainer>
+          <StartButton buttonText="Next" onClick={handleFilteredData} />
+        </SelectionDiv>
+        <LogOutButton />
+      </MainWrapper>
+    </Main>
   )
 }
+
+const Main = styled.div``
+
+const MainWrapper = styled.div`
+display: flex;
+flex-direction: column;
+
+@media (min-width: 668px) {
+max-width: 660px;
+margin: auto;
+padding-bottom: 3rem;
+box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
 
 const SelectionDiv = styled.div`
 display: flex;
