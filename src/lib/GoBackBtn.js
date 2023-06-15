@@ -16,14 +16,12 @@ export const GoBackBtn = () => {
 }
 
 const GoBackButton = styled.button`
-background: none;
-border: none;
-padding: none;
-position: absolute;
-left: -5px;
-top: 5px;
-cursor: pointer;
+  justify-self: start;
+  background: none;
+  border: none;
+  padding: none;
+  cursor: pointer;
 `
 const IMG = styled.img`
-height: 28px;
+  height: 28px;
 `

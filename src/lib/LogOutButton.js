@@ -18,27 +18,24 @@ export const LogOutButton = () => {
     navigate('/')
   }
   return (
-    <StyledLogoutBtn
-      type="button"
-      onClick={onLogoutButtonClick}>
+    <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>
       <LogOutIcon src={LogOutIconImg} />
     </StyledLogoutBtn>
   )
 }
 
 const StyledLogoutBtn = styled.button`
-border: none;
-background: none;
-position: absolute;
-right: 0px;
-top: 5px;
-cursor: pointer;
-
-@media (min-width: 1024px) {
-  font-size: 20px;
+  border: none;
+  background: none;
+  grid-row-start: 1;
+  grid-column-start: 3;
+  justify-self: end;
+  cursor: pointer;
+  @media (min-width: 1024px) {
+    font-size: 20px;
   }
 `
 
 const LogOutIcon = styled.img`
-height: 30px;
+  height: 30px;
 `
