@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { StartButton } from 'lib/StartButton'
 import { Header } from '../lib/Header'
 
 export const WorkoutPage = () => {
@@ -16,8 +17,8 @@ export const WorkoutPage = () => {
   const restTime = useSelector((store) => store.timer.restTime)
   const repetitions = useSelector((store) => store.timer.repetitions)
   const rounds = useSelector((store) => store.timer.rounds)
-  const roundsRestTime = useSelector((store) => store.timer.roundsRestTime)
 
+  const [isRunning, setIsRunning] = useState(true)
   const [isWorkTime, setIsWorkTime] = useState(true)
   const [isRestTime, setIsRestTime] = useState(false)
   const [currentRepetition, setCurrentRepetition] = useState(1)
@@ -39,6 +40,10 @@ export const WorkoutPage = () => {
     return null
   }
 
+  const handlePauseClick = () => {
+    setIsRunning((current) => !current);
+  };
+
   const handleTimerComplete = () => {
     if (isWorkTime) {
       setIsWorkTime(false)
@@ -51,7 +56,10 @@ export const WorkoutPage = () => {
       }
     } else if (isRestTime) {
       setIsRestTime(false)
-      if (currentRepetition === repetitions && currentRound !== rounds) {
+
+      if (currentRepetition === repetitions && currentRound === rounds) {
+        navigate('/well-done')
+      } else if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
       } else {
         setCurrentRepetition((prevRepetition) => prevRepetition + 1)
@@ -59,88 +67,102 @@ export const WorkoutPage = () => {
       }
     } else if (isRoundRest) {
       setIsRoundRest(false)
-      setCurrentRound((prevRound) => prevRound + 1)
-      setCurrentRepetition(1)
       if (currentRound === rounds) {
         setIsWorkTime(false)
         setIsRestTime(false)
+        navigate('/well-done')
       } else {
+        setCurrentRound((prevRound) => prevRound + 1)
+        setCurrentRepetition(1)
         setIsWorkTime(true)
       }
     }
   }
 
   return (
-    <>
+    <MainWrapper>
       {isWorkTime && (
-        <Header
-          headerTitle={getCurrentExercise().name}
-          currentRoundText={`Round: ${currentRound} / ${rounds}`}
-          currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
-        />
-      )}
-      {isRestTime && (
-        <Header
-          headerTitle="Rest"
-          headerNextUp={`Next up: ${getNextExercise().name}`}
-          currentRoundText={`Round: ${currentRound} / ${rounds}`}
-          currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
-        />
-      )}
-      {isRoundRest && <Header headerTitle="Rest" />}
-      <Main>
-        <WorkoutWrapper>
-          {isWorkTime && (
-            <>
-              <Img src={getCurrentExercise().img} alt="Exercise" />
-              <CountdownCircleTimer
-                key={`work-${currentRepetition}-${currentRound}`}
-                isPlaying
-                duration={workTime}
-                colors={['#A53860']}
-                onComplete={handleTimerComplete}>
-                {({ remainingTime }) => remainingTime}
-              </CountdownCircleTimer>
-            </>
-          )}
-
-          {isRestTime && (
-            <>
-              <Img src={getNextExercise().img} alt="Exercise" />
-              <CountdownCircleTimer
-                key={`rest-${currentRepetition}-${currentRound}`}
-                isPlaying
-                duration={restTime}
-                colors={['#3DA5D9']}
-                onComplete={handleTimerComplete}>
-                {({ remainingTime }) => remainingTime}
-              </CountdownCircleTimer>
-            </>
-          )}
-          {isRoundRest && (
+        <>
+          <Header
+            headerTitle={getCurrentExercise().name}
+            currentRoundText={`Round: ${currentRound} / ${rounds}`}
+            currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
+          />
+          <WorkoutWrapper>
+            <Img src={getCurrentExercise().img} alt="Exercise" />
             <CountdownCircleTimer
-              key={`round-rest-${currentRound}`}
-              isPlaying
-              duration={roundsRestTime}
-              colors={['#9AFFDF']}
-              onComplete={handleTimerComplete}>
+              key={`work-${currentRepetition}-${currentRound}`}
+              isPlaying={isRunning}
+              duration={workTime}
+              colors={['#A53860']}
+              onComplete={handleTimerComplete}
+            >
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
-          )}
-        </WorkoutWrapper>
-      </Main>
-    </>
+          </WorkoutWrapper>
+        </>
+      )}
+      {isRestTime && (
+        <>
+          <Header
+            headerTitle="Rest"
+            headerNextUp={`Next up: ${getNextExercise().name}`}
+            currentRoundText={`Round: ${currentRound} / ${rounds}`}
+            currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
+          />
+          <WorkoutWrapper>
+            <Img src={getNextExercise().img} alt="Exercise" />
+            <CountdownCircleTimer
+              key={`rest-${currentRepetition}-${currentRound}`}
+              isPlaying={isRunning}
+              duration={restTime}
+              colors={['#3DA5D9']}
+              onComplete={handleTimerComplete}
+            >
+              {({ remainingTime }) => remainingTime}
+            </CountdownCircleTimer>
+          </WorkoutWrapper>
+        </>
+      )}
+      {isRoundRest && (
+        <>
+          <Header headerTitle="Rest" />
+          <WorkoutWrapper>
+            <CountdownCircleTimer
+              key={`round-rest-${currentRound}`}
+              isPlaying={isRunning}
+              duration={4}
+              colors={['#9AFFDF']}
+              onComplete={handleTimerComplete}
+            >
+              {({ remainingTime }) => remainingTime}
+            </CountdownCircleTimer>
+          </WorkoutWrapper>
+        </>
+      )}
+      <StartButton
+        buttonText="Pause"
+        handleClick={handlePauseClick}
+        white={!isRunning}
+      />
+    </MainWrapper>
   )
 }
-
 const Img = styled.img`
   width: 200px;
   padding: 10px;
 `
-const Main = styled.div`
+
+const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 const WorkoutWrapper = styled.div`
   width: 300px;
