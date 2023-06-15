@@ -17,9 +17,9 @@ export const WellDone = () => {
   const accessToken = useSelector((store) => store.user.accessToken)
   const loggedInUserId = useSelector((store) => store.user.userId)
 
+  console.log('loggedInUserId', loggedInUserId)
   console.log('accessToken', accessToken)
 
-  // Save the workout
   const handleSaveWorkout = () => {
     console.log('timestamp', timestamp)
     console.log('finishedWorkout', finishedWorkout)
