@@ -12,7 +12,6 @@ import { SetTimer } from 'components/SetTimer'
 import { Welcome } from 'components/Welcome'
 import { Favorites } from 'components/Favorites'
 import { Recent } from 'components/Recent'
-import { Details } from 'components/Details'
 import { WorkoutPage } from 'components/WorkoutPage'
 import { NotFound } from 'components/NotFound'
 import { WellDone } from 'components/WellDone'
@@ -40,7 +39,6 @@ export const App = () => {
           <Route path="/" element={<LogIn />} />
           <Route path="/exercises" element={<CustomWorkout />} />
           <Route path="/filter" element={<FilterData />} />
-          <Route path="/details" element={<Details />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/todays" element={<TodaysWorkout />} />
