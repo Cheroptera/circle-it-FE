@@ -12,10 +12,10 @@ import { Header } from '../lib/Header'
 // * This is a list of all the favorites of a logged in user
 export const Favorites = () => {
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const accessToken = useSelector((store) => store.user.accessToken)
   const [favoriteWorkouts, setFavoriteWorkouts] = useState([])
-  const [selectedWorkout, setSelectedWorkout] = useState([]);
+  const [selectedWorkout, setSelectedWorkout] = useState([])
 
   useEffect(() => {
     const options = {
@@ -51,9 +51,9 @@ export const Favorites = () => {
   }
 
   return (
-    <>
-      <Header headerTitle="Favorite workouts" />
-      <Main>
+    <Main>
+      <MainWrapper>
+        <Header headerTitle="Favorite workouts" />
         {favoriteWorkouts && favoriteWorkouts.map((singleWorkout) => (
           <ExerciseCardWrapper key={singleWorkout.timestamp}>
             <ExerciseCard
@@ -65,15 +65,28 @@ export const Favorites = () => {
         ))}
         <StartButton buttonText="Show exercises" onClick={handleSetList} />
         <LogOutButton />
-      </Main>
-    </>
+      </MainWrapper>
+    </Main>
   )
 }
 
-const Main = styled.div``;
+const Main = styled.div``
+
+const MainWrapper = styled.div`
+display: flex;
+flex-direction: column;
+
+@media (min-width: 668px) {
+max-width: 660px;
+margin: auto;
+padding-bottom: 3rem;
+box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
 
 const ExerciseCardWrapper = styled.div`
   display: flex;
+  align-self: center;
 `
 
 const H3 = styled.h3`
