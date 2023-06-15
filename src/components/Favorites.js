@@ -54,16 +54,15 @@ export const Favorites = () => {
     <>
       <Header headerTitle="Favorite workouts" />
       <Main>
-        {favoriteWorkouts &&
-          favoriteWorkouts.map((singleWorkout) => (
-            <ExerciseCardWrapper key={singleWorkout.timestamp}>
-              <ExerciseCard
-                onClick={() => handleSelectedWorkout(singleWorkout)}
-                isSelected={selectedWorkout === singleWorkout}>
-                <H3>{new Date(singleWorkout.timestamp).toLocaleDateString()}</H3>
-              </ExerciseCard>
-            </ExerciseCardWrapper>
-          ))}
+        {favoriteWorkouts && favoriteWorkouts.map((singleWorkout) => (
+          <ExerciseCardWrapper key={singleWorkout.timestamp}>
+            <ExerciseCard
+              onClick={() => handleSelectedWorkout(singleWorkout)}
+              isSelected={selectedWorkout === singleWorkout}>
+              <H3>{new Date(singleWorkout.timestamp).toLocaleDateString()}</H3>
+            </ExerciseCard>
+          </ExerciseCardWrapper>
+        ))}
         <StartButton buttonText="Show exercises" onClick={handleSetList} />
         <LogOutButton />
       </Main>
