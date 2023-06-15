@@ -10,7 +10,7 @@ const StyledHeader = styled.div`
   height: 250px;
   border-radius: 0px 0px 17rem 17rem;
   background-color: #61c9a8;
-  width: 100vw;
+  width: 100%;
   z-index: -1;
 `
 
