@@ -7,12 +7,12 @@ import RandomIcon from '../images/random.png'
 import RecentIcon from '../images/recent.png'
 
 const StyledSquareButton = styled.button`
-  background-color: #9AFFDF;
-  padding: 30px 30px; 
+  background-color: #9affdf;
+  padding: 30px 30px;
   width: 150px;
-  height: 150px; 
-  border-radius: 10px; 
-  border: none; 
+  height: 150px;
+  border-radius: 10px;
+  border: none;
   font-weight: bold;
   font-family: 'Poppins', 'Sans-Serif';
   font-size: 18px;
@@ -24,11 +24,11 @@ const StyledSquareButton = styled.button`
   &:focus {
     color: white;
   }
-`;
+`
 
 const Icon = styled.img`
   height: 30px;
-`;
+`
 
 export const SquareButton = ({ buttonText }) => {
   const navigate = useNavigate()
@@ -36,21 +36,21 @@ export const SquareButton = ({ buttonText }) => {
   const getIconForButton = (text) => {
     switch (text) {
       case 'Recent':
-        return RecentIcon;
+        return RecentIcon
       case 'Favorite Workouts':
         return FavoritesIcon
       case 'Surprise Me':
-        return RandomIcon;
+        return RandomIcon
       case 'Custom Workout':
         return CustomIcon
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   const handleSquareButtonClick = () => {
     if (buttonText === 'Recent') {
-      navigate('/filter')
+      navigate('/recent')
     } else if (buttonText === 'Favorite Workouts') {
       navigate('/favorites')
     } else if (buttonText === 'Surprise Me') {
