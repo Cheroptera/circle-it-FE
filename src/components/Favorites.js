@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { useSelector, useDispatch } from 'react-redux'
@@ -31,7 +32,6 @@ export const Favorites = () => {
       .then((res) => res.json())
       .then((json) => {
         setFavoriteWorkouts(json.response)
-        console.log(json)
       })
       .catch((error) => {
         console.error('Failed', error)
@@ -54,15 +54,18 @@ export const Favorites = () => {
     <Main>
       <MainWrapper>
         <Header headerTitle="Favorite workouts" />
-        {favoriteWorkouts && favoriteWorkouts.map((singleWorkout) => (
-          <ExerciseCardWrapper key={singleWorkout.timestamp}>
-            <ExerciseCard
-              onClick={() => handleSelectedWorkout(singleWorkout)}
-              isSelected={selectedWorkout === singleWorkout}>
-              <H3>{new Date(singleWorkout.timestamp).toLocaleDateString()}</H3>
-            </ExerciseCard>
-          </ExerciseCardWrapper>
-        ))}
+        {favoriteWorkouts &&
+          favoriteWorkouts.map((singleWorkout) => (
+            <ExerciseCardWrapper key={singleWorkout.timestamp}>
+              <ExerciseCard
+                onClick={() => handleSelectedWorkout(singleWorkout)}
+                isSelected={selectedWorkout === singleWorkout}>
+                <H3>
+                  {new Date(singleWorkout.timestamp).toLocaleDateString()}
+                </H3>
+              </ExerciseCard>
+            </ExerciseCardWrapper>
+          ))}
         <StartButton buttonText="Show exercises" onClick={handleSetList} />
         <LogOutButton />
       </MainWrapper>
@@ -73,15 +76,15 @@ export const Favorites = () => {
 const Main = styled.div``
 
 const MainWrapper = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-@media (min-width: 668px) {
-max-width: 660px;
-margin: auto;
-padding-bottom: 3rem;
-box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    padding-bottom: 3rem;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 
 const ExerciseCardWrapper = styled.div`
