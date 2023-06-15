@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState } from 'react'
+import { API_URL } from 'utils/urls'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -12,7 +13,9 @@ import { Header } from '../lib/Header'
 
 export const WorkoutPage = () => {
   const navigate = useNavigate()
+  const accessToken = useSelector((store) => store.user.accessToken)
   const randomList = useSelector((store) => store.workouts.list)
+  const timestamp = useSelector((store) => store.workouts.createdAt)
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const repetitions = useSelector((store) => store.timer.repetitions)
@@ -26,7 +29,6 @@ export const WorkoutPage = () => {
   const [isRoundRest, setIsRoundRest] = useState(false)
 
   const getCurrentExercise = () => {
-    console.log(rounds)
     if (randomList.length > 0) {
       return randomList[currentRepetition - 1]
     }
@@ -41,14 +43,44 @@ export const WorkoutPage = () => {
   }
 
   const handlePauseClick = () => {
-    setIsRunning((current) => !current);
-  };
+    setIsRunning((current) => !current)
+  }
+
+  // Function that saves workout to recent workouts
+  const workoutDone = () => {
+    fetch(API_URL('recent'), {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: accessToken,
+        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        timestamp,
+        exercises: randomList
+      })
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json)
+        if (json.success) {
+          console.log('success')
+        } else {
+          console.error('Failed to save workout')
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to save workout', error)
+      })
+    navigate('/well-done')
+  }
 
   const handleTimerComplete = () => {
     if (isWorkTime) {
       setIsWorkTime(false)
       if (currentRepetition === repetitions && currentRound === rounds) {
-        navigate('/well-done')
+        workoutDone()
       } else if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
       } else {
@@ -58,7 +90,7 @@ export const WorkoutPage = () => {
       setIsRestTime(false)
 
       if (currentRepetition === repetitions && currentRound === rounds) {
-        navigate('/well-done')
+        workoutDone()
       } else if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
       } else {
@@ -70,7 +102,7 @@ export const WorkoutPage = () => {
       if (currentRound === rounds) {
         setIsWorkTime(false)
         setIsRestTime(false)
-        navigate('/well-done')
+        workoutDone()
       } else {
         setCurrentRound((prevRound) => prevRound + 1)
         setCurrentRepetition(1)
@@ -95,8 +127,7 @@ export const WorkoutPage = () => {
               isPlaying={isRunning}
               duration={workTime}
               colors={['#A53860']}
-              onComplete={handleTimerComplete}
-            >
+              onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
           </WorkoutWrapper>
@@ -117,8 +148,7 @@ export const WorkoutPage = () => {
               isPlaying={isRunning}
               duration={restTime}
               colors={['#3DA5D9']}
-              onComplete={handleTimerComplete}
-            >
+              onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
           </WorkoutWrapper>
@@ -133,8 +163,7 @@ export const WorkoutPage = () => {
               isPlaying={isRunning}
               duration={4}
               colors={['#9AFFDF']}
-              onComplete={handleTimerComplete}
-            >
+              onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
           </WorkoutWrapper>
