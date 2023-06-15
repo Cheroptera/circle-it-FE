@@ -17,6 +17,7 @@ const MainWrapper = styled.div`
   margin: auto;
   padding-bottom: 3rem;
   box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  height: 100vh;
 }
 `
 

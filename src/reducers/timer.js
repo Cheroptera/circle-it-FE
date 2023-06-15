@@ -5,7 +5,7 @@ export const timer = createSlice({
   name: 'timer',
   initialState: {
     workTime: '2',
-    restTime: '2',
+    restTime: '4',
     repetitions: 5,
     rounds: 2,
     isRunning: true

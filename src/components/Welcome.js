@@ -76,6 +76,8 @@ export const Welcome = () => {
 const Main = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  height: 100vh;
 
   @media (min-width: 668px) {
     max-width: 660px;
@@ -87,14 +89,24 @@ const Main = styled.div`
 
 const StyledP = styled.p`
   text-align: center;
+  margin-top: 20px;
+
+  @media (min-width: 668px) {
+  margin-top: 100px;
+  }
 `
 
 const StyledBtnGroup = styled.div`
   display: flex;
-  flex-flow: wrap;
+  flex-wrap: wrap;
+  max-width: 400px;
   gap: 20px;
   justify-content: center;
   margin-top: 1rem;
+
+  @media (min-width: 668px) {
+    gap: 50px;
+  }
 `
 const PageContent = styled.div`
   display: flex;

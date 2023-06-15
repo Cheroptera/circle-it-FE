@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 import { css } from 'styled-components'
 import { LogOutButton } from 'lib/LogOutButton'
 import { GoBackBtn } from './GoBackBtn'
+import LogInImg from '../images/profile.png'
 
 export const Header = ({
   headerTitle,
@@ -28,7 +29,7 @@ export const Header = ({
         <GoBackBtn />
         {!isLoggedIn && (
           <LogInBtn type="button" onClick={handleLogInClick}>
-            Log In
+            <LogInImage src={LogInImg} />
           </LogInBtn>
         )}
         {isLoggedIn && <LogOutButton />}
@@ -69,6 +70,9 @@ const LogInBtn = styled.button`
   font-size: 20px;
   border: none;
   background-color: unset;
+`
+const LogInImage = styled.img`
+width: 35px;
 `
 
 const StyledCurrentRoundText = styled.h3`
@@ -130,7 +134,7 @@ const Blob1 = styled.div`
     width: 70px;
     height: 70px;
     top: calc(7%);
-    left: calc(30%);
+    left: calc(20%);
   }
 
   @media (min-width: 1480px) {
@@ -146,6 +150,12 @@ const Blob2 = styled.div`
   position: absolute;
   top: calc(2%);
   right: calc(20%);
+
+  @media (min-width: 700px) {
+    width: 60px;
+    height: 60px;
+    right: calc(20%);
+  }
 
   @media (min-width: 1024px) {
     width: 70px;

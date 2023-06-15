@@ -185,6 +185,7 @@ const Main = styled.div``
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   @media (min-width: 668px) {
     max-width: 660px;

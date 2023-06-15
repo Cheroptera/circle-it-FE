@@ -54,30 +54,32 @@ export const WellDone = () => {
   return (
     <Main>
       <Header headerTitle="Well done!" />
-      <StyledWellDoneContainer>
-        <H2>You&apos;re frickin&apos; awesome! </H2>
-        {isLoggedIn && (
-          <>
-            <p>Did you enjoy this workout?</p>
-            <StartButton
-              buttonText="Save Workout"
-              onClick={handleSaveWorkout} />
-            <p>or</p>
-          </>
-        )}
+      <Container>
+        <StyledWellDoneContainer>
+          <H2>You&apos;re frickin&apos; awesome! </H2>
+          {isLoggedIn && (
+            <>
+              <p>Did you enjoy this workout?</p>
+              <StartButton
+                buttonText="Save Workout"
+                onClick={handleSaveWorkout} />
+              <StyledP>or</StyledP>
+            </>
+          )}
+        </StyledWellDoneContainer>
         <GoToStartButton />
-      </StyledWellDoneContainer>
-      <Lottie
-        style={{
-          width: '90%',
-          height: '90%',
-          position: 'absolute',
-          top: '50px',
-          zIndex: '-1'
-        }}
-        animationData={confetti}
-        loop
-      />
+        <Lottie
+          style={{
+            width: '90%',
+            height: '90%',
+            position: 'absolute',
+            top: '50px',
+            zIndex: '-1'
+          }}
+          animationData={confetti}
+          loop
+        />
+      </Container>
     </Main>
   )
 }
@@ -86,6 +88,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 20rem;
 
   @media (min-width: 668px) {
     max-width: 660px;
@@ -106,10 +109,19 @@ const StyledWellDoneContainer = styled.div`
     font-size: 20px;
   }
 `
+const Container = styled.div`
+display: flex;
+align-items: center;
+flex-direction: column;
+`
 
 const H2 = styled.h2`
   margin: unset;
   text-align: center;
+`
+
+const StyledP = styled.p`
+margin: 0;
 `
 
 //* This is a page that the user will see after finishing a workout
