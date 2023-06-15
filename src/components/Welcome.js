@@ -61,13 +61,13 @@ export const Welcome = () => {
   const renderWelcomeMessage = () => {
     console.log(renderWelcomeMessage)
     if (isNewUser) {
-      return `Welcome, ${userName}!`;
+      return `Welcome, ${userName}!`
     } else {
-      return `Welcome back, ${userName}!`;
+      return `Welcome back, ${userName}!`
     }
-  };
+  }
   return (
-    <>
+    <Main>
       <Header headerTitle={renderWelcomeMessage()} />
       <PageContent>
         <StyledBtnGroup>
@@ -76,10 +76,11 @@ export const Welcome = () => {
           <SquareButton buttonText="Surprise Me" />
           <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
+        <StyledP>This is your app for fast, simple and fun circuit training!</StyledP>
         {/* <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn> */}
         <LogOutButton />
       </PageContent>
-    </>
+    </Main>
   )
 }
 
@@ -93,6 +94,22 @@ export const Welcome = () => {
 // padding: 20px;
 // margin-top: 200px;
 // `
+
+const Main = styled.div`
+display: flex;
+flex-direction: column;
+
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  padding: 0 20px 60px 20px;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
+
+const StyledP = styled.p`
+text-align: center;
+`
 
 const StyledBtnGroup = styled.div`
 display: flex; 

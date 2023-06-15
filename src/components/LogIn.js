@@ -69,7 +69,6 @@ export const LogIn = () => {
           dispatch(user.actions.setError(null))
           dispatch(user.actions.setLoggedIn(true))
 
-
           const isNewUser = mode === 'signup'
           dispatch(user.actions.setNewUser(isNewUser))
           navigate('/welcome')
@@ -89,66 +88,68 @@ export const LogIn = () => {
   }
   return (
     <Main>
-      <LoginPageTop>
-        <HeaderText>Circ(le) it!</HeaderText>
-        <HeaderImg src={headerImg} alt="headerImg" />
-      </LoginPageTop>
-      <LoginPageBottom>
-        <StartDiv>
-          <StartText>Get going right away!</StartText>
-          <StartButton buttonText="Start a workout" onClick={handleRandomWorkoutClick} />
-        </StartDiv>
-        <LoginText>Want to be able to save workouts? Sign up first.</LoginText>
-        <RadioDiv>
-          <RadioDivSmall>
-            <label htmlFor="signup">Sign up</label>
-            <input
-              type="radio"
-              id="signup"
-              checked={mode === 'signup'}
-              onChange={() => setMode('signup')} />
-          </RadioDivSmall>
-          <RadioDivSmall>
-            <label htmlFor="login">Log in</label>
-            <input
-              type="radio"
-              id="login"
-              checked={mode === 'login'}
-              onChange={() => setMode('login')} />
-          </RadioDivSmall>
-        </RadioDiv>
-        <SubmitForm onSubmit={onFormSubmit}>
-          {mode === 'signup' && (
+      <MainWrapper>
+        <LoginPageTop>
+          <HeaderText>Circ(le) it!</HeaderText>
+          <HeaderImg src={headerImg} alt="headerImg" />
+        </LoginPageTop>
+        <LoginPageBottom>
+          <StartDiv>
+            <StartText>Get going right away!</StartText>
+            <StartButton buttonText="Start a workout" onClick={handleRandomWorkoutClick} />
+          </StartDiv>
+          <LoginText>Want to be able to save workouts? Sign up first.</LoginText>
+          <RadioDiv>
+            <RadioDivSmall>
+              <label htmlFor="signup">Sign up</label>
+              <input
+                type="radio"
+                id="signup"
+                checked={mode === 'signup'}
+                onChange={() => setMode('signup')} />
+            </RadioDivSmall>
+            <RadioDivSmall>
+              <label htmlFor="login">Log in</label>
+              <input
+                type="radio"
+                id="login"
+                checked={mode === 'login'}
+                onChange={() => setMode('login')} />
+            </RadioDivSmall>
+          </RadioDiv>
+          <SubmitForm onSubmit={onFormSubmit}>
+            {mode === 'signup' && (
+              <FormDiv>
+                <label htmlFor="name" />
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)} />
+              </FormDiv>
+            )}
             <FormDiv>
-              <label htmlFor="name" />
+              <label htmlFor="username" />
               <input
                 type="text"
-                id="name"
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)} />
+                id="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)} />
+              <label htmlFor="password" />
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} />
             </FormDiv>
-          )}
-          <FormDiv>
-            <label htmlFor="username" />
-            <input
-              type="text"
-              id="username"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)} />
-            <label htmlFor="password" />
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)} />
-          </FormDiv>
-          <StartButton buttonText={buttonText} handleClick={onFormSubmit} />
-          {alertMessage && <AlertMessage message={alertMessage} />}
-        </SubmitForm>
-      </LoginPageBottom>
+            <StartButton buttonText={buttonText} handleClick={onFormSubmit} />
+            {alertMessage && <AlertMessage message={alertMessage} />}
+          </SubmitForm>
+        </LoginPageBottom>
+      </MainWrapper>
     </Main>
   )
 }
@@ -160,11 +161,19 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 668px) {
     max-width: 100vw;
     max-height: 100vh;
   }
 `
+const MainWrapper = styled.div`
+@media (min-width: 668px) {
+max-width: 660px;
+margin: 3rem auto;
+box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
+
 const LoginPageTop = styled.div`
   @media (min-width: 1024px) {
     flex-basis: 20%;
@@ -172,11 +181,11 @@ const LoginPageTop = styled.div`
 `
 const HeaderImg = styled.img`
   display: flex;
-  width: 100vw;
+  width: 100%;
   object-fit: cover;
   object-position: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 668px) {
     height: 30vh;
   }
 `
@@ -188,7 +197,7 @@ const HeaderText = styled.h1`
   top: calc(10%);
   left: calc(10%);
 
-  @media (min-width: 1024px) {
+  @media (min-width: 668px) {
     font-size: 82px;
     top: calc(10%);
   }
@@ -202,7 +211,7 @@ const LoginPageBottom = styled.div`
   margin: 0;
   align-self: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 668px) {
     justify-content: center;
   }
 `

@@ -55,4 +55,10 @@ const RecentPage = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
+
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
 `

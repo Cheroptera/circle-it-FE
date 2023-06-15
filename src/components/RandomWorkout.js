@@ -16,7 +16,7 @@ import { StyledList, Ul, Li, TodaysCard, ExerciseImg, DescriptionDiv, Descriptio
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const [randomList, setRandomList] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -46,7 +46,8 @@ export const RandomWorkout = () => {
   }, [])
 
   return (
-    <>
+
+    <Main>
       <Header headerTitle="Today&apos;s Workout" />
       {loading ? (
         <Loading />
@@ -82,9 +83,19 @@ export const RandomWorkout = () => {
           )}
         </>
       )}
-    </>
+    </Main>
+
   )
 }
+
+const Main = styled.div`
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  padding-bottom: 3rem;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
 
 const ButtonWrapper = styled.div`
       display: flex;

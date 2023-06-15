@@ -18,16 +18,24 @@ export const TodaysWorkout = () => {
   const handleStart = () => {
     navigate('/set-timer')
   }
-  const handleDescriptionBtnClick = () => {
-    setShowDescriptionPopup(true)
+  // const handleDescriptionBtnClick = () => {
+  //   setShowDescriptionPopup(true)
+  // }
+
+  const handleDescriptionBtnClick = (exercise) => {
+    console.log('Clicked exercise:', exercise);
+    console.log('Workout list:', workoutList);
+    const singleExercise = workoutList.find((item) => item.name === exercise);
+    console.log('Selected exercise:', singleExercise);
+    setShowDescriptionPopup(true);
   }
 
   const handleCloseDescriptionPopup = () => {
-    setShowDescriptionPopup(false);
-  };
+    setShowDescriptionPopup(false)
+  }
 
   return (
-    <>
+    <Main>
       <Header headerTitle="Today&apos;s Workout" />
       <StyledList>
         <Ul>
@@ -43,6 +51,8 @@ export const TodaysWorkout = () => {
                 </TodaysCard>
                 {showDescriptionPopup && (
                   <DescriptionPopup
+                    img={singleRandomExercise.img}
+                    exerciseName={singleRandomExercise.name}
                     message={singleRandomExercise.description}
                     handleClose={handleCloseDescriptionPopup} />
                 )}
@@ -54,9 +64,17 @@ export const TodaysWorkout = () => {
         <StartButton buttonText="Set timer" handleClick={handleStart} />
       </ButtonWrapper>
       <LogOutButton />
-    </>
+    </Main>
   )
 }
+
+const Main = styled.div`
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
 
 export const DescriptionBtn = styled.button`
 border: none;
@@ -146,20 +164,25 @@ p{
 }
 `
 
-const DescriptionPopup = ({ message, handleClose }) => {
+const DescriptionPopup = ({ img, exerciseName, message, handleClose }) => {
   return (
     <Overlay>
       <AlertWindow>
-        <TopBorder>
-          <Xbutton
-            type="button"
-            onClick={handleClose}>
-            X
-          </Xbutton>
-        </TopBorder>
         <MessageArea>
-          <p>{message}</p>
+          <AlertHeader>
+            <h2>{exerciseName}</h2>
+            <DescriptionImg src={img} alt="img" />
+          </AlertHeader>
+          <DescriptionDiv1>
+            <h3>Description</h3>
+            <p>{message}</p>
+          </DescriptionDiv1>
         </MessageArea>
+        <Closebutton
+          type="button"
+          onClick={handleClose}>
+          Close
+        </Closebutton>
       </AlertWindow>
     </Overlay>
   )
@@ -180,23 +203,40 @@ justify-content: center;
 `
 
 const AlertWindow = styled.div`
-width: 300px;
-border: 3px #A53860 solid;
-border-radius: 10px 10px 5px 5px;
+padding: 20px;
+min-width: 300px;
+min-height: 400px;
+max-width: 600px;
+border-radius: 16px;
+box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.1);
 position: absolute;
 background-color: white;
+z-index: 2;
+align-items: center;
+display:flex;
+flex-direction: column;
 `
 
-const TopBorder = styled.div`
-width: 100%;
-background-color: #A53860;
-display: flex;
-justify-content: flex-end;
+const DescriptionDiv1 = styled(DescriptionDiv)`
+width: unset;
 `
-const Xbutton = styled.button`
+
+const Closebutton = styled.button`
 margin: 3px;
 cursor:pointer;
 `
 const MessageArea = styled.div`
 padding: 0px 20px;
+display: flex;
+flex-direction: column;
+`
+
+const AlertHeader = styled.div`
+display: flex;
+gap: 40px;
+align-items: center;
+`
+
+const DescriptionImg = styled.img`
+width: 100px;
 `

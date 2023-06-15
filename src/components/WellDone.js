@@ -50,7 +50,7 @@ export const WellDone = () => {
       })
   }
   return (
-    <>
+    <Main>
       <Header
         headerTitle="Well done!" />
       <StyledWellDoneContainer>
@@ -60,10 +60,21 @@ export const WellDone = () => {
       </StyledWellDoneContainer>
       <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px', zIndex: '-1' }} animationData={confetti} loop />
       <LogOutButton style={{ zIndex: '1' }} />
-    </>
+    </Main>
   )
 }
 
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
+`
 const StyledWellDoneContainer = styled.div`
 display: flex; 
 flex-direction: column;

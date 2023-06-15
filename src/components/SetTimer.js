@@ -82,6 +82,12 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
 `
 const FormWrapper = styled.div`
   width: 242px;
@@ -105,4 +111,4 @@ text-align: center;
 :focus {
   outline: none;
   border: 3px solid #61C9A8;
-`
+}`
