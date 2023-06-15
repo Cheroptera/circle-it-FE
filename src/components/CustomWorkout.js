@@ -4,8 +4,8 @@ import styled from 'styled-components/macro'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setList, setTimestamp } from 'reducers/workouts'
-import { LogOutButton } from 'lib/LogOutButton'
 import { StartButton } from 'lib/StartButton'
+import { GoToStartButton } from 'lib/GoToStartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
@@ -22,13 +22,17 @@ export const CustomWorkout = () => {
       isSelected: false,
       number: null,
       index
-    }));
+    }))
     setExerciseList(updatedList)
   }, [filteredList])
 
   const handleExerciseSelection = (index) => {
-    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length
-    const exerciseToUpdate = exerciseList.find((exercise) => exercise.index === index)
+    const selectedCount = exerciseList.filter(
+      (exercise) => exercise.isSelected
+    ).length
+    const exerciseToUpdate = exerciseList.find(
+      (exercise) => exercise.index === index
+    )
 
     if (exerciseToUpdate.isSelected) {
       // If the exercise is already selected, unselect it and update the numbers
@@ -41,7 +45,7 @@ export const CustomWorkout = () => {
         if (exercise.isSelected && exercise.number > deselectedNumber) {
           exercise.number -= 1
         }
-      });
+      })
     } else if (selectedCount < 5) {
       // If the exercise is not selected and the maximum selection limit is not reached, select it and assign a number
       exerciseToUpdate.isSelected = true
@@ -49,7 +53,7 @@ export const CustomWorkout = () => {
     }
 
     setExerciseList([...exerciseList])
-  };
+  }
 
   const handleCreateWorkout = () => {
     const selectedExercises = exerciseList
@@ -58,13 +62,15 @@ export const CustomWorkout = () => {
         ...rest,
         isSelected: false,
         number: null
-      }));
+      }))
     dispatch(setList(selectedExercises))
     dispatch(setTimestamp())
     navigate('/todays')
-  };
+  }
 
-  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length
+  const selectedExerciseCount = exerciseList.filter(
+    (exercise) => exercise.isSelected
+  ).length
   const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5
 
   return (
@@ -76,31 +82,37 @@ export const CustomWorkout = () => {
             <StyledList>
               {exerciseList.map(({ name, isSelected, number, index }) => (
                 <ExerciseCardWrapper key={index}>
-                  <ExerciseCard onClick={() => handleExerciseSelection(index)} isSelected={isSelected}>
+                  <ExerciseCard
+                    onClick={() => handleExerciseSelection(index)}
+                    isSelected={isSelected}>
                     <H3>{name}</H3>
                     {isSelected && <NumberWrapper>{number}</NumberWrapper>}
                   </ExerciseCard>
                 </ExerciseCardWrapper>
               ))}
             </StyledList>
-            <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
+            <StartButton
+              buttonText="Create Workout"
+              onClick={handleCreateWorkout}
+              disabled={isCreateWorkoutButtonDisabled}
+            />
           </ExerciseDiv>
-          <LogOutButton />
+          <GoToStartButton />
         </MainWrapper>
       </Main>
     </>
-  );
-};
+  )
+}
 
 const Main = styled.div``
 
 const MainWrapper = styled.div`
-@media (min-width: 668px) {
-  max-width: 660px;
-  margin: auto;
-  padding-bottom: 3rem;
-  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    padding-bottom: 3rem;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 
 const StyledList = styled.div`
@@ -110,13 +122,13 @@ const StyledList = styled.div`
   height: 50vh;
   overflow-y: scroll;
   margin: 20px;
-  `
+`
 
 const ExerciseDiv = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const ExerciseCardWrapper = styled.div`
@@ -128,11 +140,11 @@ const H3 = styled.h3`
 `
 
 const NumberWrapper = styled.div`
-color: #A53860;
-font-size: 16px;
-display: flex;
-align-self: flex-end;
-position:absolute;
-right: calc(4%);
-top: calc(-7px);
+  color: #a53860;
+  font-size: 16px;
+  display: flex;
+  align-self: flex-end;
+  position: absolute;
+  right: calc(4%);
+  top: calc(-7px);
 `

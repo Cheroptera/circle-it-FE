@@ -5,7 +5,6 @@ import styled from 'styled-components/macro'
 import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { StartButton } from 'lib/StartButton'
-import { LogOutButton } from 'lib/LogOutButton'
 import { GoToStartButton } from 'lib/GoToStartButton'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from '../lib/ExerciseCard'
@@ -67,7 +66,6 @@ export const Recent = () => {
         <p>No recent workouts</p>
       )}
       <StartButton buttonText="Show exercises" onClick={handleSetList} />
-      <LogOutButton />
       <GoToStartButton />
     </RecentPage>
   )

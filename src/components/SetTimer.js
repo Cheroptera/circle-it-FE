@@ -10,7 +10,6 @@ import {
 } from 'reducers/timer'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
-import { LogOutButton } from 'lib/LogOutButton'
 import styled from 'styled-components/macro'
 
 //* This is where the user sets the timer
@@ -68,12 +67,8 @@ export const SetTimer = () => {
           />{' '}
           Rest seconds
         </label>
-        <StartButton
-          buttonText="Lets go!"
-          handleClick={handleStartWorkout}
-        />
+        <StartButton buttonText="Lets go!" handleClick={handleStartWorkout} />
       </FormWrapper>
-      <LogOutButton />
     </Main>
   )
 }
@@ -81,19 +76,19 @@ export const SetTimer = () => {
 const Main = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 
-@media (min-width: 668px) {
-  max-width: 660px;
-  margin: auto;
-  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 const FormWrapper = styled.div`
   width: 242px;
   display: flex;
   flex-direction: column;
   margin: 8px;
+  align-self: center;
 
   @media (min-width: 1024px) {
     justify-content: center;
@@ -101,14 +96,15 @@ const FormWrapper = styled.div`
 `
 
 const Input = styled.input`
-width: 40px;
-height: 35px;
-background-color: #F0F0F0;
-margin: 6px;
-border-radius: 8px;
-text-align: center;
+  width: 40px;
+  height: 35px;
+  background-color: #f0f0f0;
+  margin: 6px;
+  border-radius: 8px;
+  text-align: center;
 
-:focus {
-  outline: none;
-  border: 3px solid #61C9A8;
-}`
+  :focus {
+    outline: none;
+    border: 3px solid #61c9a8;
+  }
+`

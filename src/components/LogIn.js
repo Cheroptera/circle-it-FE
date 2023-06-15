@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -41,7 +43,9 @@ export const LogIn = () => {
   useEffect(() => {
     if (error) {
       if (error === 'User already exists') {
-        setAlertMessage('User already exists. Please choose a different username.')
+        setAlertMessage(
+          'User already exists. Please choose a different username.'
+        )
       } else if (error === 'Username and password do not match') {
         setAlertMessage('Username and password do not match. Please try again.')
       } else {
@@ -76,10 +80,20 @@ export const LogIn = () => {
           dispatch(user.actions.setAccessToken(null))
           dispatch(user.actions.setUsername(null))
           dispatch(user.actions.setUserId(null))
-          if (mode === 'login' && data.response === 'Credentials do not match') {
-            setAlertMessage('Username and password do not match. Please try again.')
-          } else if (mode === 'signup' && data.response === 'User already exists') {
-            setAlertMessage('User already exists. Please choose a different username.')
+          if (
+            mode === 'login' &&
+            data.response === 'Credentials do not match'
+          ) {
+            setAlertMessage(
+              'Username and password do not match. Please try again.'
+            )
+          } else if (
+            mode === 'signup' &&
+            data.response === 'User already exists'
+          ) {
+            setAlertMessage(
+              'User already exists. Please choose a different username.'
+            )
           } else {
             setAlertMessage('An error occurred. Please try again.')
           }
@@ -96,9 +110,14 @@ export const LogIn = () => {
         <LoginPageBottom>
           <StartDiv>
             <StartText>Get going right away!</StartText>
-            <StartButton buttonText="Start a workout" onClick={handleRandomWorkoutClick} />
+            <StartButton
+              buttonText="Start a workout"
+              onClick={handleRandomWorkoutClick}
+            />
           </StartDiv>
-          <LoginText>Want to be able to save workouts? Sign up first.</LoginText>
+          <LoginText>
+            Want to be able to save workouts? Sign up first.
+          </LoginText>
           <RadioDiv>
             <RadioDivSmall>
               <label htmlFor="signup">Sign up</label>
@@ -106,7 +125,8 @@ export const LogIn = () => {
                 type="radio"
                 id="signup"
                 checked={mode === 'signup'}
-                onChange={() => setMode('signup')} />
+                onChange={() => setMode('signup')}
+              />
             </RadioDivSmall>
             <RadioDivSmall>
               <label htmlFor="login">Log in</label>
@@ -114,7 +134,8 @@ export const LogIn = () => {
                 type="radio"
                 id="login"
                 checked={mode === 'login'}
-                onChange={() => setMode('login')} />
+                onChange={() => setMode('login')}
+              />
             </RadioDivSmall>
           </RadioDiv>
           <SubmitForm onSubmit={onFormSubmit}>
@@ -126,7 +147,8 @@ export const LogIn = () => {
                   id="name"
                   placeholder="Name"
                   value={name}
-                  onChange={(e) => setName(e.target.value)} />
+                  onChange={(e) => setName(e.target.value)}
+                />
               </FormDiv>
             )}
             <FormDiv>
@@ -136,14 +158,16 @@ export const LogIn = () => {
                 id="username"
                 placeholder="Username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)} />
+                onChange={(e) => setUsername(e.target.value)}
+              />
               <label htmlFor="password" />
               <input
                 type="password"
                 id="password"
                 placeholder="Password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} />
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormDiv>
             <StartButton buttonText={buttonText} handleClick={onFormSubmit} />
             {alertMessage && <AlertMessage message={alertMessage} />}
@@ -167,11 +191,11 @@ const Main = styled.div`
   }
 `
 const MainWrapper = styled.div`
-@media (min-width: 668px) {
-max-width: 660px;
-margin: 3rem auto;
-box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: 3rem auto;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 
 const LoginPageTop = styled.div`
@@ -274,9 +298,7 @@ const AlertMessage = ({ message }) => {
       <Overlay>
         <AlertWindow>
           <TopBorder>
-            <Xbutton
-              type="button"
-              onClick={handleCloseAlert}>
+            <Xbutton type="button" onClick={handleCloseAlert}>
               X
             </Xbutton>
           </TopBorder>
@@ -293,37 +315,37 @@ const AlertMessage = ({ message }) => {
 }
 
 const Overlay = styled.section`
-width: 100vw;
-height: 100vh;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-position: fixed;
-background-color: rgba(49,49,49,0.8);
-display: flex;
-align-items: center;
-justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(49, 49, 49, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const AlertWindow = styled.div`
-width: 300px;
-border: 3px #A53860 solid;
-border-radius: 10px 10px 5px 5px;
-position: absolute;
-background-color: white;
+  width: 300px;
+  border: 3px #a53860 solid;
+  border-radius: 10px 10px 5px 5px;
+  position: absolute;
+  background-color: white;
 `
 
 const TopBorder = styled.div`
-width: 100%;
-background-color: #A53860;
-display: flex;
-justify-content: flex-end;
+  width: 100%;
+  background-color: #a53860;
+  display: flex;
+  justify-content: flex-end;
 `
 const Xbutton = styled.button`
-margin: 3px;
-cursor:pointer;
+  margin: 3px;
+  cursor: pointer;
 `
 const MessageArea = styled.div`
-padding: 0px 20px;
+  padding: 0px 20px;
 `

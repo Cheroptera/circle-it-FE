@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { StartButton } from 'lib/StartButton'
-import { LogOutButton } from 'lib/LogOutButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
@@ -67,7 +66,6 @@ export const Favorites = () => {
             </ExerciseCardWrapper>
           ))}
         <StartButton buttonText="Show exercises" onClick={handleSetList} />
-        <LogOutButton />
       </MainWrapper>
     </Main>
   )

@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable max-len */
 import React from 'react'
 import { API_URL } from 'utils/urls'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Header } from 'lib/Header'
-import { LogOutButton } from 'lib/LogOutButton'
 import { StartButton } from 'lib/StartButton'
 import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
@@ -38,7 +38,7 @@ export const WellDone = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log('hallå', json)
+        console.log(json)
         if (json.success) {
           navigate('/favorites')
         } else {
@@ -51,15 +51,23 @@ export const WellDone = () => {
   }
   return (
     <Main>
-      <Header
-        headerTitle="Well done!" />
+      <Header headerTitle="Well done!" />
       <StyledWellDoneContainer>
         <H2>You&apos;re frickin&apos; awesome! </H2>
         <p>Did you enjoy this workout?</p>
         <StartButton buttonText="Save Workout" onClick={handleSaveWorkout} />
       </StyledWellDoneContainer>
-      <Lottie style={{ width: '90%', height: '90%', position: 'absolute', top: '50px', zIndex: '-1' }} animationData={confetti} loop />
-      <LogOutButton style={{ zIndex: '1' }} />
+      <Lottie
+        style={{
+          width: '90%',
+          height: '90%',
+          position: 'absolute',
+          top: '50px',
+          zIndex: '-1'
+        }}
+        animationData={confetti}
+        loop
+      />
     </Main>
   )
 }
@@ -76,16 +84,16 @@ const Main = styled.div`
   }
 `
 const StyledWellDoneContainer = styled.div`
-display: flex; 
-flex-direction: column;
-justify-content: center; 
-font-size: 32px; 
-margin: 5%;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 32px;
+  margin: 5%;
+  align-items: center;
 `
 
 const H2 = styled.h2`
-margin: unset;
+  margin: unset;
 `
 
 //* This is a page that the user will see after finishing a workout

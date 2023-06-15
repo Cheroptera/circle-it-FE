@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable operator-linebreak */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,7 +13,6 @@ import styled from 'styled-components/macro'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
-import { LogOutButton } from 'lib/LogOutButton'
 
 export const FilterData = () => {
   const dispatch = useDispatch()
@@ -21,8 +24,24 @@ export const FilterData = () => {
   const [selectedEquipment, setSelectedEquipment] = useState([])
   const [lowImpactOnly, setLowImpactOnly] = useState(false)
 
-  const musclegroups = ['legs', 'chest', 'arms', 'back', 'shoulders', 'abs', 'glutes']
-  const equipment = ['none', 'dumbbells', 'kettlebell', 'jump rope', 'fitness band', 'box', 'weight plate']
+  const musclegroups = [
+    'legs',
+    'chest',
+    'arms',
+    'back',
+    'shoulders',
+    'abs',
+    'glutes'
+  ]
+  const equipment = [
+    'none',
+    'dumbbells',
+    'kettlebell',
+    'jump rope',
+    'fitness band',
+    'box',
+    'weight plate'
+  ]
 
   useEffect(() => {
     const options = {
@@ -49,24 +68,34 @@ export const FilterData = () => {
   const handleMuscleGroupChange = (event) => {
     const checkedMuscleGroup = event.target.value
     if (event.target.checked) {
-      setSelectedMuscleGroups((prevSelected) => [...prevSelected, checkedMuscleGroup])
+      setSelectedMuscleGroups((prevSelected) => [
+        ...prevSelected,
+        checkedMuscleGroup
+      ])
     } else {
-      setSelectedMuscleGroups((prevSelected) => prevSelected.filter((item) => item !== checkedMuscleGroup))
+      setSelectedMuscleGroups((prevSelected) =>
+        prevSelected.filter((item) => item !== checkedMuscleGroup)
+      )
     }
-  };
+  }
 
   const handleEquipmentChange = (event) => {
     const checkedEquipment = event.target.value
     if (event.target.checked) {
-      setSelectedEquipment((prevSelected) => [...prevSelected, checkedEquipment])
+      setSelectedEquipment((prevSelected) => [
+        ...prevSelected,
+        checkedEquipment
+      ])
     } else {
-      setSelectedEquipment((prevSelected) => prevSelected.filter((item) => item !== checkedEquipment))
+      setSelectedEquipment((prevSelected) =>
+        prevSelected.filter((item) => item !== checkedEquipment)
+      )
     }
-  };
+  }
 
   const handleLowImpactToggle = (event) => {
     setLowImpactOnly(event.target.checked)
-  };
+  }
 
   const handleFilteredData = () => {
     console.log('selectedMuscleGroups:', selectedMuscleGroups)
@@ -74,8 +103,14 @@ export const FilterData = () => {
     console.log('lowImpactOnly:', lowImpactOnly)
     console.log('exerciseList:', exerciseList)
     const filteredData = exerciseList.filter((exercise) => {
-      const muscleGroupsMatch = selectedMuscleGroups.length === 0 || exercise.musclegroup.some((group) => selectedMuscleGroups.includes(group))
-      const equipmentMatch = selectedEquipment.length === 0 || exercise.equipment.some((eq) => selectedEquipment.includes(eq))
+      const muscleGroupsMatch =
+        selectedMuscleGroups.length === 0 ||
+        exercise.musclegroup.some((group) =>
+          selectedMuscleGroups.includes(group)
+        )
+      const equipmentMatch =
+        selectedEquipment.length === 0 ||
+        exercise.equipment.some((eq) => selectedEquipment.includes(eq))
       const lowImpactMatch = !lowImpactOnly || !exercise.highImpact
       return (muscleGroupsMatch || equipmentMatch) && lowImpactMatch // Modify this line
     })
@@ -98,8 +133,11 @@ export const FilterData = () => {
                   <StyledToggle
                     id={singleMuscleGroup}
                     value={singleMuscleGroup}
-                    defaultChecked={selectedMuscleGroups.includes(singleMuscleGroup)}
-                    onChange={handleMuscleGroupChange} />
+                    defaultChecked={selectedMuscleGroups.includes(
+                      singleMuscleGroup
+                    )}
+                    onChange={handleMuscleGroupChange}
+                  />
                   <ToggleLabel htmlFor={singleMuscleGroup}>
                     {singleMuscleGroup}
                   </ToggleLabel>
@@ -116,7 +154,8 @@ export const FilterData = () => {
                     id={singleEquipment}
                     value={singleEquipment}
                     defaultChecked={selectedEquipment.includes(singleEquipment)}
-                    onChange={handleEquipmentChange} />
+                    onChange={handleEquipmentChange}
+                  />
                   <ToggleLabel htmlFor={singleEquipment}>
                     {singleEquipment}
                   </ToggleLabel>
@@ -130,12 +169,12 @@ export const FilterData = () => {
             <StyledToggle
               id="lowImpact"
               defaultChecked={lowImpactOnly}
-              onChange={handleLowImpactToggle} />
+              onChange={handleLowImpactToggle}
+            />
             <ToggleLabel htmlFor="lowImpact">Low Impact Only</ToggleLabel>
           </ToggleContainer>
           <StartButton buttonText="Next" onClick={handleFilteredData} />
         </SelectionDiv>
-        <LogOutButton />
       </MainWrapper>
     </Main>
   )
@@ -144,62 +183,62 @@ export const FilterData = () => {
 const Main = styled.div``
 
 const MainWrapper = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-@media (min-width: 668px) {
-max-width: 660px;
-margin: auto;
-padding-bottom: 3rem;
-box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    padding-bottom: 3rem;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 
 const SelectionDiv = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 30px;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  gap: 20px;
 `
 
 const EquipAndMuscle = styled.div`
-display: flex;
-gap: 30px;
+  display: flex;
+  gap: 30px;
 `
 const MuscleGroupDiv = styled.div`
-width: fit-content;
+  width: fit-content;
 
-h3{
-  margin: 10px;
-}
+  h3 {
+    margin: 10px;
+  }
 `
 
 const EquipmentDiv = styled.div`
-width: fit-content;
+  width: fit-content;
 
-h3{
-  margin: 10px;
-}
+  h3 {
+    margin: 10px;
+  }
 `
 
 const ToggleContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-`;
+`
 
 const ToggleLabel = styled.label`
   margin-left: 0.5rem;
-`;
+`
 
 const StyledToggle = styled(Toggle)`
   && {
-    --toggle-hover-color-unchecked: #A53860;
-    --toggle-hover-color-checked: #9AFFDF;
+    --toggle-hover-color-unchecked: #a53860;
+    --toggle-hover-color-checked: #9affdf;
 
     .react-toggle-track {
-      background-color: #61304B;
+      background-color: #61304b;
     }
 
     &:hover:not(.react-toggle--checked) .react-toggle-track {
@@ -212,7 +251,7 @@ const StyledToggle = styled(Toggle)`
 
     .react-toggle-thumb {
       background-color: #fff;
-      border: 1px solid #A53860;
+      border: 1px solid #a53860;
     }
 
     &.react-toggle--checked .react-toggle-thumb,
@@ -221,7 +260,7 @@ const StyledToggle = styled(Toggle)`
     }
 
     &.react-toggle--checked .react-toggle-track {
-      background-color: #61C9A8;
+      background-color: #61c9a8;
     }
 
     .react-toggle-track-check,
@@ -233,4 +272,4 @@ const StyledToggle = styled(Toggle)`
       display: none;
     }
   }
-`;
+`

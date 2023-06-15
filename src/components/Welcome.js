@@ -8,7 +8,6 @@ import { API_URL } from 'utils/urls'
 // import { user } from 'reducers/user'
 import { Header } from 'lib/Header'
 import { SquareButton } from 'lib/SquareButton'
-import { LogOutButton } from 'lib/LogOutButton'
 
 //* This is where the logged in user can choose to go to recent, favorites, customize
 //* workout and random.
@@ -33,7 +32,6 @@ export const Welcome = () => {
         'Content-Type': 'application/json',
         Authorization: accessToken
         // 'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
-
       }
     }
     fetch(API_URL('welcome'), options)
@@ -48,15 +46,6 @@ export const Welcome = () => {
         }
       })
   })
-
-  // const onLogoutButtonClick = () => {
-  //   dispatch(user.actions.setAccessToken(null))
-  //   dispatch(user.actions.setUsername(null))
-  //   dispatch(user.actions.setUserId(null))
-  //   dispatch(user.actions.setError(null))
-  //   dispatch(welcome.actions.setItems([]))
-  //   navigate('/')
-  // }
 
   const renderWelcomeMessage = () => {
     console.log(renderWelcomeMessage)
@@ -76,49 +65,38 @@ export const Welcome = () => {
           <SquareButton buttonText="Surprise Me" />
           <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
-        <StyledP>This is your app for fast, simple and fun circuit training!</StyledP>
-        {/* <StyledLogoutBtn type="button" onClick={onLogoutButtonClick}>Log Out</StyledLogoutBtn> */}
-        <LogOutButton />
+        <StyledP>
+          This is your app for fast, simple and fun circuit training!
+        </StyledP>
       </PageContent>
     </Main>
   )
 }
 
-// const StyledLogoutBtn = styled.button`
-// border: 2px solid #A53860;
-// background:white;
-// justify-content:center;
-// align-self: center;
-// width: 30%;
-// border-radius: 10px;
-// padding: 20px;
-// margin-top: 200px;
-// `
-
 const Main = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-@media (min-width: 668px) {
-  max-width: 660px;
-  margin: auto;
-  padding: 0 20px 60px 20px;
-  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-}
+  @media (min-width: 668px) {
+    max-width: 660px;
+    margin: auto;
+    padding: 0 20px 60px 20px;
+    box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+  }
 `
 
 const StyledP = styled.p`
-text-align: center;
+  text-align: center;
 `
 
 const StyledBtnGroup = styled.div`
-display: flex; 
-flex-flow: wrap;
-gap: 20px; 
-justify-content: center; 
-margin-top: 1rem; 
+  display: flex;
+  flex-flow: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 1rem;
 `
 const PageContent = styled.div`
-display: flex; 
-flex-direction: column; 
+  display: flex;
+  flex-direction: column;
 `
