@@ -14,13 +14,11 @@ export const TodaysWorkout = () => {
   const workoutList = useSelector((store) => store.workouts.list)
   const navigate = useNavigate()
   const [showDescriptionPopup, setShowDescriptionPopup] = useState(false)
-  const [selectedExercise, setSelectedExercise] = useState(null)
 
   const handleStart = () => {
     navigate('/set-timer')
   }
-  const handleDescriptionBtnClick = (exercise) => {
-    setSelectedExercise(exercise)
+  const handleDescriptionBtnClick = () => {
     setShowDescriptionPopup(true)
   }
 
@@ -43,6 +41,11 @@ export const TodaysWorkout = () => {
                     <DescriptionBtn type="button" onClick={handleDescriptionBtnClick}><p>{singleRandomExercise.description}</p><p>...</p></DescriptionBtn>
                   </DescriptionDiv>
                 </TodaysCard>
+                {showDescriptionPopup && (
+                  <DescriptionPopup
+                    message={singleRandomExercise.description}
+                    handleClose={handleCloseDescriptionPopup} />
+                )}
               </Li>
             ))}
         </Ul>
@@ -51,11 +54,6 @@ export const TodaysWorkout = () => {
         <StartButton buttonText="Set timer" handleClick={handleStart} />
       </ButtonWrapper>
       <LogOutButton />
-      {showDescriptionPopup && (
-        <DescriptionPopup
-          message={selectedExercise ? selectedExercise.description : ''}
-          handleClose={handleCloseDescriptionPopup} />
-      )}
     </>
   )
 }
