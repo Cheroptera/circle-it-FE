@@ -8,7 +8,6 @@ export const timer = createSlice({
     restTime: '2',
     repetitions: 5,
     rounds: 2,
-    roundsRestTime: '4',
     isRunning: true
   },
   reducers: {
