@@ -67,17 +67,20 @@ export const LogIn = () => {
           dispatch(user.actions.setUsername(data.response.username))
           dispatch(user.actions.setUserId(data.response.id))
           dispatch(user.actions.setError(null))
+
+          const isNewUser = mode === 'signup'
+          dispatch(user.actions.setNewUser(isNewUser))
           navigate('/welcome')
         } else {
-          dispatch(user.actions.setAccessToken(null));
-          dispatch(user.actions.setUsername(null));
-          dispatch(user.actions.setUserId(null));
+          dispatch(user.actions.setAccessToken(null))
+          dispatch(user.actions.setUsername(null))
+          dispatch(user.actions.setUserId(null))
           if (mode === 'login' && data.response === 'Credentials do not match') {
-            setAlertMessage('Username and password do not match. Please try again.');
+            setAlertMessage('Username and password do not match. Please try again.')
           } else if (mode === 'signup' && data.response === 'User already exists') {
-            setAlertMessage('User already exists. Please choose a different username.');
+            setAlertMessage('User already exists. Please choose a different username.')
           } else {
-            setAlertMessage('An error occurred. Please try again.');
+            setAlertMessage('An error occurred. Please try again.')
           }
         }
       })
@@ -247,10 +250,69 @@ const SubmitForm = styled.form`
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
   }
 `
+
 const AlertMessage = ({ message }) => {
-  return (
-    <div>
-      <p>{message}</p>
-    </div>
-  )
+  const [showAlert, setShowAlert] = useState(false)
+
+  const handleCloseAlert = () => {
+    setShowAlert(true)
+    window.location.reload()
+  }
+  if (!showAlert) {
+    return (
+      <Overlay>
+        <AlertWindow>
+          <TopBorder>
+            <Xbutton
+              type="button"
+              onClick={handleCloseAlert}>
+              X
+            </Xbutton>
+          </TopBorder>
+          <MessageArea>
+            <h2>Oooops!</h2>
+            <p>{message}</p>
+          </MessageArea>
+        </AlertWindow>
+      </Overlay>
+    )
+  } else {
+    return null
+  }
 }
+
+const Overlay = styled.section`
+width: 100vw;
+height: 100vh;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+position: fixed;
+background-color: rgba(49,49,49,0.8);
+display: flex;
+align-items: center;
+justify-content: center;
+`
+
+const AlertWindow = styled.div`
+width: 300px;
+border: 3px #A53860 solid;
+border-radius: 10px 10px 5px 5px;
+position: absolute;
+background-color: white;
+`
+
+const TopBorder = styled.div`
+width: 100%;
+background-color: #A53860;
+display: flex;
+justify-content: flex-end;
+`
+const Xbutton = styled.button`
+margin: 3px;
+cursor:pointer;
+`
+const MessageArea = styled.div`
+padding: 0px 20px;
+`
