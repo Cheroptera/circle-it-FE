@@ -94,6 +94,7 @@ const StyledWellDoneContainer = styled.div`
 
 const H2 = styled.h2`
   margin: unset;
+  text-align: center;
 `
 
 //* This is a page that the user will see after finishing a workout
