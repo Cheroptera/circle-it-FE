@@ -23,32 +23,32 @@ export const CustomWorkout = () => {
       number: null,
       index
     }));
-    setExerciseList(updatedList);
-  }, [filteredList]);
+    setExerciseList(updatedList)
+  }, [filteredList])
 
   const handleExerciseSelection = (index) => {
-    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length;
-    const exerciseToUpdate = exerciseList.find((exercise) => exercise.index === index);
+    const selectedCount = exerciseList.filter((exercise) => exercise.isSelected).length
+    const exerciseToUpdate = exerciseList.find((exercise) => exercise.index === index)
 
     if (exerciseToUpdate.isSelected) {
       // If the exercise is already selected, unselect it and update the numbers
-      const deselectedNumber = exerciseToUpdate.number;
-      exerciseToUpdate.isSelected = false;
-      exerciseToUpdate.number = null;
+      const deselectedNumber = exerciseToUpdate.number
+      exerciseToUpdate.isSelected = false
+      exerciseToUpdate.number = null
 
       // Update the numbers of the remaining selected exercises
       exerciseList.forEach((exercise) => {
         if (exercise.isSelected && exercise.number > deselectedNumber) {
-          exercise.number -= 1;
+          exercise.number -= 1
         }
       });
     } else if (selectedCount < 5) {
       // If the exercise is not selected and the maximum selection limit is not reached, select it and assign a number
-      exerciseToUpdate.isSelected = true;
-      exerciseToUpdate.number = selectedCount + 1;
+      exerciseToUpdate.isSelected = true
+      exerciseToUpdate.number = selectedCount + 1
     }
 
-    setExerciseList([...exerciseList]);
+    setExerciseList([...exerciseList])
   };
 
   const handleCreateWorkout = () => {
@@ -59,38 +59,49 @@ export const CustomWorkout = () => {
         isSelected: false,
         number: null
       }));
-    dispatch(setList(selectedExercises));
-    dispatch(setTimestamp());
-    navigate('/todays');
+    dispatch(setList(selectedExercises))
+    dispatch(setTimestamp())
+    navigate('/todays')
   };
 
-  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length;
-  const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5;
+  const selectedExerciseCount = exerciseList.filter((exercise) => exercise.isSelected).length
+  const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5
 
   return (
     <>
       <Header headerTitle="Choose Five Exercises" />
       <Main>
-        <ExerciseDiv>
-          <StyledList>
-            {exerciseList.map(({ name, isSelected, number, index }) => (
-              <ExerciseCardWrapper key={index}>
-                <ExerciseCard onClick={() => handleExerciseSelection(index)} isSelected={isSelected}>
-                  <H3>{name}</H3>
-                  {isSelected && <NumberWrapper>{number}</NumberWrapper>}
-                </ExerciseCard>
-              </ExerciseCardWrapper>
-            ))}
-          </StyledList>
-          <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
-        </ExerciseDiv>
-        <LogOutButton />
+        <MainWrapper>
+          <ExerciseDiv>
+            <StyledList>
+              {exerciseList.map(({ name, isSelected, number, index }) => (
+                <ExerciseCardWrapper key={index}>
+                  <ExerciseCard onClick={() => handleExerciseSelection(index)} isSelected={isSelected}>
+                    <H3>{name}</H3>
+                    {isSelected && <NumberWrapper>{number}</NumberWrapper>}
+                  </ExerciseCard>
+                </ExerciseCardWrapper>
+              ))}
+            </StyledList>
+            <StartButton buttonText="Create Workout" onClick={handleCreateWorkout} disabled={isCreateWorkoutButtonDisabled} />
+          </ExerciseDiv>
+          <LogOutButton />
+        </MainWrapper>
       </Main>
     </>
   );
 };
 
-const Main = styled.div``;
+const Main = styled.div``
+
+const MainWrapper = styled.div`
+@media (min-width: 668px) {
+  max-width: 660px;
+  margin: auto;
+  padding-bottom: 3rem;
+  box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
+}
+`
 
 const StyledList = styled.div`
   display: flex;
