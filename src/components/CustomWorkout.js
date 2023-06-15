@@ -94,8 +94,7 @@ export const CustomWorkout = () => {
             <StartButton
               buttonText="Create Workout"
               onClick={handleCreateWorkout}
-              disabled={isCreateWorkoutButtonDisabled}
-            />
+              disabled={isCreateWorkoutButtonDisabled} />
           </ExerciseDiv>
           <GoToStartButton />
         </MainWrapper>

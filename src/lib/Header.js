@@ -93,7 +93,6 @@ const StyledHeaderTitle = styled.h2`
   font-size: 28px;
   color: white;
   text-align: center;
-  z-index: 1;
 
   @media (min-width: 700px) {
     font-size: 38px;

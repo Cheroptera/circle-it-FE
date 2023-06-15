@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Header } from 'lib/Header'
 import { StartButton } from 'lib/StartButton'
+import { GoToStartButton } from 'lib/GoToStartButton'
 import Lottie from 'lottie-react'
 import styled from 'styled-components/macro'
 import confetti from '../lotties/confetti.json'
@@ -13,6 +14,7 @@ import confetti from '../lotties/confetti.json'
 export const WellDone = () => {
   const navigate = useNavigate()
   const finishedWorkout = useSelector((store) => store.workouts.list)
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn)
   const timestamp = useSelector((store) => store.workouts.createdAt)
   const accessToken = useSelector((store) => store.user.accessToken)
   const loggedInUserId = useSelector((store) => store.user.userId)
@@ -54,8 +56,16 @@ export const WellDone = () => {
       <Header headerTitle="Well done!" />
       <StyledWellDoneContainer>
         <H2>You&apos;re frickin&apos; awesome! </H2>
-        <p>Did you enjoy this workout?</p>
-        <StartButton buttonText="Save Workout" onClick={handleSaveWorkout} />
+        {isLoggedIn && (
+          <>
+            <p>Did you enjoy this workout?</p>
+            <StartButton
+              buttonText="Save Workout"
+              onClick={handleSaveWorkout} />
+            <p>or</p>
+          </>
+        )}
+        <GoToStartButton />
       </StyledWellDoneContainer>
       <Lottie
         style={{
@@ -90,6 +100,11 @@ const StyledWellDoneContainer = styled.div`
   font-size: 32px;
   margin: 5%;
   align-items: center;
+  gap: 30px;
+  
+  p{
+    font-size: 20px;
+  }
 `
 
 const H2 = styled.h2`

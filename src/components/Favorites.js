@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { StartButton } from 'lib/StartButton'
+import { GoToStartButton } from 'lib/GoToStartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
@@ -66,6 +67,7 @@ export const Favorites = () => {
             </ExerciseCardWrapper>
           ))}
         <StartButton buttonText="Show exercises" onClick={handleSetList} />
+        <GoToStartButton />
       </MainWrapper>
     </Main>
   )
@@ -76,6 +78,7 @@ const Main = styled.div``
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @media (min-width: 668px) {
     max-width: 660px;

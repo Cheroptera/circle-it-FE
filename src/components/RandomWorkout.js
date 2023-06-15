@@ -12,6 +12,7 @@ import { Header } from 'lib/Header'
 // import { ExerciseCard } from 'lib/ExerciseCard'
 import { StartButton } from 'lib/StartButton'
 import { Loading } from 'lib/Loading'
+import { DescriptionPopup } from 'lib/DescriptionPopUp'
 import {
   StyledList,
   Ul,
@@ -26,11 +27,20 @@ import {
 export const RandomWorkout = () => {
   const [loading, setLoading] = useState(true)
   const [randomList, setRandomList] = useState([])
+  const [showDescriptionPopup, setShowDescriptionPopup] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleClickEvent = () => {
     window.location.reload()
+  }
+
+  const handleDescriptionBtnClick = () => {
+    setShowDescriptionPopup(true)
+  }
+
+  const handleCloseDescriptionPopup = () => {
+    setShowDescriptionPopup(false)
   }
 
   const handleSetList = () => {
@@ -67,12 +77,19 @@ export const RandomWorkout = () => {
                       />
                       <DescriptionDiv>
                         <h3>{singleRandomExercise.name}</h3>
-                        <DescriptionBtn type="button">
-                          <p>{singleRandomExercise.description}</p>
-                          <p>...</p>
+                        <DescriptionBtn onClick={handleDescriptionBtnClick} type="button">
+                          See description
                         </DescriptionBtn>
                       </DescriptionDiv>
                     </TodaysCard>
+                    {showDescriptionPopup && (
+                      <DescriptionPopup
+                        img={singleRandomExercise.img}
+                        exerciseName={singleRandomExercise.name}
+                        message={singleRandomExercise.description}
+                        handleClose={handleCloseDescriptionPopup}
+                      />
+                    )}
                   </Li>
                 ))}
             </Ul>
