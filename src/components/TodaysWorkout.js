@@ -130,6 +130,7 @@ export const Li = styled.li`
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  padding-bottom: 2rem;
 `
 export const TodaysCard = styled.div`
   border: solid #a53860 5px;

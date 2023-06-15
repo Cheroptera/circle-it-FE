@@ -76,6 +76,7 @@ export const SetTimer = () => {
 const Main = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 1rem;
 
   @media (min-width: 668px) {
     max-width: 660px;

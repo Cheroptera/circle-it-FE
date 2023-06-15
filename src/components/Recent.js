@@ -75,6 +75,7 @@ const RecentPage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 2rem;
 
   @media (min-width: 668px) {
     max-width: 660px;
