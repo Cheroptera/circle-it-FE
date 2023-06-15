@@ -73,13 +73,15 @@ export const WorkoutPage = () => {
       .catch((error) => {
         console.error('Failed to save workout', error)
       })
+    setIsRunning(false)
     navigate('/well-done')
   }
 
   const handleTimerComplete = () => {
     if (isWorkTime) {
       setIsWorkTime(false)
-      if (currentRepetition === repetitions && currentRound === rounds) {
+      if (currentRepetition === repetitions && currentRound >= rounds) {
+        console.log(currentRepetition, rounds)
         workoutDone()
       } else if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
@@ -88,7 +90,6 @@ export const WorkoutPage = () => {
       }
     } else if (isRestTime) {
       setIsRestTime(false)
-
       if (currentRepetition === repetitions && currentRound === rounds) {
         workoutDone()
       } else if (currentRepetition === repetitions && currentRound !== rounds) {
@@ -186,7 +187,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 2rem;
+  padding-bottom: 15rem;
 
   @media (min-width: 668px) {
     max-width: 660px;
