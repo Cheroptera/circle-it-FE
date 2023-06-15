@@ -56,7 +56,7 @@ export const SquareButton = ({ buttonText }) => {
     } else if (buttonText === 'Surprise Me') {
       navigate('/random')
     } else if (buttonText === 'Custom Workout') {
-      navigate('/exercises')
+      navigate('/filter')
     }
   }
 
