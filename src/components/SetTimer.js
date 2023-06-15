@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-closing-bracket-location */
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -20,10 +20,14 @@ export const SetTimer = () => {
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const rounds = useSelector((store) => store.timer.rounds)
+  const [countdown, setCountdown] = useState(0);
 
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
-    navigate('/workout')
+    setCountdown(5)
+    setTimeout(() => {
+      navigate('/workout')
+    }, 5000)
   }
 
   return (
@@ -53,7 +57,7 @@ export const SetTimer = () => {
               dispatch(setWorkTime(inputValue))
             }}
           />{' '}
-          Work seconds
+          Working time (s)
         </label>
         <label htmlFor="rest-time">
           <Input
@@ -65,10 +69,13 @@ export const SetTimer = () => {
               dispatch(setRestTime(inputValue))
             }}
           />{' '}
-          Rest seconds
+          Rest time (s)
         </label>
         <StartButton buttonText="Lets go!" handleClick={handleStartWorkout} />
       </FormWrapper>
+      <p>
+        {countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}
+      </p>
     </Main>
   )
 }
