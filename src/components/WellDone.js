@@ -18,13 +18,12 @@ export const WellDone = () => {
   const loggedInUserId = useSelector((store) => store.user.userId)
 
   console.log('accessToken', accessToken)
-  console.log('loggedInUserId', loggedInUserId)
 
   // Save the workout
   const handleSaveWorkout = () => {
     console.log('timestamp', timestamp)
     console.log('finishedWorkout', finishedWorkout)
-    fetch(API_URL('workouts'), {
+    fetch(API_URL('favorites'), {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -34,8 +33,7 @@ export const WellDone = () => {
       },
       body: JSON.stringify({
         timestamp,
-        exercises: finishedWorkout,
-        loggedInUserId
+        exercises: finishedWorkout
       })
     })
       .then((res) => res.json())
