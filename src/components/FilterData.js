@@ -180,7 +180,7 @@ const ToggleLabel = styled.label`
 const StyledToggle = styled(Toggle)`
   && {
     --toggle-hover-color-unchecked: #A53860;
-    --toggle-hover-color-checked: #61304B;
+    --toggle-hover-color-checked: #9AFFDF;
 
     .react-toggle-track {
       background-color: #61304B;
@@ -205,7 +205,7 @@ const StyledToggle = styled(Toggle)`
     }
 
     &.react-toggle--checked .react-toggle-track {
-      background-color: #A53860;
+      background-color: #61C9A8;
     }
 
     .react-toggle-track-check,
