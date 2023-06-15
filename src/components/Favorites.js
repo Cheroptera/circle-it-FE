@@ -36,7 +36,7 @@ export const Favorites = () => {
       .catch((error) => {
         console.error('Failed', error)
       })
-  }, [])
+  }, [accessToken])
 
   const handleSelectedWorkout = (workout) => {
     setSelectedWorkout(workout)
