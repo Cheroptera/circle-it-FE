@@ -2,7 +2,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { setList, setTimestamp } from 'reducers/workouts'
@@ -11,7 +11,8 @@ import { Header } from 'lib/Header'
 // import { ExerciseCard } from 'lib/ExerciseCard'
 import { StartButton } from 'lib/StartButton'
 import { Loading } from 'lib/Loading'
-import { StyledList, Ul, Li, TodaysCard, ExerciseImg, DescriptionDiv } from './TodaysWorkout'
+import { LogOutButton } from 'lib/LogOutButton'
+import { StyledList, Ul, Li, TodaysCard, ExerciseImg, DescriptionDiv, DescriptionBtn } from './TodaysWorkout'
 
 //* This is where the random workout shows
 export const RandomWorkout = () => {
@@ -19,9 +20,10 @@ export const RandomWorkout = () => {
   const [randomList, setRandomList] = useState([])
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn)
 
   const handleClickEvent = () => {
-    navigate('/random')
+    window.location.reload()
   }
 
   const handleLogInClick = () => {
@@ -59,7 +61,7 @@ export const RandomWorkout = () => {
                       <ExerciseImg src={singleRandomExercise.img} alt="exerciseImg" />
                       <DescriptionDiv>
                         <h3>{singleRandomExercise.name}</h3>
-                        <p>{singleRandomExercise.description}</p>
+                        <DescriptionBtn type="button"><p>{singleRandomExercise.description}</p><p>...</p></DescriptionBtn>
                       </DescriptionDiv>
                     </TodaysCard>
                   </Li>
@@ -70,39 +72,31 @@ export const RandomWorkout = () => {
             <StartButton buttonText="Set timer" handleClick={handleSetList} />
             <StartButton white buttonText="Regenerate" handleClick={handleClickEvent} />
           </ButtonWrapper>
-          <LogInBtn type="button" onClick={handleLogInClick}>Log In</LogInBtn>
+          {!isLoggedIn && (
+            <LogInBtn type="button" onClick={handleLogInClick}>
+              Log In
+            </LogInBtn>
+          )}
+          {isLoggedIn && (
+            <LogOutButton />
+          )}
         </>
       )}
     </>
   )
 }
 
-// const StyledList = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `
-
-// const Ul = styled.ul`
-//   list-style-type: none;
-//   padding-left: 0;
-// `
-
-// const Li = styled.li`
-//   display: flex;
-//   justify-content: center;
-// `
-
 const ButtonWrapper = styled.div`
-display: flex;
-justify-content: center;
-`
+      display: flex;
+      justify-content: center;
+      `
 
 const LogInBtn = styled.button`
-color: white;
-font-size: 20px;
-border: none;
-background-color: unset;
-position: absolute;
-top: 2px;
-right: 5px;
-`
+      color: white;
+      font-size: 20px;
+      border: none;
+      background-color: unset;
+      position: absolute;
+      top: 2px;
+      right: 5px;
+      `
