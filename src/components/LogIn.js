@@ -67,6 +67,8 @@ export const LogIn = () => {
           dispatch(user.actions.setUsername(data.response.username))
           dispatch(user.actions.setUserId(data.response.id))
           dispatch(user.actions.setError(null))
+          dispatch(user.actions.setLoggedIn(true))
+
 
           const isNewUser = mode === 'signup'
           dispatch(user.actions.setNewUser(isNewUser))
