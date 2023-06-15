@@ -13,6 +13,8 @@ import { LogOutButton } from 'lib/LogOutButton'
 //* This is where the logged in user can choose to go to recent, favorites, customize
 //* workout and random.
 export const Welcome = () => {
+  const userName = useSelector((store) => store.user.username)
+  const isNewUser = useSelector((store) => store.user.isNewUser)
   // const welcomeItems = useSelector((store) => store.welcome.items)
   const dispatch = useDispatch()
   const accessToken = useSelector((store) => store.user.accessToken)
@@ -55,9 +57,18 @@ export const Welcome = () => {
   //   dispatch(welcome.actions.setItems([]))
   //   navigate('/')
   // }
+
+  const renderWelcomeMessage = () => {
+    console.log(renderWelcomeMessage)
+    if (isNewUser) {
+      return `Welcome, ${userName}!`;
+    } else {
+      return `Welcome back, ${userName}!`;
+    }
+  };
   return (
     <>
-      <Header headerTitle="Welcome back!" />
+      <Header headerTitle={renderWelcomeMessage()} />
       <PageContent>
         <StyledBtnGroup>
           <SquareButton buttonText="Recent" />
