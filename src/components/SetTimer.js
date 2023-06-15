@@ -25,9 +25,15 @@ export const SetTimer = () => {
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
     setCountdown(5)
+
+    const countdownInterval = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1)
+    }, 1000)
+
     setTimeout(() => {
+      clearInterval(countdownInterval);
       navigate('/workout')
-    }, 5000)
+    }, 5000);
   }
 
   return (
@@ -73,9 +79,7 @@ export const SetTimer = () => {
         </label>
         <StartButton buttonText="Lets go!" handleClick={handleStartWorkout} />
       </FormWrapper>
-      <p>
-        {countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}
-      </p>
+      <P>{countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}</P>
     </Main>
   )
 }
@@ -116,4 +120,10 @@ const Input = styled.input`
     outline: none;
     border: 3px solid #61c9a8;
   }
+`
+
+const P = styled.p`
+font-size: 24px;
+text-align: center;
+margin-top: 30px;
 `
