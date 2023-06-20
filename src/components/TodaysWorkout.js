@@ -89,28 +89,6 @@ border-radius: 10px;
 width: fit-content;
 padding: 3px 5px;
 `
-/* border: none;
-border-radius: 8px;
-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
-background-color: unset;
-font-size: 12px;
-width: 200px;
-cursor: pointer;
-text-align: inherit;
-overflow: hidden;
-text-overflow: ellipsis;
-word-break: break-all;
-white-space: nowrap;
-display: flex;
-flex-direction: column;
-
-&:hover {
-  opacity: 0.5;
-}
-@media (min-width: 700px) {
-  width: 420px;
-}
-` */
 export const StyledList = styled.div`
 display: flex;
 flex-direction: column;
