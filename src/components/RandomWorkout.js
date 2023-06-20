@@ -28,6 +28,7 @@ export const RandomWorkout = () => {
   const [loading, setLoading] = useState(true)
   const [randomList, setRandomList] = useState([])
   const [showDescriptionPopup, setShowDescriptionPopup] = useState(false)
+  const [selectedExercise, setSelectedExercise] = useState(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -35,7 +36,8 @@ export const RandomWorkout = () => {
     window.location.reload()
   }
 
-  const handleDescriptionBtnClick = () => {
+  const handleDescriptionBtnClick = (exercise) => {
+    setSelectedExercise(exercise)
     setShowDescriptionPopup(true)
   }
 
@@ -77,16 +79,16 @@ export const RandomWorkout = () => {
                       />
                       <DescriptionDiv>
                         <h3>{singleRandomExercise.name}</h3>
-                        <DescriptionBtn onClick={handleDescriptionBtnClick} type="button">
+                        <DescriptionBtn onClick={() => handleDescriptionBtnClick(singleRandomExercise)} type="button">
                           See description
                         </DescriptionBtn>
                       </DescriptionDiv>
                     </TodaysCard>
-                    {showDescriptionPopup && (
+                    {showDescriptionPopup && selectedExercise && (
                       <DescriptionPopup
-                        img={singleRandomExercise.img}
-                        exerciseName={singleRandomExercise.name}
-                        message={singleRandomExercise.description}
+                        img={selectedExercise.img}
+                        exerciseName={selectedExercise.name}
+                        message={selectedExercise.description}
                         handleClose={handleCloseDescriptionPopup}
                       />
                     )}
