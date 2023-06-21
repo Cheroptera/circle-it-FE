@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
-import { StartButton } from 'lib/StartButton'
-import { GoToStartButton } from 'lib/GoToStartButton'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from '../lib/ExerciseCard'
+import InfoIcon from '../images/info.svg'
 
 export const Recent = () => {
   const navigate = useNavigate()
@@ -26,11 +25,10 @@ export const Recent = () => {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    fetch(API_URL('/recent'), options)
+    fetch(API_URL('recent'), options)
       .then((res) => res.json())
       .then((json) => {
         setRecentWorkouts(json.response)
-        console.log(json)
       })
       .catch((error) => {
         console.error('Failed', error)
@@ -39,14 +37,16 @@ export const Recent = () => {
 
   const handleSelectedWorkout = (workout) => {
     setSelectedWorkout(workout)
-    console.log('set', workout)
   }
 
-  const handleSetList = () => {
-    if (selectedWorkout) {
-      dispatch(setList(selectedWorkout.exercises))
-      navigate('/todays')
-    }
+  const handleSetList = (workout) => {
+    dispatch(setList(workout.exercises))
+    navigate('/todays')
+  }
+
+  const handleCardClick = (workout) => {
+    handleSelectedWorkout(workout)
+    handleSetList(workout)
   }
 
   return (
@@ -56,17 +56,18 @@ export const Recent = () => {
         recentWorkouts.map((singleWorkout) => (
           <ExerciseCardWrapper key={singleWorkout.timestamp}>
             <ExerciseCard
-              onClick={() => handleSelectedWorkout(singleWorkout)}
-              isSelected={selectedWorkout === singleWorkout}>
+              isSelected={selectedWorkout === singleWorkout}
+              onClick={() => handleCardClick(singleWorkout)}>
               <H3>{new Date(singleWorkout.timestamp).toLocaleDateString()}</H3>
             </ExerciseCard>
+            <div>
+              <InfoImg src={InfoIcon} alt="info" />
+            </div>
           </ExerciseCardWrapper>
         ))
       ) : (
-        <p>No recent workouts</p>
+        <p>Nothing here! Finish a workout to make it show up!</p>
       )}
-      <StartButton buttonText="Show exercises" onClick={handleSetList} />
-      <GoToStartButton />
     </RecentPage>
   )
 }
@@ -86,8 +87,14 @@ const RecentPage = styled.div`
 const ExerciseCardWrapper = styled.div`
   display: flex;
   align-self: center;
+  align-items: center;
+  justify-content: center;
 `
 
 const H3 = styled.h3`
   margin: 0;
+`
+
+const InfoImg = styled.img`
+width: 30px;
 `

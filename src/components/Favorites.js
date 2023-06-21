@@ -5,10 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
-import { StartButton } from 'lib/StartButton'
-import { GoToStartButton } from 'lib/GoToStartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
+import InfoIcon from '../images/info.svg'
 
 // * This is a list of all the favorites of a logged in user
 export const Favorites = () => {
@@ -28,7 +27,7 @@ export const Favorites = () => {
         'Access-Control-Allow-Origin': '*'
       }
     }
-    fetch(API_URL('/favorites'), options)
+    fetch(API_URL('favorites'), options)
       .then((res) => res.json())
       .then((json) => {
         setFavoriteWorkouts(json.response)
@@ -40,34 +39,38 @@ export const Favorites = () => {
 
   const handleSelectedWorkout = (workout) => {
     setSelectedWorkout(workout)
-    console.log('set', workout)
   }
 
-  const handleSetList = () => {
-    if (selectedWorkout) {
-      dispatch(setList(selectedWorkout.exercises))
-      navigate('/todays')
-    }
+  const handleSetList = (workout) => {
+    dispatch(setList(workout.exercises))
+    navigate('/todays')
+  }
+
+  const handleCardClick = (workout) => {
+    handleSelectedWorkout(workout)
+    handleSetList(workout)
   }
 
   return (
     <Main>
       <MainWrapper>
         <Header headerTitle="Favorite workouts" />
-        {favoriteWorkouts &&
+        {favoriteWorkouts.length > 0 ? (
           favoriteWorkouts.map((singleWorkout) => (
             <ExerciseCardWrapper key={singleWorkout.timestamp}>
               <ExerciseCard
-                onClick={() => handleSelectedWorkout(singleWorkout)}
-                isSelected={selectedWorkout === singleWorkout}>
+                isSelected={selectedWorkout === singleWorkout}
+                onClick={() => handleCardClick(singleWorkout)}>
                 <H3>
                   {new Date(singleWorkout.timestamp).toLocaleDateString()}
                 </H3>
               </ExerciseCard>
+              <InfoImg src={InfoIcon} alt="info" />
             </ExerciseCardWrapper>
-          ))}
-        <StartButton buttonText="Show exercises" onClick={handleSetList} />
-        <GoToStartButton />
+          ))
+        ) : (
+          <p>Nothing here! Finish a workout to save it to your favorites.</p>
+        )}
       </MainWrapper>
     </Main>
   )
@@ -80,6 +83,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 
   @media (min-width: 668px) {
     max-width: 660px;
@@ -96,4 +100,8 @@ const ExerciseCardWrapper = styled.div`
 
 const H3 = styled.h3`
   margin: 0;
+`
+
+const InfoImg = styled.img`
+width: 30px;
 `

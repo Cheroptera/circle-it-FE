@@ -65,7 +65,7 @@ export const TodaysWorkout = () => {
         </Ul>
       </StyledList>
       <ButtonWrapper>
-        <StartButton buttonText="Set timer" handleClick={handleStart} />
+        <StartButton buttonText="Let's go!" handleClick={handleStart} />
       </ButtonWrapper>
     </Main>
   )
@@ -114,7 +114,7 @@ justify-content: center;
 padding-bottom: 2rem;
 `
 export const TodaysCard = styled.div`
-border: 1px solid #a53860;
+border: 1px solid #CDB0EE;
 display: flex;
 gap: 20px;
 width: 350px;

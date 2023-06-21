@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setList, setTimestamp } from 'reducers/workouts'
 import { StartButton } from 'lib/StartButton'
-import { GoToStartButton } from 'lib/GoToStartButton'
 import { ExerciseCard } from '../lib/ExerciseCard'
 import { Header } from '../lib/Header'
 
@@ -96,7 +95,6 @@ export const CustomWorkout = () => {
               onClick={handleCreateWorkout}
               disabled={isCreateWorkoutButtonDisabled} />
           </ExerciseDiv>
-          <GoToStartButton />
         </MainWrapper>
       </Main>
     </>
