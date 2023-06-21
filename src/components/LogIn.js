@@ -8,7 +8,7 @@ import { user } from 'reducers/user'
 import { API_URL } from 'utils/urls'
 import styled from 'styled-components/macro'
 import { StartButton } from 'lib/StartButton'
-import headerImg from '../images/Background.svg'
+import headerImg from '../images/background3.svg'
 
 // This is the page where the user can choose to either start a workout without
 // logging in, sign up or log in.
@@ -105,7 +105,7 @@ export const LogIn = () => {
       <MainWrapper>
         <LoginPageTop>
           <HeaderText>Circ(le) it!</HeaderText>
-          {/* <HeaderImg src={headerImg} alt="headerImg" /> */}
+          <HeaderSubText> Circuit training made simple </HeaderSubText>
         </LoginPageTop>
         <LoginPageBottom>
           <StartDiv>
@@ -184,12 +184,8 @@ const Main = styled.div`
   gap: 16px;
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 668px) {
-    max-width: 100vw;
-    max-height: 100vh;
-  }
 `
+
 const MainWrapper = styled.div`
   @media (min-width: 668px) {
     max-width: 660px;
@@ -199,39 +195,41 @@ const MainWrapper = styled.div`
 `
 
 const LoginPageTop = styled.div`
-  height: 40vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
   background-image: url(${headerImg});
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
+  align-items: center;
+  justify-content: flex-end;
 
   @media (min-width: 1024px) {
     flex-basis: 20%;
   }
 `
-// const HeaderImg = styled.img`
-//   display: flex;
-//   width: 100%;
-//   object-fit: cover;
-//   object-position: center;
-
-//   @media (min-width: 668px) {
-//     height: 30vh;
-//   }
-// `
 
 const HeaderText = styled.h1`
   color: white;
   font-size: 45px;
-  padding-left: 2rem;
-  padding-top: 9rem;
   margin: 0;
   @media (min-width: 668px) {
     font-size: 48px;
   }
 `
+
+const HeaderSubText = styled.p`
+  color: white;
+  font-size: 16px;
+  margin:0;
+  padding-bottom: 5rem;
+  @media (min-width: 668px) {
+    font-size: 24px;
+  }
+`
+
 const LoginPageBottom = styled.div`
-  width: 375px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,6 +239,7 @@ const LoginPageBottom = styled.div`
 
   @media (min-width: 668px) {
     justify-content: center;
+    width: 660px;
   }
 `
 
