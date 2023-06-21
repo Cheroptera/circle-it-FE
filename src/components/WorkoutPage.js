@@ -171,7 +171,7 @@ export const WorkoutPage = () => {
         </>
       )}
       <StartButton
-        buttonText="Pause"
+        buttonText={isRunning ? 'Pause' : 'Resume'}
         handleClick={handlePauseClick}
         white={!isRunning}
       />
