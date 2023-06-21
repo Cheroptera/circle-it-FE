@@ -57,7 +57,6 @@ export const FilterData = () => {
       .then((res) => res.json())
       .then((json) => {
         setExerciseList(json)
-        console.log(json)
       })
       .catch((error) => {
         console.error(error)
@@ -98,10 +97,6 @@ export const FilterData = () => {
   }
 
   const handleFilteredData = () => {
-    console.log('selectedMuscleGroups:', selectedMuscleGroups)
-    console.log('selectedEquipment:', selectedEquipment)
-    console.log('lowImpactOnly:', lowImpactOnly)
-    console.log('exerciseList:', exerciseList)
     const filteredData = exerciseList.filter((exercise) => {
       const muscleGroupsMatch =
         selectedMuscleGroups.length === 0 ||
@@ -114,7 +109,6 @@ export const FilterData = () => {
       const lowImpactMatch = !lowImpactOnly || !exercise.highImpact
       return (muscleGroupsMatch || equipmentMatch) && lowImpactMatch // Modify this line
     })
-    console.log(filteredData)
     dispatch(setFilteredList(filteredData))
     navigate('/exercises')
   }

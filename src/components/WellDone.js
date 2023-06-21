@@ -17,14 +17,8 @@ export const WellDone = () => {
   const isLoggedIn = useSelector((store) => store.user.isLoggedIn)
   const timestamp = useSelector((store) => store.workouts.createdAt)
   const accessToken = useSelector((store) => store.user.accessToken)
-  const loggedInUserId = useSelector((store) => store.user.userId)
-
-  console.log('loggedInUserId', loggedInUserId)
-  console.log('accessToken', accessToken)
 
   const handleSaveWorkout = () => {
-    console.log('timestamp', timestamp)
-    console.log('finishedWorkout', finishedWorkout)
     fetch(API_URL('favorites'), {
       method: 'PATCH',
       headers: {
@@ -40,7 +34,6 @@ export const WellDone = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
         if (json.success) {
           navigate('/favorites')
         } else {

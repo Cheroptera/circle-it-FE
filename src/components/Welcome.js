@@ -48,7 +48,6 @@ export const Welcome = () => {
   })
 
   const renderWelcomeMessage = () => {
-    console.log(renderWelcomeMessage)
     if (isNewUser) {
       return `Welcome, ${userName}!`
     } else {

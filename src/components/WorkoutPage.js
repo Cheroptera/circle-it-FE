@@ -63,7 +63,6 @@ export const WorkoutPage = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
         if (json.success) {
           console.log('success')
         } else {
@@ -81,7 +80,6 @@ export const WorkoutPage = () => {
     if (isWorkTime) {
       setIsWorkTime(false)
       if (currentRepetition === repetitions && currentRound >= rounds) {
-        console.log(currentRepetition, rounds)
         workoutDone()
       } else if (currentRepetition === repetitions && currentRound !== rounds) {
         setIsRoundRest(true)
