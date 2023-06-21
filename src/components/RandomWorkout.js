@@ -65,6 +65,14 @@ export const RandomWorkout = () => {
         <Loading />
       ) : (
         <>
+          <ButtonWrapper>
+            <StartButton buttonText="Let's go!" handleClick={handleSetList} />
+            <StartButton
+              white
+              buttonText="Randomise again"
+              handleClick={handleClickEvent}
+            />
+          </ButtonWrapper>
           <StyledList>
             <Ul>
               {randomList &&
@@ -94,14 +102,6 @@ export const RandomWorkout = () => {
                 ))}
             </Ul>
           </StyledList>
-          <ButtonWrapper>
-            <StartButton buttonText="Set timer" handleClick={handleSetList} />
-            <StartButton
-              white
-              buttonText="Regenerate"
-              handleClick={handleClickEvent}
-            />
-          </ButtonWrapper>
         </>
       )}
     </Main>
