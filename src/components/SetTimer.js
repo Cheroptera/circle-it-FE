@@ -77,7 +77,7 @@ export const SetTimer = () => {
           />{' '}
           Rest time (s)
         </label>
-        <StartButton buttonText="Lets go!" handleClick={handleStartWorkout} />
+        <StartButton buttonText="I'm ready!" handleClick={handleStartWorkout} />
       </FormWrapper>
       <P>{countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}</P>
     </Main>
