@@ -15,12 +15,14 @@ export const TodaysWorkout = () => {
   const workoutList = useSelector((store) => store.workouts.list)
   const navigate = useNavigate()
   const [showDescriptionPopup, setShowDescriptionPopup] = useState(false)
+  const [selectedExercise, setSelectedExercise] = useState(null)
 
   const handleStart = () => {
     navigate('/set-timer')
   }
 
-  const handleDescriptionBtnClick = () => {
+  const handleDescriptionBtnClick = (exercise) => {
+    setSelectedExercise(exercise)
     setShowDescriptionPopup(true)
   }
 
@@ -45,16 +47,16 @@ export const TodaysWorkout = () => {
                     <h3>{singleRandomExercise.name}</h3>
                     <DescriptionBtn
                       type="button"
-                      onClick={handleDescriptionBtnClick}>
+                      onClick={() => handleDescriptionBtnClick(singleRandomExercise)}>
                       See description
                     </DescriptionBtn>
                   </DescriptionDiv>
                 </TodaysCard>
-                {showDescriptionPopup && (
+                {showDescriptionPopup && selectedExercise && (
                   <DescriptionPopup
-                    img={singleRandomExercise.img}
-                    exerciseName={singleRandomExercise.name}
-                    message={singleRandomExercise.description}
+                    img={selectedExercise.img}
+                    exerciseName={selectedExercise.name}
+                    message={selectedExercise.description}
                     handleClose={handleCloseDescriptionPopup}
                   />
                 )}
@@ -87,28 +89,6 @@ border-radius: 10px;
 width: fit-content;
 padding: 3px 5px;
 `
-/* border: none;
-border-radius: 8px;
-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
-background-color: unset;
-font-size: 12px;
-width: 200px;
-cursor: pointer;
-text-align: inherit;
-overflow: hidden;
-text-overflow: ellipsis;
-word-break: break-all;
-white-space: nowrap;
-display: flex;
-flex-direction: column;
-
-&:hover {
-  opacity: 0.5;
-}
-@media (min-width: 700px) {
-  width: 420px;
-}
-` */
 export const StyledList = styled.div`
 display: flex;
 flex-direction: column;

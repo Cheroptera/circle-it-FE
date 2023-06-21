@@ -97,6 +97,7 @@ const StyledHeaderTitle = styled.h2`
   font-size: 28px;
   color: white;
   text-align: center;
+  z-index: 1;
 
   @media (min-width: 700px) {
     font-size: 38px;
@@ -121,20 +122,21 @@ const StyledHeaderNextUp = styled.h3`
 `
 
 const Blob1 = styled.div`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: #9affdf;
   position: absolute;
   top: calc(12%);
-  left: calc(10%);
+  left: calc(20%);
   position: absolute;
+  z-index: 0;
 
-  @media (min-width: 700px) {
+  @media (min-width: 800px) {
     width: 70px;
     height: 70px;
-    top: calc(7%);
-    left: calc(20%);
+    top: calc(10%);
+    left: calc(25%);
   }
 
   @media (min-width: 1024px) {
@@ -143,13 +145,14 @@ const Blob1 = styled.div`
 `
 
 const Blob2 = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background-color: #9affdf;
   position: absolute;
   top: calc(2%);
   right: calc(20%);
+  z-index: 0;
 
   @media (min-width: 700px) {
     width: 60px;
