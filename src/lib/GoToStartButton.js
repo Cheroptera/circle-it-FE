@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 export const GoToStartButton = () => {
   return (
@@ -19,4 +19,5 @@ color: white;
 cursor: pointer;
 padding: 10px 18px;
 border-radius: 16px;
+align-self: center;
 `

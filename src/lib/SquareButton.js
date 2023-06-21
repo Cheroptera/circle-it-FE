@@ -7,13 +7,12 @@ import RandomIcon from '../images/random.png'
 import RecentIcon from '../images/recent.png'
 
 const StyledSquareButton = styled.button`
-  background-color: #9affdf;
+  background-color: #FFFDD4;
   padding: 30px 30px;
   width: 150px;
   height: 150px;
   border-radius: 10px;
   border: none;
-  font-weight: bold;
   font-family: 'Poppins', 'Sans-Serif';
   font-size: 18px;
   margin-top: 1rem;

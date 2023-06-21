@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import React from 'react';
 
 export const StyledStartButton = styled.button`
   border-radius: 16px;
-  border: ${(props) => (props.white ? '3px solid #A53860' : 'none')};
-  background-color: ${(props) => (props.white ? 'white' : '#A53860')};
+  border: ${(props) => (props.white ? '3px solid #F6A0F6' : 'none')};
+  background-color: ${(props) => (props.white ? 'white' : '#F6A0F6')};
   color: ${(props) => (props.white ? 'black' : 'white')};
   font-size: 16px;
   font-weight: 700;

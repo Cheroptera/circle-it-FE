@@ -214,6 +214,7 @@ const HeaderText = styled.h1`
   color: white;
   font-size: 45px;
   margin: 0;
+  text-shadow: 6px 0px 5px rgba(0,0,0,0.21);
   @media (min-width: 668px) {
     font-size: 48px;
   }
@@ -224,6 +225,7 @@ const HeaderSubText = styled.p`
   font-size: 16px;
   margin:0;
   padding-bottom: 5rem;
+  text-shadow: 6px 0px 5px rgba(0,0,0,0.21);
   @media (min-width: 668px) {
     font-size: 24px;
   }
