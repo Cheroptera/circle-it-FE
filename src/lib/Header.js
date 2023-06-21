@@ -137,8 +137,8 @@ const Blob1 = styled.div`
     left: calc(20%);
   }
 
-  @media (min-width: 1480px) {
-    left: calc(35%);
+  @media (min-width: 1024px) {
+    left: calc(31%);
   }
 `
 

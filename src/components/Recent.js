@@ -74,7 +74,6 @@ export const Recent = () => {
 const RecentPage = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 2rem;
   height: 100vh;
 
