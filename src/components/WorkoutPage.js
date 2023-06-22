@@ -143,7 +143,7 @@ export const WorkoutPage = () => {
             currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
           />
           <WorkoutWrapper>
-            <Img src={getNextExercise().img} alt="Exercise" />
+            <RestImg src={getNextExercise().img} alt="Exercise" />
             <CountdownCircleTimer
               key={`rest-${currentRepetition}-${currentRound}`}
               isPlaying={isRunning}
@@ -181,6 +181,12 @@ export const WorkoutPage = () => {
 const Img = styled.img`
   width: 200px;
   padding: 10px;
+`
+
+const RestImg = styled.img`
+  width: 200px;
+  padding: 10px;
+  opacity: 0.5;
 `
 
 const MainWrapper = styled.div`
