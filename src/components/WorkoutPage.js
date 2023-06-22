@@ -126,7 +126,7 @@ export const WorkoutPage = () => {
               key={`work-${currentRepetition}-${currentRound}`}
               isPlaying={isRunning}
               duration={workTime}
-              colors={['#A53860']}
+              colors={['#CDB0EE']}
               onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
@@ -148,7 +148,7 @@ export const WorkoutPage = () => {
               key={`rest-${currentRepetition}-${currentRound}`}
               isPlaying={isRunning}
               duration={restTime}
-              colors={['#3DA5D9']}
+              colors={['#62c6ae']}
               onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}
             </CountdownCircleTimer>
@@ -157,7 +157,10 @@ export const WorkoutPage = () => {
       )}
       {isRoundRest && (
         <>
-          <Header restColor={isRestTime || isRoundRest} headerTitle="Rest" />
+          <Header
+            restColor={isRestTime || isRoundRest}
+            headerTitle="1 minute rest"
+          />
           <WorkoutWrapper>
             <CountdownCircleTimer
               key={`round-rest-${currentRound}`}
@@ -186,7 +189,7 @@ const Img = styled.img`
 const RestImg = styled.img`
   width: 200px;
   padding: 10px;
-  opacity: 0.5;
+  opacity: 0.4;
 `
 
 const MainWrapper = styled.div`
