@@ -115,6 +115,7 @@ export const WorkoutPage = () => {
       {isWorkTime && (
         <>
           <Header
+            restColor={isRestTime || isRoundRest}
             headerTitle={getCurrentExercise().name}
             currentRoundText={`Round: ${currentRound} / ${rounds}`}
             currentRepText={`Rep: ${currentRepetition} / ${repetitions}`}
@@ -135,6 +136,7 @@ export const WorkoutPage = () => {
       {isRestTime && (
         <>
           <Header
+            restColor={isRestTime || isRoundRest}
             headerTitle="Rest"
             headerNextUp={`Next up: ${getNextExercise().name}`}
             currentRoundText={`Round: ${currentRound} / ${rounds}`}
@@ -155,7 +157,7 @@ export const WorkoutPage = () => {
       )}
       {isRoundRest && (
         <>
-          <Header headerTitle="Rest" />
+          <Header restColor={isRestTime || isRoundRest} headerTitle="Rest" />
           <WorkoutWrapper>
             <CountdownCircleTimer
               key={`round-rest-${currentRound}`}
