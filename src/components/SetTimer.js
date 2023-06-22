@@ -20,7 +20,7 @@ export const SetTimer = () => {
   const workTime = useSelector((store) => store.timer.workTime)
   const restTime = useSelector((store) => store.timer.restTime)
   const rounds = useSelector((store) => store.timer.rounds)
-  const [countdown, setCountdown] = useState(0);
+  const [countdown, setCountdown] = useState(0)
 
   const handleStartWorkout = () => {
     dispatch(setIsRunning(true))
@@ -31,9 +31,9 @@ export const SetTimer = () => {
     }, 1000)
 
     setTimeout(() => {
-      clearInterval(countdownInterval);
+      clearInterval(countdownInterval)
       navigate('/workout')
-    }, 5000);
+    }, 5000)
   }
 
   return (
@@ -77,9 +77,15 @@ export const SetTimer = () => {
           />{' '}
           Rest time (s)
         </label>
-        <StartButton buttonText="I'm ready!" handleClick={handleStartWorkout} />
+        <StartButton
+          buttonText="I'm ready!"
+          handleClick={handleStartWorkout}
+          disabled={countdown}
+        />
       </FormWrapper>
-      <P>{countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}</P>
+      <P>
+        {countdown > 0 ? `Workout starting in ${countdown} seconds...` : ''}
+      </P>
     </Main>
   )
 }
@@ -123,7 +129,7 @@ const Input = styled.input`
 `
 
 const P = styled.p`
-font-size: 24px;
-text-align: center;
-margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 30px;
 `
