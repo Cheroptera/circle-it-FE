@@ -69,21 +69,20 @@ export const Favorites = () => {
             </ExerciseCardWrapper>
           ))
         ) : (
-          <p>Nothing here! Finish a workout to save it to your favorites.</p>
+          <Text>
+            Nothing here! Finish a workout to save it to your favorites.
+          </Text>
         )}
       </MainWrapper>
     </Main>
   )
 }
 
-const Main = styled.div`
-`
+const Main = styled.div``
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 100vh;
 
   @media (min-width: 668px) {
     max-width: 660px;
@@ -103,5 +102,9 @@ const H3 = styled.h3`
 `
 
 const InfoImg = styled.img`
-width: 30px;
+  width: 30px;
+`
+
+const Text = styled.p`
+  text-align: center;
 `

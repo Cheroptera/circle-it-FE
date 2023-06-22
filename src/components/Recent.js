@@ -66,7 +66,7 @@ export const Recent = () => {
           </ExerciseCardWrapper>
         ))
       ) : (
-        <p>Nothing here! Finish a workout to make it show up!</p>
+        <Text>Nothing here! Finish a workout to make it show up!</Text>
       )}
     </RecentPage>
   )
@@ -96,5 +96,9 @@ const H3 = styled.h3`
 `
 
 const InfoImg = styled.img`
-width: 30px;
+  width: 30px;
+`
+
+const Text = styled.p`
+  text-align: center;
 `
