@@ -73,31 +73,30 @@ export const CustomWorkout = () => {
   const isCreateWorkoutButtonDisabled = selectedExerciseCount !== 5
 
   return (
-    <>
-      <Header headerTitle="Choose Five Exercises" />
-      <Main>
-        <MainWrapper>
-          <ExerciseDiv>
-            <StyledList>
-              {exerciseList.map(({ name, isSelected, number, index }) => (
-                <ExerciseCardWrapper key={index}>
-                  <ExerciseCard
-                    onClick={() => handleExerciseSelection(index)}
-                    isSelected={isSelected}>
-                    <H3>{name}</H3>
-                    {isSelected && <NumberWrapper>{number}</NumberWrapper>}
-                  </ExerciseCard>
-                </ExerciseCardWrapper>
-              ))}
-            </StyledList>
-            <StartButton
-              buttonText="Create Workout"
-              onClick={handleCreateWorkout}
-              disabled={isCreateWorkoutButtonDisabled} />
-          </ExerciseDiv>
-        </MainWrapper>
-      </Main>
-    </>
+    <Main>
+      <MainWrapper>
+        <Header headerTitle="Choose Five Exercises" />
+        <ExerciseDiv>
+          <StyledList>
+            {exerciseList.map(({ name, isSelected, number, index }) => (
+              <ExerciseCardWrapper key={index}>
+                <ExerciseCard
+                  onClick={() => handleExerciseSelection(index)}
+                  isSelected={isSelected}>
+                  <H3>{name}</H3>
+                  {isSelected && <NumberWrapper>{number}</NumberWrapper>}
+                </ExerciseCard>
+              </ExerciseCardWrapper>
+            ))}
+          </StyledList>
+          <StartButton
+            buttonText="Create Workout"
+            onClick={handleCreateWorkout}
+            disabled={isCreateWorkoutButtonDisabled}
+          />
+        </ExerciseDiv>
+      </MainWrapper>
+    </Main>
   )
 }
 
