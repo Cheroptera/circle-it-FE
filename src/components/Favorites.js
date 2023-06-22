@@ -1,4 +1,8 @@
 /* eslint-disable operator-linebreak */
+/* eslint-disable function-paren-newline */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable react/jsx-closing-bracket-location */
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'

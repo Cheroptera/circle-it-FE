@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable react/jsx-closing-bracket-location */
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useNavigate } from 'react-router-dom'
