@@ -189,7 +189,7 @@ const Main = styled.div`
 const MainWrapper = styled.div`
   @media (min-width: 668px) {
     max-width: 660px;
-    margin: 3rem auto;
+    margin: 0 auto;
     box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
   }
 `
@@ -214,7 +214,7 @@ const HeaderText = styled.h1`
   color: white;
   font-size: 45px;
   margin: 0;
-  text-shadow: 6px 0px 5px rgba(0,0,0,0.21);
+  text-shadow: 6px 0px 5px rgba(0, 0, 0, 0.21);
   @media (min-width: 668px) {
     font-size: 48px;
   }
@@ -223,9 +223,9 @@ const HeaderText = styled.h1`
 const HeaderSubText = styled.p`
   color: white;
   font-size: 16px;
-  margin:0;
+  margin: 0;
   padding-bottom: 5rem;
-  text-shadow: 6px 0px 5px rgba(0,0,0,0.21);
+  text-shadow: 6px 0px 5px rgba(0, 0, 0, 0.21);
   @media (min-width: 668px) {
     font-size: 24px;
   }
@@ -238,6 +238,7 @@ const LoginPageBottom = styled.div`
   align-items: center;
   margin: 0;
   align-self: center;
+  padding-bottom: 2rem;
 
   @media (min-width: 668px) {
     justify-content: center;
