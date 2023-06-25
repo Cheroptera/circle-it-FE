@@ -1,1 +1,0 @@
-// * This is a footer with our contact info. To be added where it fits bvest..
