@@ -14,10 +14,10 @@ const GoToStart = styled.div`
 font-size: 16px;
 font-weight: 700;
 width: fit-content;
-background-color: #A53860;
-color: white;
+background-color: #b0ebbd;
 cursor: pointer;
 padding: 10px 18px;
 border-radius: 16px;
 align-self: center;
+box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
 `
