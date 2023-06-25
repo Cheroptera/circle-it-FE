@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro';
 
 export const ExerciseCard = styled.button`
-  background: #9affdf;
+  background: #BAE1FF;
   border: none;
   border-radius: 16px;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.5);
@@ -14,14 +14,14 @@ export const ExerciseCard = styled.button`
   cursor: pointer;
   position: relative;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 400;
 
   &:hover{
-    background: #61C9A8;
+    background: #B0EBBD;
   }
 
   ${({ isSelected }) => isSelected
     && css`
-      background: #61C9A8;
+      background: #B0EBBD;
     `}
 `;

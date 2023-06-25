@@ -93,6 +93,8 @@ const StyledBtnGroup = styled.div`
 
   @media (min-width: 668px) {
     gap: 50px;
+    max-width: 700px;
+    margin-top: 3rem;
   }
 `
 const PageContent = styled.div`

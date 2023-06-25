@@ -99,6 +99,7 @@ const StyledHeaderTitle = styled.h2`
   color: white;
   text-align: center;
   z-index: 1;
+  filter: drop-shadow(0px 5px 4px rgba(0 0 0 0.32));
 
   @media (min-width: 700px) {
     font-size: 38px;
@@ -132,6 +133,8 @@ const Blob1 = styled.div`
   left: calc(20%);
   position: absolute;
   z-index: 0;
+  filter: drop-shadow(-6px 12px 4px rgba(0, 0, 0, 0.25));
+
 
   @media (min-width: 800px) {
     width: 70px;
@@ -142,6 +145,10 @@ const Blob1 = styled.div`
 
   @media (min-width: 1024px) {
     left: calc(31%);
+  }
+
+  @media (min-width: 1480px) {
+    left: calc(37%);
   }
 `
 
@@ -154,6 +161,8 @@ const Blob2 = styled.div`
   top: calc(2%);
   right: calc(20%);
   z-index: 0;
+  filter: drop-shadow(-6px 12px 4px rgba(0, 0, 0, 0.25));
+
 
   @media (min-width: 700px) {
     width: 60px;
@@ -165,5 +174,9 @@ const Blob2 = styled.div`
     width: 70px;
     height: 70px;
     right: calc(32%);
+  }
+
+  @media (min-width: 1480px) {
+    right: calc(37%);
   }
 `

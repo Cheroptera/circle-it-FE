@@ -83,7 +83,7 @@ export const DescriptionBtn = styled.button`
 display: flex;
 justify-content: center;
 background-color: unset;
-border: 2px solid #61C9A8;
+border: 2px solid #BAE1FF;
 box-shadow: 0px 8px 8px rgb(0 0 0 / 30%);
 border-radius: 10px;
 width: fit-content;

@@ -15,13 +15,22 @@ const StyledSquareButton = styled.button`
   border: none;
   font-family: 'Poppins', 'Sans-Serif';
   font-size: 18px;
-  margin-top: 1rem;
+  margin-top: 2rem;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
   &:hover,
   &:focus {
-    color: white;
+    background: #B0EBBD;
+  }
+
+  @media (min-width: 668px){
+    display:flex;
+    flex-direction:column;
+    width: 200px;
+    height: 200px;
+    align-items:center;
+    justify-content: center;
   }
 `
 

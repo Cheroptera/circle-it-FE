@@ -134,14 +134,28 @@ const ExerciseCardWrapper = styled.div`
 
 const H3 = styled.h3`
   margin: 0;
+  font-weight: 400;
+  font-size: 14px; 
+
+  @media (min-width:668px) {
+    font-size: 20px;
+  }
 `
 
 const NumberWrapper = styled.div`
-  color: #a53860;
+  color: black;
   font-size: 16px;
+  background-color: #FFADFF;
+  padding: 2px;
+  width: 18px;
+  height: 18px;
+  /* padding: 2px; */
+  border-radius: 50%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
   position: absolute;
-  right: calc(4%);
+  right: calc(2%);
   top: calc(-7px);
 `

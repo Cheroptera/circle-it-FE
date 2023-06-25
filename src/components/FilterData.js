@@ -229,11 +229,11 @@ const ToggleLabel = styled.label`
 
 const StyledToggle = styled(Toggle)`
   && {
-    --toggle-hover-color-unchecked: #a53860;
-    --toggle-hover-color-checked: #9affdf;
+    --toggle-hover-color-unchecked: #B0EBBD;
+    --toggle-hover-color-checked: #FFB3BA;
 
     .react-toggle-track {
-      background-color: #61304b;
+      background-color: #FFB3BA;
     }
 
     &:hover:not(.react-toggle--checked) .react-toggle-track {
@@ -246,7 +246,7 @@ const StyledToggle = styled(Toggle)`
 
     .react-toggle-thumb {
       background-color: #fff;
-      border: 1px solid #a53860;
+      border: 1px solid #B0EBBD;
     }
 
     &.react-toggle--checked .react-toggle-thumb,
@@ -255,7 +255,7 @@ const StyledToggle = styled(Toggle)`
     }
 
     &.react-toggle--checked .react-toggle-track {
-      background-color: #61c9a8;
+      background-color: #B0EBBD;
     }
 
     .react-toggle-track-check,

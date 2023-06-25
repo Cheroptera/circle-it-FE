@@ -336,7 +336,7 @@ const Overlay = styled.section`
 
 const AlertWindow = styled.div`
   width: 300px;
-  border: 3px #a53860 solid;
+  border: 3px #BAE1FF solid;
   border-radius: 10px 10px 5px 5px;
   position: absolute;
   background-color: white;
@@ -344,7 +344,7 @@ const AlertWindow = styled.div`
 
 const TopBorder = styled.div`
   width: 100%;
-  background-color: #a53860;
+  background-color: #BAE1FF;
   display: flex;
   justify-content: flex-end;
 `
