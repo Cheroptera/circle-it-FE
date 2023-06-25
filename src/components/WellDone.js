@@ -1,3 +1,4 @@
+//* This is a page that the user will see after finishing a workout
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable max-len */
 import React from 'react'
@@ -116,5 +117,3 @@ const H2 = styled.h2`
 const StyledP = styled.p`
 margin: 0;
 `
-
-//* This is a page that the user will see after finishing a workout

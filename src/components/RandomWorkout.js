@@ -47,7 +47,7 @@ export const RandomWorkout = () => {
 
   const handleSetList = () => {
     dispatch(setList(randomList))
-    dispatch(setTimestamp()) // Dispatch the setTimestamp action
+    dispatch(setTimestamp())
     navigate('/set-timer')
   }
 
@@ -71,7 +71,7 @@ export const RandomWorkout = () => {
             <StartButton buttonText="Let's go!" handleClick={handleSetList} />
             <StartButton
               white
-              buttonText="Randomise again"
+              buttonText="Randomize again"
               handleClick={handleClickEvent}
             />
           </ButtonWrapper>

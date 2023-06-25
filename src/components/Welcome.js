@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { welcome } from 'reducers/welcome'
 import { API_URL } from 'utils/urls'
-// import { user } from 'reducers/user'
 import { Header } from 'lib/Header'
 import { SquareButton } from 'lib/SquareButton'
 
@@ -31,7 +30,6 @@ export const Welcome = () => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: accessToken
-        // 'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
       }
     }
     fetch(API_URL('welcome'), options)

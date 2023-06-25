@@ -149,7 +149,6 @@ const NumberWrapper = styled.div`
   padding: 2px;
   width: 18px;
   height: 18px;
-  /* padding: 2px; */
   border-radius: 50%;
   display: flex;
   align-items: center;
