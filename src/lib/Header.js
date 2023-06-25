@@ -98,6 +98,7 @@ const StyledHeaderTitle = styled.h2`
   font-size: 28px;
   color: white;
   text-align: center;
+  text-shadow: 6px 0px 5px rgba(0, 0, 0, 0.21);
   z-index: 1;
   filter: drop-shadow(0px 5px 4px rgba(0 0 0 0.32));
 
@@ -144,11 +145,12 @@ const Blob1 = styled.div`
   }
 
   @media (min-width: 1024px) {
-    left: calc(31%);
+    left: calc(33%);
   }
 
   @media (min-width: 1480px) {
-    left: calc(37%);
+    left: calc(40%);
+    top: calc(7%);
   }
 `
 
@@ -177,6 +179,6 @@ const Blob2 = styled.div`
   }
 
   @media (min-width: 1480px) {
-    right: calc(37%);
+    right: calc(39%);
   }
 `
