@@ -107,7 +107,7 @@ export const FilterData = () => {
         selectedEquipment.length === 0 ||
         exercise.equipment.some((eq) => selectedEquipment.includes(eq))
       const lowImpactMatch = !lowImpactOnly || !exercise.highImpact
-      return (muscleGroupsMatch || equipmentMatch) && lowImpactMatch // Modify this line
+      return (muscleGroupsMatch && equipmentMatch) && lowImpactMatch // Modify this line
     })
     dispatch(setFilteredList(filteredData))
     navigate('/exercises')
