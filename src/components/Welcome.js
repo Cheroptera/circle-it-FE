@@ -64,9 +64,6 @@ export const Welcome = () => {
           <SquareButton buttonText="Surprise Me" />
           <SquareButton buttonText="Custom Workout" />
         </StyledBtnGroup>
-        <StyledP>
-          This is your app for fast, simple and fun circuit training!
-        </StyledP>
       </PageContent>
     </Main>
   )
@@ -83,15 +80,6 @@ const Main = styled.div`
     margin: auto;
     padding: 0 20px 60px 20px;
     box-shadow: 5px 8px 20px rgb(0 0 0 / 30%);
-  }
-`
-
-const StyledP = styled.p`
-  text-align: center;
-  margin-top: 20px;
-
-  @media (min-width: 668px) {
-  margin-top: 100px;
   }
 `
 
