@@ -6,7 +6,7 @@ import { setList } from 'reducers/workouts'
 import { API_URL } from 'utils/urls'
 import { Header } from 'lib/Header'
 import { ExerciseCard } from '../lib/ExerciseCard'
-import InfoIcon from '../images/info.svg'
+// import InfoIcon from '../images/info.svg'
 
 export const Recent = () => {
   const navigate = useNavigate()
@@ -61,7 +61,7 @@ export const Recent = () => {
               <H3>{new Date(singleWorkout.timestamp).toLocaleDateString()}</H3>
             </ExerciseCard>
             <div>
-              <InfoImg src={InfoIcon} alt="info" />
+              {/* <InfoImg src={InfoIcon} alt="info" /> */}
             </div>
           </ExerciseCardWrapper>
         ))
@@ -95,9 +95,9 @@ const H3 = styled.h3`
   margin: 0;
 `
 
-const InfoImg = styled.img`
-  width: 30px;
-`
+// const InfoImg = styled.img`
+//   width: 30px;
+// `
 
 const Text = styled.p`
   text-align: center;
