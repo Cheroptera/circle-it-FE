@@ -165,7 +165,7 @@ export const WorkoutPage = () => {
             <CountdownCircleTimer
               key={`round-rest-${currentRound}`}
               isPlaying={isRunning}
-              duration={4}
+              duration={60}
               colors={['#9AFFDF']}
               onComplete={handleTimerComplete}>
               {({ remainingTime }) => remainingTime}

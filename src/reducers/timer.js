@@ -4,10 +4,10 @@ import { createSlice } from '@reduxjs/toolkit'
 export const timer = createSlice({
   name: 'timer',
   initialState: {
-    workTime: '2',
-    restTime: '4',
+    workTime: '40',
+    restTime: '40',
     repetitions: 5,
-    rounds: 2,
+    rounds: 4,
     isRunning: true
   },
   reducers: {
