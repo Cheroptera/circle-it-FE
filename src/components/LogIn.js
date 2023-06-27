@@ -15,7 +15,6 @@ import headerImg from '../images/background3.svg'
 export const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
   const [mode, setMode] = useState('login')
   const error = useSelector((store) => store.user.error)
   const dispatch = useDispatch()
@@ -139,18 +138,6 @@ export const LogIn = () => {
             </RadioDivSmall>
           </RadioDiv>
           <SubmitForm onSubmit={onFormSubmit}>
-            {mode === 'signup' && (
-              <FormDiv>
-                <label htmlFor="name" />
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </FormDiv>
-            )}
             <FormDiv>
               <label htmlFor="username" />
               <input
