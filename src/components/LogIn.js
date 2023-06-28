@@ -115,7 +115,7 @@ export const LogIn = () => {
             />
           </StartDiv>
           <LoginText>
-            Want to be able to save workouts? Sign up first.
+            Sign up or log in to unlock more features.
           </LoginText>
           <RadioDiv>
             <RadioDivSmall>
