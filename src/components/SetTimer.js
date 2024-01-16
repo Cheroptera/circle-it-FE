@@ -38,7 +38,7 @@ export const SetTimer = () => {
 
   return (
     <Main>
-      <Header headerTitle="Customize timer" />
+      <Header headerTitle="Timer Options" />
       <FormWrapper>
         <h3>Set your circuit</h3>
         <label htmlFor="rounds">
